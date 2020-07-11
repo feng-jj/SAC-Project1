@@ -6,3 +6,4 @@ Dashboard project for the Sexual Assault Center
 2. git stage "file name"
 3. git commit -m"with this commit I... state changes you made to code"
 4. git push
+5. git pull (get updates from github)

@@ -2122,7 +2122,7 @@ input, select, textarea {
 
 		#logo .image {
 			position: absolute;
-			padding-left: 80px;
+			padding-left: 75px;
 			left: 0;
 			top: 0;
 		}
@@ -2166,7 +2166,7 @@ input, select, textarea {
 					}
 
 				#nav ul li a.active {
-					background: rgba(112, 47, 138, 1);
+					background: rgba(112, 47, 138);
 					box-shadow: inset 0 0 0.25em 0 rgba(0, 0, 0, 0.125);
 					color: rgb(255, 209, 0);
 				}

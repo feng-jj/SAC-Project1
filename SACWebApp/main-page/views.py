@@ -4,4 +4,4 @@ from django.http import HttpResponse
 
 
 def home(request) :
-    return render(request, 'main-page/html5up-prologue/index.html')
+    return render(request, 'index.html')

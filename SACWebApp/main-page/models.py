@@ -56,6 +56,18 @@ class CommonEntries(models.Model):
     class Meta:
         abstract = True
     
-# child class of CommonEntries
+# child classes of CommonEntries
 class Clinical(CommonEntries):  
+    pass
+
+class Advocacy(CommonEntries):
+    pass
+
+class MAP(CommonEntries):
+    pass
+
+class OV(CommonEntries):
+    pass
+
+class SAFE_Clinic(CommonEntries):
     pass

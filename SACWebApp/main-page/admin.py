@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Clinical
+from .models import Clinical, Advocacy, MAP, OV, SAFE_Clinic
 
 # Register your models here.
-admin.site.register(Clinical)
+myModels = [Clinical, Advocacy, MAP, OV, SAFE_Clinic]
+admin.site.register(myModels)

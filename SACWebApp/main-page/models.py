@@ -58,16 +58,31 @@ class CommonEntries(models.Model):
     
 # child classes of CommonEntries
 class Clinical(CommonEntries):  
+    class Meta:
+        verbose_name = "Clinical Team Entry"
+        verbose_name_plural = "Clinical Team Entries"
     pass
 
 class Advocacy(CommonEntries):
+    class Meta:
+        verbose_name = "Advocacy Team Entry"
+        verbose_name_plural = "Advocacy Team Entries"
     pass
 
 class MAP(CommonEntries):
+    class Meta:
+        verbose_name = "MAP Team Entry"
+        verbose_name_plural = "MAP Team Entries"
     pass
 
 class OV(CommonEntries):
+    class Meta:
+        verbose_name = "OV Team Entry"
+        verbose_name_plural = "OV Team Entries"
     pass
 
 class SAFE_Clinic(CommonEntries):
+    class Meta:
+        verbose_name = "SAFE Clinic Team Entry"
+        verbose_name_plural = "SAFE Clinic Team Entries"
     pass

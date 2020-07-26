@@ -1,7 +1,9 @@
 from django.db import models
+from datetime import date
 
 # abstract base class for clinical, advocacy, MAP, OV, and SAFE Clinic Teams
 class CommonEntries(models.Model):
+    entry_date = models.DateField(default = date.today)
     total_ind = models.PositiveIntegerField(verbose_name = "Total Individuals")
     total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions")
     race_amerind = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - American Indian/Alaska Native")

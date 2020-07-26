@@ -1758,7 +1758,7 @@ input, select, textarea {
 			width: 75px;
 			height: 75px;
 			background: rgba(255, 0, 0, 0);
-			margin: 0 0 0 0;
+			margin: auto;
 		}
 
 			.image.avatar48 img {
@@ -2122,7 +2122,8 @@ input, select, textarea {
 
 		#logo .image {
 			position: absolute;
-			padding-left: 75px;
+			margin-left: auto;
+			margin-right: auto;
 			left: 0;
 			top: 0;
 		}

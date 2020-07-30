@@ -1,56 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "main-page/base.html" %}
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Advocacy Dashboard</title>
-        <link rel="stylesheet" href="../../../../WebAssets/assets/css/main.css" />
-    </head>
+{% block content %}
+	<!-- Dashboard Title -->
+		<section id="advocacy-link" class="two">
+			<div class="container">
 
-    <body class="is-preload">
-        <!-- Header -->
-            <div id="header">
+				<header>
+					<h2>Welcome to the Advocacy Dashboard</h2>
+				</header>
 
-                <div class="top">
+				<p>Add graphs here</p>
 
-                    <!-- Logo -->
-                        <div id="logo">
-                            <span class="image avatar48"><img src="../../../../WebAssets/images/sac-logo.png" alt="" /></span>
-                            
-                        </div>
-
-                    <!-- Nav -->
-                        <nav id="nav">
-                            <ul>
-                                <li><a href="index.html" id="top-link"><span>Main Dashboard</span></a></li>
-                                <li><a href="safe_clinic.html" id="safe_clinic-link"><span>SAFE Clinic</span></a></li>
-                                <li><a class = active href="advocacy.html" id="advocacy-link"><span>Advocacy</span></a></li>
-                                <li><a href="map.html" id="map-link"><span>MAP</span></a></li>
-                                <li><a href="ov.html" id="ov-link"><span>OV</span></a></li>
-                                <li><a href="crisis_line.html" id="crisis_line-link"><span>Crisis Line</span></a></li>
-                                <li><a href="prevention.html" id="prevention-link"><span>Prevention</span></a></li>
-                                <li><a href="training.html" id="training-link"><span>Training</span></a></li>
-                                <li><a href="development.html" id="development-link"><span>Development</span></a></li>
-                            </ul>
-                        </nav>
-
-                </div>
-            </div>
-        <!-- Main -->
-            <div id="main">
-                <!-- Advocacy -->
-                    <section id="advocacy" class="three">
-                        <div class="container">
-
-                            <header>
-                                <h2>Advocacy Dashboard</h2>
-                            </header>
-
-                            
-
-                        </div>
-                    </section>
-            </div>
-    </body>
-</html>
+			</div>
+		</section>
+{% endblock content %}

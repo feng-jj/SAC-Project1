@@ -14,14 +14,14 @@ This WebApp is a data dashboard for the Sexual Assault Center in Nashville, TN c
 * An authentication system to gain access to the dashboard
 * A data entry portal
 * Data visualization dashboards
-Upon logging in, SAC employees can input their team's operational data which is visualized in a team-specific dashboard through various graphs and charts. Visualizations display data month-to-month. Additionally, employees can retroactively modify their team's inputted data, but not the data of other teams. A registered admnistrative "super-user" can modify any team's data. 
+Once logged in, SAC employees can input their team's operational data which is visualized in a team-specific dashboard through various graphs and charts. Visualizations display data month-to-month. Additionally, employees can retroactively modify their team's inputted data, but not the data of other teams. A registered admnistrative "super-user" can modify any team's data. 
 
 ## Prerequisites
 Before proceeding, please make sure you have the following installed:
 * [Django](https://www.djangoproject.com/download/)
 * Anything else?
 
-## Installation
+## Installation 
 1. Not sure how this is gonna be installed but I can fill this in once we have more stuff done
 
 ## Instructions

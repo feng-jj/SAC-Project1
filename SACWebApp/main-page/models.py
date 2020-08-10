@@ -1,11 +1,11 @@
 from django.db import models
+from django.forms import ModelForm
 from datetime import date
 
 # abstract base class for clinical, advocacy, MAP, OV, and SAFE Clinic Teams
 class CommonEntries(models.Model):
     entry_date = models.DateField(default = date.today)
     total_ind = models.PositiveIntegerField(verbose_name = "Total Individuals")
-    total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions")
     race_amerind = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - American Indian/Alaska Native")
     race_asian = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Asian")
     race_black = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Black/African American")
@@ -60,34 +60,63 @@ class CommonEntries(models.Model):
     
 # child classes of CommonEntries
 class Clinical(CommonEntries):  
+    total_ind = models.PositiveIntegerField(verbose_name = "Total Individuals")
+    total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions")
     class Meta:
         verbose_name = "Clinical Team Entry"
         verbose_name_plural = "Clinical Team Entries"
     pass
 
 class Advocacy(CommonEntries):
+    total_ind = models.PositiveIntegerField(verbose_name = "Total Individuals")
+    total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions")
     class Meta:
         verbose_name = "Advocacy Team Entry"
         verbose_name_plural = "Advocacy Team Entries"
     pass
 
 class MAP(CommonEntries):
+    total_accompaniments = models.PositiveIntegerField(verbose_name = "Total Accompaniments")
     class Meta:
         verbose_name = "MAP Team Entry"
         verbose_name_plural = "MAP Team Entries"
     pass
 
 class OV(CommonEntries):
+    total_OV = models.PositiveIntegerField(verbose_name = "Total OVs")
     class Meta:
         verbose_name = "OV Team Entry"
         verbose_name_plural = "OV Team Entries"
     pass
 
 class SAFE_Clinic(CommonEntries):
+    total_exams = models.PositiveIntegerField(verbose_name = "Total Rape Exams")
     class Meta:
         verbose_name = "SAFE Clinic Team Entry"
         verbose_name_plural = "SAFE Clinic Team Entries"
     pass
+
+class ClinicalForm(ModelForm):
+    class Meta: 
+        model = Clinical
+        fields = '__all__'
+
+class AdvocacyForm(ModelForm):
+    class Meta:
+        model = Advocacy
+        fields = '__all__'
+
+class MAPForm(ModelForm):
+    class Meta:
+        model = MAP
+        fields = '__all__'
+
+class OVForm(ModelForm):
+    class Meta:
+        model = OV
+        fields = '__all__'
+
+
 
 ##################################################################################################
 
@@ -223,7 +252,7 @@ class Training(models.Model):
         ('immigrant org staff', 'immigrant org staff'),
         ('law enforcement officers', 'law enforcement officers'),
         ('legal services staff (not attorney)', 'legal services staff'),
-        ('mental health professionals', 'mental health professionals'),
+        ('mental health professionals', 'mpyental health professionals'),
         ('prosecutors', 'prosecutors'),
         ('sex offender treatment providers', 'sex offender treatment providers'),
         ('sexual assault nurse/forensic examiners', 'sexual assault nurse/forensic examiners'),

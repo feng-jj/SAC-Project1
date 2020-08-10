@@ -1,11 +1,11 @@
 from django.db import models
+from django.forms import ModelForm
 from datetime import date
 
 # abstract base class for clinical, advocacy, MAP, OV, and SAFE Clinic Teams
 class CommonEntries(models.Model):
     entry_date = models.DateField(default = date.today)
     total_ind = models.PositiveIntegerField(verbose_name = "Total Individuals")
-    total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions")
     race_amerind = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - American Indian/Alaska Native")
     race_asian = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Asian")
     race_black = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Black/African American")
@@ -60,34 +60,63 @@ class CommonEntries(models.Model):
     
 # child classes of CommonEntries
 class Clinical(CommonEntries):  
+    total_ind = models.PositiveIntegerField(verbose_name = "Total Individuals")
+    total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions")
     class Meta:
         verbose_name = "Clinical Team Entry"
         verbose_name_plural = "Clinical Team Entries"
     pass
 
 class Advocacy(CommonEntries):
+    total_ind = models.PositiveIntegerField(verbose_name = "Total Individuals")
+    total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions")
     class Meta:
         verbose_name = "Advocacy Team Entry"
         verbose_name_plural = "Advocacy Team Entries"
     pass
 
 class MAP(CommonEntries):
+    total_accompaniments = models.PositiveIntegerField(verbose_name = "Total Accompaniments")
     class Meta:
         verbose_name = "MAP Team Entry"
         verbose_name_plural = "MAP Team Entries"
     pass
 
 class OV(CommonEntries):
+    total_OV = models.PositiveIntegerField(verbose_name = "Total OVs")
     class Meta:
         verbose_name = "OV Team Entry"
         verbose_name_plural = "OV Team Entries"
     pass
 
 class SAFE_Clinic(CommonEntries):
+    total_exams = models.PositiveIntegerField(verbose_name = "Total Rape Exams")
     class Meta:
         verbose_name = "SAFE Clinic Team Entry"
         verbose_name_plural = "SAFE Clinic Team Entries"
     pass
+
+class ClinicalForm(ModelForm):
+    class Meta: 
+        model = Clinical
+        fields = '__all__'
+
+class AdvocacyForm(ModelForm):
+    class Meta:
+        model = Advocacy
+        fields = '__all__'
+
+class MAPForm(ModelForm):
+    class Meta:
+        model = MAP
+        fields = '__all__'
+
+class OVForm(ModelForm):
+    class Meta:
+        model = OV
+        fields = '__all__'
+
+
 
 ##################################################################################################
 
@@ -174,3 +203,100 @@ class Crisis_Line(models.Model):
         verbose_name = "Crisis Line Team Entry"
         verbose_name_plural = "Crisis Line Team Entries"
     
+#####################################################################################################
+
+class Prevention(models.Model):
+    TYPE_ORG = [ 
+        ('church', 'church'),
+        ('college/university', 'college/university'),
+        ('high school', 'high school'),
+        ('elementary school', 'elementary school'),
+        ('middle school', 'middle school'),
+        ('non-profit', 'non-profit'),
+        ('corporation', 'corporation'),
+        ('bar/restaurant', 'bar/restaurant'),
+        ('other', 'other'),
+    ]
+
+    TOPIC = [
+        ('stewards of children', 'stewards of children'),
+        ('safe bar', 'safe bar'),
+        ('other', 'other'),
+    ]
+
+    entry_date = models.DateField(default = date.today)
+    type_org = models.CharField(max_length = 30, verbose_name = "Type of Organization", blank = True, choices = TYPE_ORG)
+    num_attendees = models.PositiveIntegerField(verbose_name = "Number of Attendees")
+    duration = models.PositiveIntegerField(verbose_name = "Training Duration")
+    topic = models.CharField(max_length = 30, verbose_name = "Topic of Training", blank = True, choices = TOPIC)
+    topic_other = models.TextField(verbose_name = "Other Topic")
+
+    class Meta:
+        verbose_name = "Prevention Team Entry"
+        verbose_name_plural = "Prevention Team Entries"
+
+
+class Training(models.Model):
+    OCCUPATION = [
+        ('advocacy org staff', 'advocacy org staff'),
+        ('attorneys/law students (not prosecutor)', 'attorneys/law students'),
+        ('batterer intervention program staff', 'batterer intervention program staff'),
+        ('corrections personnel', 'corrections personnel'),
+        ('court personnel', 'court personnel'),
+        ('disability org staff', 'disability org staff'),
+        ('educators', 'educators'),
+        ('elder org staff', 'elder org staff'),
+        ('faith-based org staff', 'faith-based org staff'),
+        ('government agency staff','gov agency staff'),
+        ('health professionals', 'health professionals'),
+        ('immigrant org staff', 'immigrant org staff'),
+        ('law enforcement officers', 'law enforcement officers'),
+        ('legal services staff (not attorney)', 'legal services staff'),
+        ('mental health professionals', 'mpyental health professionals'),
+        ('prosecutors', 'prosecutors'),
+        ('sex offender treatment providers', 'sex offender treatment providers'),
+        ('sexual assault nurse/forensic examiners', 'sexual assault nurse/forensic examiners'),
+        ('social service org staff (non government)', 'social service org staff'),
+        ('substance abuse org staff', 'substance abuse org staff'),
+        ('supervised visitation and exchange center staff', 'supervised vistation and exchange center'),
+        ('translators/interpreters', 'translators/interpreters'),
+        ('tribal government/tribal government agency staff', 'tribal government/tribal government agency staff'),
+        ('victim advocates (non-government)', 'victim advocates'),
+        ('victim assistants (government)', 'victim assistants'),
+        ('volunteers', 'volunteers'),
+        ('other', 'other'),
+    ]
+    TOPIC = [
+
+    ]
+    TYPE = [
+        ('training', 'training'),
+        ('wellness retreat', 'wellness retreat'),
+        ('peer support collaborative', 'peer support collaborative'),
+        ('other','other'),
+    ]
+
+    entry_date = models.DateField(default = date.today)
+    occupation = models.CharField(max_length = 50, verbose_name = "Occupation of Trainees", blank = True, choices = OCCUPATION)
+    num_attendees = models.PositiveIntegerField(verbose_name = "Number of Attendees")
+    duration = models.PositiveIntegerField(verbose_name = "Training Duration (min)")
+    training_type = models.CharField(max_length = 50, verbose_name = "Type of Training", blank = True, choices = TYPE)
+    training_type_other = models.TextField(verbose_name = "Type of Training - Other Text")
+
+    class Meta:
+        verbose_name = "Training Team Entry"
+        verbose_name_plural = "Training Team Entries"
+
+class Development(models.Model):
+    entry_date = models.DateField(default = date.today)
+    new_donors = models.PositiveIntegerField(verbose_name = "New Donors")
+    new_foundations = models.PositiveIntegerField(verbose_name = "New Foundations/Grants" )
+    over_1000 = models.PositiveIntegerField(verbose_name = "Gifts over $1000")
+    recurring_donors = models.PositiveIntegerField(verbose_name = "Recurring Donors")
+    recurring_gift_avg = models.PositiveIntegerField(verbose_name = "Recurring Gift Average")
+    total_raised = models.PositiveIntegerField(verbose_name = "Total Amount Raised")
+    percent_goal_met = models.PositiveIntegerField(verbose_name = "Percentage of Monthly Goal Met")
+
+    class Meta:
+        verbose_name = "Development Team Entry"
+        verbose_name_plural = "Development Team Entries"

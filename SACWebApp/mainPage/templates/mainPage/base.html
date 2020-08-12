@@ -3,7 +3,6 @@
 <!-- BLOCKED CONTENT IS IN MAIN -->
 <!DOCTYPE HTML>
 <html>
-
 	<head>
 		{% if team_name %}
 			<title>{{team_name}} Dashboard</title>
@@ -47,6 +46,7 @@
                 {% block content %}
 
                 {% endblock %}
+
 			</div>
 
 		<!-- Footer -->
@@ -60,6 +60,7 @@
 			</div>
 
 		<!-- Scripts -->
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 			<script src="../WebAssets/assets/js/jquery.min.js"></script>
 			<script src="../WebAssets/assets/js/jquery.scrolly.min.js"></script>
 			<script src="../WebAssets/assets/js/jquery.scrollex.min.js"></script>
@@ -69,6 +70,9 @@
 			<script src="../WebAssets/assets/js/main.js"></script>
 
 	</body>
+
+{% block graphs %}
+	{% endblock %}
 </html>
 
 

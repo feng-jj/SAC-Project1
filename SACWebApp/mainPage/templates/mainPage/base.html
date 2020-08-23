@@ -13,7 +13,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../WebAssets/assets/css/main.css" />
     </head>
-    
+
 	<body class="is-preload">
 
 		<!-- Header -->
@@ -27,14 +27,10 @@
 						<nav id="nav">
 							<ul>
 								<li><a href="{% url 'home-page' %}" id="index-link"><span>Main Dashboard</span></a></li>
-								<li><a href="#" id="safe_clinic-link"><span>SAFE Clinic</span></a></li>
-								<li><a href="#" id="advocacy-link"><span>Advocacy</span></a></li>
-								<li><a href="#" id="map-link"><span>MAP</span></a></li>
-								<li><a href="#" id="ov-link"><span>OV</span></a></li>
-								<li><a href="#" id="crisis_line-link"><span>Crisis Line</span></a></li>
-								<li><a href="#" id="prevention-link"><span>Prevention</span></a></li>
-								<li><a href="#" id="training-link"><span>Training</span></a></li>
-								<li><a href="#" id="development-link"><span>Development</span></a></li>
+								<li><a href="{% url 'crisis_line' %}" id="crisis_line-link"><span>Crisis Line</span></a></li>
+								<li><a href="{% url 'prevention' %}" id="prevention-link"><span>Prevention</span></a></li>
+								<li><a href="{% url 'training' %}" id="training-link"><span>Training</span></a></li>
+								<li><a href="{% url 'development' %}" id="development-link"><span>Development</span></a></li>
 							</ul>
 						</nav>
 				</div>
@@ -70,10 +66,7 @@
 			<script src="../WebAssets/assets/js/main.js"></script>
 
 	</body>
-
 {% block graphs %}
+
 	{% endblock %}
 </html>
-
-
-

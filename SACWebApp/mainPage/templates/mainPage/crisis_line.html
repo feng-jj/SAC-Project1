@@ -1,0 +1,168 @@
+{% extends "mainPage/base.html" %}
+
+{% block content %}
+	<!-- Dashboard Title -->
+		<section id="crisis_line-link" class="two">
+			<div class="container">
+
+				<header>
+					<h2>Crisis Line Dashboard Data</h2>
+				</header>
+
+				<canvas id="totalCalls" width="50" height="20"></canvas>
+				<canvas id="highestCalls" width="50" height="20"></canvas>
+				<canvas id="howSAC" width="50" height="20"></canvas>
+				<canvas id="numberMinors" width="50" height="20"></canvas>
+
+			</div>
+		</section>
+{% endblock content %}
+
+
+{% block graphs %}
+<script>
+	var ctx = document.getElementById('totalCalls').getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+	        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
+	        datasets: [{
+	            label: 'Total Number of Calls',
+	            data: [{% for item in qs %} {{item.total_calls}},
+										{% endfor %}],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	});
+	var ctx = document.getElementById('highestCalls').getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+	        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
+	        datasets: [{
+	            label: 'Total Number of Calls',
+	            data: [{% for item in qs %} {{item.highest_calls}},
+										{% endfor %}],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	});
+
+	var ctx = document.getElementById('totalCalls').getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+	        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
+	        datasets: [{
+	            label: 'Total Number of Calls',
+	            data: [{% for item in qs %} {{item.demographic_calls}},
+										{% endfor %}],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	});
+
+	new Chart(document.getElementById("howSAC"), {
+	    type: 'pie',
+	    data: {
+	      labels: ["TV Commercial", "Radio","Website","Social Media",
+								"Friend/Family Member", "Medical Professional","Other"],
+	      datasets: [{
+	        label: "How They Heard",
+	        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+	        data: [{% for item in qs %} {{item.head_TV}},{{item.heard_radio}},
+					{{item.heard_radio}}, {{item.heard_website}}, {{item.heard_friend_fam}},
+					{{item.heard_medical}}, {{item.heard_other + item.heard_other_text}},
+					{% endfor %}]
+	      }]
+	    },
+	    options: {
+	      title: {
+	        display: true,
+	        text: 'Percentage of People in Different Age Groups'
+	      }
+	    }
+	});
+
+
+</script>
+
+{% endblock graphs %}

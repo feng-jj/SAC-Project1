@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main-page', '0004_auto_20200725_2359'),
+        ('mainPage', '0004_auto_20200725_2359'),
     ]
 
     operations = [

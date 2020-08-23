@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main-page', '0002_advocacy_map_ov_safe_clinic'),
+        ('mainPage', '0002_advocacy_map_ov_safe_clinic'),
     ]
 
     operations = [

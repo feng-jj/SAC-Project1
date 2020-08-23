@@ -57,9 +57,9 @@ class CommonEntries(models.Model):
 
     class Meta:
         abstract = True
-    
+
 # child classes of CommonEntries
-class Clinical(CommonEntries):  
+class Clinical(CommonEntries):
     class Meta:
         verbose_name = "Clinical Team Entry"
         verbose_name_plural = "Clinical Team Entries"
@@ -173,4 +173,3 @@ class Crisis_Line(models.Model):
     class Meta:
         verbose_name = "Crisis Line Team Entry"
         verbose_name_plural = "Crisis Line Team Entries"
-    

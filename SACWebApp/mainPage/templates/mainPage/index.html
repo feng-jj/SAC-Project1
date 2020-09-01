@@ -11,8 +11,10 @@
 
 			</div>
 		</section>
-		<canvas id="numberOfPeople" width="50" height="20"></canvas>
-		<canvas id="ageOfPeople" width="50" height="20"></canvas>
+		<div class = "container"> 
+			<canvas id="numberOfPeople" width="50" height="25"></canvas>
+			<canvas id="ageOfPeople" width="50" height="25"></canvas>
+		</div>
 {% endblock content %}
 
 {% block graphs %}
@@ -48,11 +50,25 @@ var myChart = new Chart(ctx, {
 								{% endfor %}],
 	        label: "# of Sessions (Total)",
 	        borderColor: "#8e5ea2",
+			borderWidth: 1,
 	        fill: false
 				}]
 
     },
     options: {
+		layout: {
+			padding: {
+				left: 20,
+				right: 20,
+				top: 20,
+				bottom: 50
+			}
+		},
+		title: {
+			display: true,
+			fontSize: 18,
+			text: 'Monthly Count of Individuals and Sessions'
+		},
         scales: {
             yAxes: [{
                 ticks: {
@@ -69,17 +85,26 @@ new Chart(document.getElementById("ageOfPeople"), {
       labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
       datasets: [{
         label: "Age Groups",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        backgroundColor: ["#b654de", "#702f8a","#007377","#13bcbf","#ffd100"],
         data: [{% for item in qs %} {{item.age_0_12}},{{item.age_13_17}},
 				{{item.age_18_24}}, {{item.age_25_59}}, {{item.age_60_plus}},
 				{% endfor %}]
       }]
     },
     options: {
-      title: {
-        display: true,
-        text: 'Percentage of People in Different Age Groups'
-      }
+		layout: {
+			padding: {
+				left: 20,
+				right: 20,
+				top:0,
+				bottom: 50
+			}
+		},
+		title: {
+			display: true,
+			fontSize: 18,
+			text: 'Age Group Breakdown'
+		}
     }
 });
 </script>

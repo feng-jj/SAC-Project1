@@ -1,13 +1,11 @@
-{% extends "users/base.html" %}
-
-{% block content %}
-
-    <div class="content-section">
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<div class="content-section">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join Today</legend>
-                {{ form.as_p }}
+                {{ form|crispy }}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Sign Up</button>
@@ -19,5 +17,4 @@
             </small>
         </div>
     </div>
-
-{% endblock content %}
+</html>

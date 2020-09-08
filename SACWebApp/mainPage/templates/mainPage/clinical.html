@@ -6,7 +6,7 @@
 			<div class="container">
 
 				<header>
-					<h2>Welcome to the Main Dashboard</h2>
+					<h2>Clinical Team Dashboard</h2>
 				</header>
 
 			</div>
@@ -21,10 +21,10 @@ var ctx = document.getElementById('numberOfPeople').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
+        labels: [{% for item in clinical %} '{{item.entry_date}}', {% endfor %}],
         datasets: [{
             label: '# of Individuals (Total)',
-            data: [{% for item in qs %} {{item.total_ind}},
+            data: [{% for item in clinical %} {{item.total_ind}},
 									{% endfor %}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -44,7 +44,7 @@ var myChart = new Chart(ctx, {
             ],
             borderWidth: 1
         }, {
-					data: [{% for item in qs %} {{item.total_sess}},
+					data: [{% for item in clinical %} {{item.total_sess}},
 								{% endfor %}],
 	        label: "# of Sessions (Total)",
 	        borderColor: "#8e5ea2",
@@ -70,7 +70,7 @@ new Chart(document.getElementById("ageOfPeople"), {
       datasets: [{
         label: "Age Groups",
         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [{% for item in qs %} {{item.age_0_12}},{{item.age_13_17}},
+        data: [{% for item in clinical %} {{item.age_0_12}},{{item.age_13_17}},
 				{{item.age_18_24}}, {{item.age_25_59}}, {{item.age_60_plus}},
 				{% endfor %}]
       }]

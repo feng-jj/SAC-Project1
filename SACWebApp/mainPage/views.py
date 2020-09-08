@@ -15,13 +15,18 @@ class currentTeamView(TemplateView) :
         context = super().get_context_data(**kwargs)
         clinical = Clinical.objects.all()
         advocacy = Advocacy.objects.all()
-        map = MAP.objects.all()
+        map_ = MAP.objects.all()
         ov  = OV.objects.all()
         safeClinic = SAFE_Clinic.objects.all()
         everything = list(
-            chain(clinical, advocacy, map, ov, safeClinic)
+            chain(clinical, advocacy, map_, ov, safeClinic)
         )
         context["qs"] = everything
+        context["safeClinic"] = safeClinic
+        context["clinical"] = clinical
+        context["advocacy"] = advocacy
+        context["map_"] = map_
+        context["ov"] = ov
         user = None
         # todo: figure out how to display user name
         if self.request.user.is_authenticated:

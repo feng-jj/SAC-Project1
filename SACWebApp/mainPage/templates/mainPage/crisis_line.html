@@ -66,7 +66,7 @@
 	    data: {
 	        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
 	        datasets: [{
-	            label: 'Total Number of Calls',
+	            label: 'Highest Number of Calls',
 	            data: [{% for item in qs %} {{item.highest_calls}},
 										{% endfor %}],
 	            backgroundColor: [
@@ -150,7 +150,7 @@
 	        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
 	        data: [{% for item in qs %} {{item.head_TV}},{{item.heard_radio}},
 					{{item.heard_radio}}, {{item.heard_website}}, {{item.heard_friend_fam}},
-					{{item.heard_medical}}, {{item.heard_other + item.heard_other_text}},
+					{{item.heard_medical}}, {{item.heard_other}},
 					{% endfor %}]
 	      }]
 	    },

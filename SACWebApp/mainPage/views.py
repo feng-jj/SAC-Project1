@@ -28,6 +28,37 @@ class currentTeamView(TemplateView) :
             user = self.request.user
         context['user'] = user
         return context
+
+'''
+    Safe Clinic Data
+'''
+class safeClinicTeamView(currentTeamView, TemplateView) :
+    template_name = 'mainPage/safe_clinic.html'
+
+'''
+    Clinical Data
+'''
+class clinicalTeamView(currentTeamView, TemplateView) :
+    template_name = 'mainPage/clinical.html'
+
+'''
+    Advocacy Data
+'''
+class advocacyTeamView(currentTeamView, TemplateView) :
+    template_name = 'mainPage/advocacy.html'
+
+'''
+    MAP Data
+'''
+class mapTeamView(currentTeamView, TemplateView) :
+    template_name = 'mainPage/map_link.html'
+
+'''
+    OV Data
+'''
+class ovTeamView(currentTeamView, TemplateView) :
+    template_name = 'mainPage/ov_link.html'
+
 '''
     Crisis Line Team View
 '''
@@ -39,8 +70,6 @@ class crisisLineTeamView(TemplateView) :
         crisisline = Crisis_Line.objects.all()
         context['qs'] = crisisline
         return context
-
-
 
 class preventionTeamView(TemplateView) :
     template_name = 'mainPage/prevention.html'

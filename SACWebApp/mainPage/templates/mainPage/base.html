@@ -27,10 +27,11 @@
 						<nav id="nav">
 							<ul>
 								<li><a href="{% url 'home-page' %}" id="index-link"><span>Main Dashboard</span></a></li>
-								<li><a href="#" id="safe_clinic-link"><span>SAFE Clinic</span></a></li>
-								<li><a href="#" id="advocacy-link"><span>Advocacy</span></a></li>
-								<li><a href="#" id="map-link"><span>MAP</span></a></li>
-								<li><a href="#" id="ov-link"><span>OV</span></a></li>
+								<li><a href="{% url 'safe_clinic' %}" id="safe_clinic-link"><span>SAFE Clinic</span></a></li>
+								<li><a href="{% url 'clinical' %}" id="clinical-link"><span>Clinical</span></a></li>
+								<li><a href="{% url 'advocacy' %}" id="advocacy-link"><span>Advocacy</span></a></li>
+								<li><a href="{% url 'map' %}" id="map-link"><span>MAP</span></a></li>
+								<li><a href="{% url 'ov' %}" id="ov-link"><span>OV</span></a></li>
 								<li><a href="{% url 'crisis_line' %}" id="crisis_line-link"><span>Crisis Line</span></a></li>
 								<li><a href="{% url 'prevention' %}" id="prevention-link"><span>Prevention</span></a></li>
 								<li><a href="{% url 'training' %}" id="training-link"><span>Training</span></a></li>

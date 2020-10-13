@@ -26,17 +26,37 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="{% url 'home-page' %}" id="index-link"><span>Main Dashboard</span></a></li>
-								<li><a href="#" id="safe_clinic-link"><span>SAFE Clinic</span></a></li>
-								<li><a href="#" id="advocacy-link"><span>Advocacy</span></a></li>
-								<li><a href="#" id="map-link"><span>MAP</span></a></li>
-								<li><a href="#" id="ov-link"><span>OV</span></a></li>
-								<li><a href="{% url 'crisis_line' %}" id="crisis_line-link"><span>Crisis Line</span></a></li>
-								<li><a href="{% url 'prevention' %}" id="prevention-link"><span>Prevention</span></a></li>
-								<li><a href="{% url 'training' %}" id="training-link"><span>Training</span></a></li>
-								<li><a href="{% url 'development' %}" id="development-link"><span>Development</span></a></li>
+								<li>
+									<a href="{% url 'home-page' %}" id="index-link">
+										Main Dashboard
+									</a>
+								</li>
+								<li>
+									<a href="#" class="team-btn">
+										Team Dashboards 
+										<span class="fas fa-caret-down"></span>
+									</a>
+									<ul class="team-show">
+										<li><a href="#" id="safe_clinic-link">SAFE Clinic</a></li>
+										<li><a href="#" id="advocacy-link">Advocacy</a></li>
+										<li><a href="#" id="map-link">MAP</a></li>
+										<li><a href="#" id="ov-link">OV</a></li>
+										<li><a href="{% url 'crisis_line' %}" id="crisis_line-link">Crisis Line</a></li>
+										<li><a href="{% url 'prevention' %}" id="prevention-link">Prevention</a></li>
+										<li><a href="{% url 'training' %}" id="training-link">Training</a></li>
+										<li><a href="{% url 'development' %}" id="development-link">Development</a></li>
+									</ul>
+								</li>
+								<li><a href="#" id="data-upload-link">Data Upload</a></li>
+								<li><a href="#" id="data-download-link">Data Download</a></li>
+								<li><a href="#" id="development-link">Logout</a></li>
 							</ul>
 						</nav>
+						<!-- <script>
+							$('.team-btn').click(function(){
+								$('nav ul .team-show').toggleClass("show");
+							});
+						</script> -->
 				</div>
 			</div>
 
@@ -54,7 +74,7 @@
 
 				<!-- Copyright -->
 					<ul class="copyright">
-						<li>&copy; Sexual Assault Center. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; Sexual Assault Center. All rights reserved.</li>
 					</ul>
 
 			</div>

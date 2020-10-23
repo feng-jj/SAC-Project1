@@ -102,6 +102,18 @@ input, select, textarea {
 			transition: none !important;
 		}
 
+	body::-webkit-scrollbar {
+		width: 7px;
+	}
+
+	body::-webkit-scrollbar-track {
+		background: rgb(164, 69, 202);
+	}
+
+	body::-webkit-scrollbar-thumb {
+		background: rgb(255, 209, 0)/*rgba(112, 47, 138)*/;
+	}
+
 	input, textarea, select {
 		font-family: 'Source Sans Pro', sans-serif;
 		font-size: 19pt;
@@ -112,17 +124,17 @@ input, select, textarea {
 
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 300;
-		color: #666;
+		color: rgba(112, 47, 138);
 		line-height: 1.5em;
 	}
 
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-		color: inherit;
+		color: rgba(112, 47, 138);
 		text-decoration: none;
 	}
 
 		h1 a strong, h2 a strong, h3 a strong, h4 a strong, h5 a strong, h6 a strong {
-			color: #333;
+			color: rgba(112, 47, 138);
 		}
 
 	h2 {
@@ -131,11 +143,11 @@ input, select, textarea {
 	}
 
 		h2.alt {
-			color: #888;
+			color: rgba(112, 47, 138);
 		}
 
 			h2.alt strong {
-				color: #666;
+				color: rgba(112, 47, 138);
 			}
 
 	h3 {
@@ -2032,7 +2044,7 @@ input, select, textarea {
 			font-family: 'Font Awesome 5 Brands';
 		}
 
-/* Header */
+/* Header and Navigation Bar */
 
 	#header {
 		display: -moz-flex;
@@ -2047,16 +2059,16 @@ input, select, textarea {
 		-webkit-justify-content: space-between;
 		-ms-justify-content: space-between;
 		justify-content: space-between;
-		background: rgb(164, 69, 202) url("images/overlay.png");
+		background: rgb(164, 69, 202);
 		box-shadow: inset -0.25em 0 0.25em 0 rgba(0, 0, 0, 0.1);
 		color: #fff;
-		height: 100%;
+		height: 100vh;
 		left: 0;
 		overflow-y: auto;
 		position: fixed;
-		text-align: right;
+		text-align: left;
 		top: 0;
-		width: 375px;
+		width: 250px;
 	}
 
 		#header .top {
@@ -2078,7 +2090,7 @@ input, select, textarea {
 				margin-bottom: 0;
 			}
 
-		#header .icons {
+		/*#header .icons {
 			font-size: 0.8em;
 			text-align: center;
 		}
@@ -2093,7 +2105,7 @@ input, select, textarea {
 
 				#header .icons a:hover {
 					color: #fff;
-				}
+				} */
 
 	#logo {
 		position: relative;
@@ -2129,43 +2141,63 @@ input, select, textarea {
 		}
 
 	#nav ul {
-		list-style: none;
 		padding-left: 0;
 		margin-bottom: 0;
+		font-size: 0.9em;
 	}
 
 		#nav ul li {
 			padding-left: 0;
+			font-size: 0.9em;
+			line-height: 70px;
 		}
 
 			#nav ul li a {
 				display: block;
-				padding: 0.5em 1.5em 0.5em 1.5em;
+				position: relative;
+				/*padding: 0.5em 1.5em 0.5em 1.5em;*/
+				padding-left: 1.5em;
 				color: rgb(255, 255, 255);
+				font-size: 0.9em
 				text-decoration: none;
 				outline: 0;
-				border: 0;
-				-moz-transition: none;
+				border-left: 4px solid transparent;
+				/*-moz-transition: none;
 				-webkit-transition: none;
 				-ms-transition: none;
-				transition: none;
+				transition: none;*/
 			}
 
 				#nav ul li a span {
-					position: relative;
-					display: block;
-					font-size: 0.8em;
+					position: absolute;
+					font-size: 1.2em;
+					color: white;
+					top: 50%;
+					right: 20px;
+					transform: translateY(-50%);
+					transition: transform 0.5s;
 				}
 
-					#nav ul li a span:before {
+					/*#nav ul li a span:before {
 						position: absolute;
 						left: 0;
 						color: #41484c;
 						text-align: center;
 						width: 1.25em;
 						line-height: 1.75em;
+					}*/
+
+					#nav ul li a.active span {
+
+						transform: translateY(-50%) rotate(-180deg);
+						transform-origin: center;
 					}
 
+
+				#nav ul li a:hover {
+					border-left-color: rgb(255, 209, 0);
+				}
+									
 				#nav ul li a.active {
 					background: rgba(112, 47, 138);
 					box-shadow: inset 0 0 0.25em 0 rgba(0, 0, 0, 0.125);
@@ -2176,10 +2208,36 @@ input, select, textarea {
 						color: #e27689;
 					}
 
+		#nav ul ul{
+			position: static;
+			display: none; 
+		}
+
+		#nav ul .team-show.show{
+			display: block;
+		}
+					
+		#nav ul ul li{
+			line-height: 2.8em;
+			border-bottom: none;
+		}
+
+			#nav ul ul li a{
+				font-size: 1.3em;
+				padding-left: 2.5em;
+				color: white;
+			}
+
+			#nav ul ul li a span{
+				position: absolute;
+				top: 50%;
+			}
+
+
 /* Footer */
 
 	#footer {
-		margin-left: 375px;
+		margin-left: 250px;
 		text-align: center;
 		background-color: #dce3e2;
 		padding: 3em 0 4em 0;
@@ -2209,7 +2267,7 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		margin-left: 375px;
+		margin-left: 250px;
 	}
 
 		#main > section {

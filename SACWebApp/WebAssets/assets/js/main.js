@@ -94,6 +94,10 @@
 
 			});
 
+			$('.team-btn').click(function(){
+				$('#nav ul .team-show').toggleClass("show");
+			});
+
 	// Scrolly.
 		$('.scrolly').scrolly();
 

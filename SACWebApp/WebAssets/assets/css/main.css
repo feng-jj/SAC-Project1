@@ -2141,7 +2141,6 @@ input, select, textarea {
 		}
 
 	#nav ul {
-		list-style: none;
 		padding-left: 0;
 		margin-bottom: 0;
 		font-size: 0.9em;
@@ -2150,7 +2149,7 @@ input, select, textarea {
 		#nav ul li {
 			padding-left: 0;
 			font-size: 0.9em;
-			line-height: 90px;
+			line-height: 70px;
 		}
 
 			#nav ul li a {
@@ -2171,24 +2170,29 @@ input, select, textarea {
 
 				#nav ul li a span {
 					position: absolute;
+					font-size: 1.2em;
+					color: white;
 					top: 50%;
 					right: 20px;
 					transform: translateY(-50%);
-					transition: transform 0.4s;
+					transition: transform 0.5s;
 				}
 
-					#nav ul li a span:before {
+					/*#nav ul li a span:before {
 						position: absolute;
 						left: 0;
 						color: #41484c;
 						text-align: center;
 						width: 1.25em;
 						line-height: 1.75em;
+					}*/
+
+					#nav ul li a.active span {
+
+						transform: translateY(-50%) rotate(-180deg);
+						transform-origin: center;
 					}
 
-					#nav ul li a:hover span {
-						transform: translateY(-50%) rotate(-180deg);
-					}
 
 				#nav ul li a:hover {
 					border-left-color: rgb(255, 209, 0);
@@ -2206,7 +2210,7 @@ input, select, textarea {
 
 		#nav ul ul{
 			position: static;
-			/*display: none;*/
+			display: none; 
 		}
 
 		#nav ul .team-show.show{
@@ -2214,14 +2218,14 @@ input, select, textarea {
 		}
 					
 		#nav ul ul li{
-			line-height: 1.5em;
+			line-height: 2.8em;
 			border-bottom: none;
 		}
 
 			#nav ul ul li a{
-				font-size: 0.8em;
-				padding-left: 1.7em;
-				color: #E27689;
+				font-size: 1.3em;
+				padding-left: 2.5em;
+				color: white;
 			}
 
 			#nav ul ul li a span{

@@ -124,7 +124,7 @@ STATIC_URL = '/WebAssets/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL='/admin'
+LOGIN_REDIRECT_URL='/main'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'WebAssets'),

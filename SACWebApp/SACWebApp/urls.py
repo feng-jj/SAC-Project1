@@ -22,6 +22,17 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mainPage.urls')),
 
+    path('advocacy-team-form/', advocacy_form_view, name = 'advocacy_form'),
+    path('clinical-team-form/', clinical_form_view, name = 'clinical_form'),
+    path('clinical-voca-team-form/', clinical_voca_form_view, name = 'clinical_voca_form'),
+    path('MAP-team-form/', map_form_view, name = 'map_form'),
+    path('OV-team-form/', ov_form_view, name = 'ov_form'),
+    path('SAFE-Clinic-team-form/', safe_clinic_form_view, name = 'safe_form'),
+    path('Crisis-Line-team-form/', crisis_line_form_view, name = 'crisis_line_form'),
+    path('prevention-team-form/', prevention_form_view, name = 'prevention_form'),
+    path('training-team-form/', training_form_view, name = 'training_form'),
+    path('development-team-form/', development_form_view, name = 'development_form'),
+
     path('safe_clinic/', safeClinicTeamView.as_view(), name='safe_clinic'),
     path('clinical/', clinicalTeamView.as_view(), name='clinical'),
     path('advocacy/', advocacyTeamView.as_view(), name='advocacy'),

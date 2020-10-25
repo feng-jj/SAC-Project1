@@ -97,3 +97,84 @@ class developmentTeamView(TemplateView) :
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
         return context
+
+
+def advocacy_form_view(request):
+    context = {}
+    form = AdvocacyForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "advocacy_form.html", context)
+
+def clinical_form_view(request):
+    context = {}
+    form = ClinicalForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "clinical_form.html", context)
+
+def clinical_voca_form_view(request):
+    context = {}
+    form = ClinicalVOCAForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "clinical_voca_form.html", context)
+
+def map_form_view(request):
+    context = {}
+    form = MAPForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "map_form.html", context)
+
+def ov_form_view(request):
+    context = {}
+    form = OVForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "ov_form.html", context)
+
+def safe_clinic_form_view(request):
+    context = {}
+    form = AdvocacyForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "advocacy_form.html", context)
+
+def crisis_line_form_view(request):
+    context = {}
+    form = CrisisLineForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "crisis_line_form.html", context)
+
+def prevention_form_view(request):
+    context = {}
+    form = PreventionForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "prevention_form.html", context)
+
+def training_form_view(request):
+    context = {}
+    form = TrainingForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "training_form.html", context)
+
+def development_form_view(request):
+    context = {}
+    form = DevelopmentForm(request.POST)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "development_form.html", context)

@@ -1,0 +1,98 @@
+
+
+<!-- THIS IS THE BASEFRAMEWORK FOR ALL PAGES -->
+<!-- CAN BE EXTENDED TO HTMLs IN OTHER APPS -->
+<!-- BLOCKED CONTENT IS IN MAIN -->
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		{% if team_name %}
+			<title>{{team_name}} Dashboard</title>
+		{% else %}
+			<title>Main Dashboard</title>
+		{% endif %}
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../WebAssets/assets/css/main.css" />
+    </head>
+    
+	<body class="is-preload">
+
+		<!-- Header -->
+			<div id="header">
+				<div class="top">
+					<!-- Logo -->
+						<div id="logo">
+							<span class="image avatar48"><img src="../WebAssets/images/sac-logo.png" alt="" /></span>
+						</div>
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="{% url 'home-page' %}" id="index-link"><span>Main Dashboard</span></a></li>
+								<li><a href="#" id="safe_clinic-link"><span>SAFE Clinic</span></a></li>
+								<li><a href="#" id="advocacy-link"><span>Advocacy</span></a></li>
+								<li><a href="#" id="map-link"><span>MAP</span></a></li>
+								<li><a href="#" id="ov-link"><span>OV</span></a></li>
+								<li><a href="#" id="crisis_line-link"><span>Crisis Line</span></a></li>
+								<li><a href="#" id="prevention-link"><span>Prevention</span></a></li>
+								<li><a href="#" id="training-link"><span>Training</span></a></li>
+								<li><a href="#" id="development-link"><span>Development</span></a></li>
+							</ul>
+						</nav>
+				</div>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+                <!-- Blocked Content -->
+				{% block content %}
+
+				<section id="index-link" class="two">
+					<div class="container">
+		
+						<header>
+							<h3>OV Team Entry Form</h3>
+						</header>
+		
+						<p>
+							For all numeric entries, enter a number 0 or greater. For all text entries (detailing other), enter all other options separated by commas. Enter n/a if no "other". 
+						</p>
+		
+					</div>
+				</section>
+
+
+                <form action = "/ov-team-form/" method = "post">
+					{% csrf_token %}
+					<table border = "1">
+						{{ form }}
+					</table>
+					<input type = "submit" value = "Submit">
+
+                </form>
+
+                {% endblock %}
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+
+				<!-- Copyright -->
+					<ul class="copyright">
+						<li>&copy; Sexual Assault Center. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../WebAssets/assets/js/jquery.min.js"></script>
+			<script src="../WebAssets/assets/js/jquery.scrolly.min.js"></script>
+			<script src="../WebAssets/assets/js/jquery.scrollex.min.js"></script>
+			<script src="../WebAssets/assets/js/browser.min.js"></script>
+			<script src="../WebAssets/assets/js/breakpoints.min.js"></script>
+			<script src="../WebAssets/assets/js/util.js"></script>
+			<script src="../WebAssets/assets/js/main.js"></script>
+
+	</body>
+</html>

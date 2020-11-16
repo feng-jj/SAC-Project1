@@ -17,10 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from mainPage.views import *
+from django.contrib.auth import views as auth_views
+from users import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mainPage.urls')),
+    path('home/', include('mainPage.urls')),
+
+    path('login/', login_form_view, name='login_form'),
+    path('register/', register_form_view, name='register_form'),
 
     path('advocacy-team-form/', advocacy_form_view, name = 'advocacy_form'),
     path('clinical-team-form/', clinical_form_view, name = 'clinical_form'),

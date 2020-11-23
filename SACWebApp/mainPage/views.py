@@ -1,9 +1,53 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from itertools import chain
-# Create your views here.
+from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .forms import UserRegisterForm
+
+
+
+'''
+    Creating the view for the login / register page
+'''
+
+def login_form_view(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('/home')
+        else:
+            messages.info(request, 'Username OR password is incorrect')
+
+    context = {}
+    return render(request, "login-form.html", context)
+
+def register_form_view(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            messages.success(request, f'Account created for {username}!')
+            return redirect('/login')
+    else:
+        form = UserRegisterForm()
+    context = {'form':form}
+    return render(request, "register-form.html", context)
 
 '''
     Creating the view for the 5 teams w/ similar data

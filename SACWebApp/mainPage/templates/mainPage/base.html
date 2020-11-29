@@ -35,12 +35,12 @@
 
 							<li>
 								<a href="#">Team Dashboards </a>
-								<ul><b></b><span style="color:white">Dashboards</span></b>
+								<ul><b><span style="color:white">Dashboards</span></b>
 									<li><a href="{% url 'safe_clinic' %}" id="safe_clinic-link">SAFE  Clinic</a></li>
 									<li><a href="{% url 'clinical' %}" id="clinical-link">Clinical</a></li>
-									<li><a href="#" id="{% url 'advocacy' %}">Advocacy</a></li>
-									<li><a href="#" id="#">MAP</a></li>
-									<li><a href="#" id="#">OV</a></li>
+									<li><a href="{% url 'advocacy' %}" id="advocacy-link">Advocacy</a></li>
+									<li><a href="{% url 'map' %}" id="map-link">MAP</a></li>
+									<li><a href="{% url 'ov' %}" id="ov-link">OV</a></li>
 									<li><a href="{% url 'crisis_line' %}" id="crisis_line-link">Crisis  Line</a></li>
 									<li><a href="{% url 'prevention' %}" id="prevention-link">Prevention</a></li>
 									<li><a href="{% url 'training' %}" id="training-link">Training</a></li>
@@ -50,7 +50,7 @@
 
 							<li>
 								<a href="#" id="data-upload-link">Data Upload</a>
-								<ul><b></b><span style="color:white">Data Upload</span></b>
+								<ul><b><span style="color:white">Data Upload</span></b>
 									<li><a href="#" id="safe_clinic-upload">SAFE  Clinic</a></li>
 									<li><a href="{% url 'clinical_form' %}" id="clinical-link">Clinical</a></li>
 									<li><a href="{% url 'advocacy_form' %}" id="advocacy-upload">Advocacy</a></li>

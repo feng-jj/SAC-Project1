@@ -75,13 +75,13 @@ class CommonEntries(models.Model):
     aces_children_2 = models.PositiveIntegerField(verbose_name = "ACES Scores Children 2", default = 0)
     aces_children_3 = models.PositiveIntegerField(verbose_name = "ACES Scores Children 3", default = 0)
     aces_children_4 = models.PositiveIntegerField(verbose_name = "ACES Scores Children 4 or More", default = 0)
-    
+
 
     class Meta:
         abstract = True
 
 # child classes of CommonEntries
-class Clinical(CommonEntries):  
+class Clinical(CommonEntries):
     total_new = models.PositiveIntegerField(verbose_name = "Total New Clients", default = 0)
     total_continue = models.PositiveIntegerField(verbose_name = "Total Continuing Clients", default = 0)
     total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions", default = 0)
@@ -113,7 +113,7 @@ class Clinical(CommonEntries):
         verbose_name_plural = "Clinical Team Entries"
     pass
 
-class Clinical_VOCA(CommonEntries):  
+class Clinical_VOCA(CommonEntries):
     total_new = models.PositiveIntegerField(verbose_name = "Total New Clients", default = 0)
     total_continue = models.PositiveIntegerField(verbose_name = "Total Continuing Clients", default = 0)
     total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions", default = 0)
@@ -198,12 +198,12 @@ class SAFE_Clinic(CommonEntries):
     pass
 
 class ClinicalForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Clinical
         fields = '__all__'
 
 class ClinicalVOCAForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Clinical_VOCA
         fields = '__all__'
 
@@ -307,14 +307,14 @@ class Crisis_Line(models.Model):
 
 
 class CrisisLineForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Crisis_Line
         fields = '__all__'
-    
+
 #####################################################################################################
 
 class Prevention(models.Model):
-    TYPE_ORG = [ 
+    TYPE_ORG = [
         ('church', 'church'),
         ('college/university', 'college/university'),
         ('high school', 'high school'),
@@ -344,7 +344,7 @@ class Prevention(models.Model):
         verbose_name_plural = "Prevention Team Entries"
 
 class PreventionForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Prevention
         fields = '__all__'
 
@@ -449,7 +449,7 @@ class Training(models.Model):
         verbose_name_plural = "Training Team Entries"
 
 class TrainingForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Training
         fields = '__all__'
 
@@ -468,6 +468,6 @@ class Development(models.Model):
         verbose_name_plural = "Development Team Entries"
 
 class DevelopmentForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Development
         fields = '__all__'

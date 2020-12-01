@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
 from datetime import date
+from multiselectfield import MultiSelectField
 
 # abstract base class for clinical, advocacy, MAP, OV, and SAFE Clinic Teams
 class CommonEntries(models.Model):
@@ -443,6 +444,7 @@ class Training(models.Model):
     duration = models.PositiveIntegerField(verbose_name = "Training Duration (min)", default = 0)
     training_type = models.CharField(max_length = 50, verbose_name = "Type of Training", blank = True, choices = TYPE)
     training_type_other = models.TextField(verbose_name = "Type of Training - Other Text", default = "")
+    training_topic = MultiSelectField(choices = TOPIC, default = "")
 
     class Meta:
         verbose_name = "Training Team Entry"

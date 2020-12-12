@@ -140,7 +140,7 @@ class trainingTeamView(TemplateView) :
 
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
-        training = training.objects.all()
+        training = Training.objects.all()
         context['training'] = training;
         return context
 

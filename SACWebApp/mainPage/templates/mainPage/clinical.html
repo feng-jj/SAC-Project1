@@ -19,11 +19,11 @@
 <script>
 var ctx = document.getElementById('numberOfPeople').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: [{% for item in clinical %} '{{item.entry_date}}', {% endfor %}],
         datasets: [{
-					{
+
 							label: '# of continuing clients',
 							data: [{% for item in clinical %} {{item.total_continue}},
 										{% endfor %}],
@@ -44,7 +44,7 @@ var myChart = new Chart(ctx, {
 						label: "# of Sessions (Total)",
 						backgroundColor : "#D2B4DE" ,
 						borderColor: "#8e5ea2",
-				borderWidth: 1,
+						borderWidth: 1,
 						fill: false
 					}]
 

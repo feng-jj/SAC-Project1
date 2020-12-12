@@ -19,7 +19,7 @@
 <script>
 var ctx = document.getElementById('numberOfPeople').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: [{% for item in map_ %} '{{item.entry_date}}', {% endfor %}],
 				datasets: [{
@@ -41,7 +41,6 @@ var myChart = new Chart(ctx, {
 					label: "# of Sessions (Total)",
 					borderColor: "#8e5ea2",
 					fill: false
-					}
 				}]
     },
     options: {

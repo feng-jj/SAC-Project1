@@ -10,6 +10,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 
+from .resources import ClinicalResource
+from .models import Clinical
+from datetime import date
+
 
 '''
     Creating the view for the login / register page
@@ -229,3 +233,213 @@ def development_form_view(request):
         form.save()
     context['form'] = form
     return render(request, "development_form.html", context)
+
+def clinical_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        clinical_resource = ClinicalResource()
+        dataset = clinical_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="clinical_data.csv"'
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="clincial_data.json"'
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="clinical_data.xls"'
+            return response
+
+    return render(request, 'clinical_export.html')
+
+def advocacy_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        advocacy_resource = AdvocacyResource()
+        dataset = advocacy_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="advocacy_data_{}.csv"'.format(date.today())
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="advocacy_data_{}.json"'.format(date.today())
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="advocacy_data_{}.xls"'.format(date.today())
+            return response
+
+    return render(request, 'advocacy_export.html')
+
+def clinical_voca_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        clinical_voca_resource = ClinicalVOCAResource()
+        dataset = clinical_voca_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="clinical_voca_data_{}.csv"'.format(date.today())
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="clinical_voca_data_{}.json"'.format(date.today())
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="clinical_voca_data_{}.xls"'.format(date.today())
+            return response
+
+    return render(request, 'clinical_voca_export.html')
+
+def map_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        map_resource = MAPResource()
+        dataset = map_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="map_data_{}.csv"'.format(date.today())
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="map_data_{}.json"'.format(date.today())
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="map_data_{}.xls"'.format(date.today())
+            return response
+
+    return render(request, 'map_export.html')
+
+def ov_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        ov_resource = OVResource()
+        dataset = ov_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="ov_data_{}.csv"'.format(date.today())
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="ov_data_{}.json"'.format(date.today())
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="ov_data_{}.xls"'.format(date.today())
+            return response
+
+    return render(request, 'ov_export.html')
+
+def safe_clinic_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        safe_clinic_resource = SAFE_ClinicResource()
+        dataset = safe_clinic_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="safe_clinic_data_{}.csv"'.format(date.today())
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="safe_clinic_data_{}.json"'.format(date.today())
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="safe_clinic_data_{}.xls"'.format(date.today())
+            return response
+
+    return render(request, 'safe_clinic_export.html')
+
+def crisis_line_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        crisis_line_resource = Crisis_LineResource()
+        dataset = crisis_line_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="crisis_line_data_{}.csv"'.format(date.today())
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="crisis_line_data_{}.json"'.format(date.today())
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="crisis_line_data_{}.xls"'.format(date.today())
+            return response
+
+    return render(request, 'crisis_line_export.html')
+
+def prevention_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        prevention_resource = PreventionResource()
+        dataset = prevention_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="prevention_data_{}.csv"'.format(date.today())
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="prevention_data_{}.json"'.format(date.today())
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="prevention_data_{}.xls"'.format(date.today())
+            return response
+
+    return render(request, 'prevention_export.html')
+
+def training_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        training_resource = TrainingResource()
+        dataset = training_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="training_data_{}.csv"'.format(date.today())
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="training_data_{}.json"'.format(date.today())
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="training_data_{}.xls"'.format(date.today())
+            return response
+
+    return render(request, 'training_export.html')
+
+def development_export(request):
+    if request.method == 'POST':
+        # Get selected option from form
+        file_format = request.POST['file-format']
+        development_resource = DevelopmentResource()
+        dataset = development_resource.export()
+        if file_format == 'CSV':
+            response = HttpResponse(dataset.csv, content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="development_data_{}.csv"'.format(date.today())
+            return response
+        elif file_format == 'JSON':
+            response = HttpResponse(dataset.json, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename="development_data_{}.json"'.format(date.today())
+            return response
+        elif file_format == 'XLS (Excel)':
+            response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="development_data_{}.xls"'.format(date.today())
+            return response
+
+    return render(request, 'development_export.html')

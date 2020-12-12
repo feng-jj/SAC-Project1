@@ -22,35 +22,27 @@ var myChart = new Chart(ctx, {
     type: 'line',
     data: {
         labels: [{% for item in ov %} '{{item.entry_date}}', {% endfor %}],
-        datasets: [{
-            label: '# of Individuals (Total)',
-            data: [{% for item in ov %} {{item.total_ind}},
+				datasets: [{
+            label: '# of continuing clients',
+            data: [{% for item in ov %} {{item.total_continue}},
 									{% endfor %}],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+						backgroundColor: "#CD5C5C",
+						borderColor: "#EC7063",
+						borderWidth: 1
         }, {
+					data: [{% for item in ov %} {{item.total_new}},
+								{% endfor %}],
+					label: "# of new clients",
+					borderColor: "#721EC1",
+					fill: false
+				}, {
 					data: [{% for item in ov %} {{item.total_sess}},
 								{% endfor %}],
 	        label: "# of Sessions (Total)",
 	        borderColor: "#8e5ea2",
 	        fill: false
-				}]
-
+					}
+        }]
     },
     options: {
         scales: {
@@ -84,4 +76,3 @@ new Chart(document.getElementById("ageOfPeople"), {
 });
 </script>
 {% endblock graphs %}
-

@@ -27,20 +27,18 @@ var myChart = new Chart(ctx, {
             data: [{% for item in safeClinic %} {{item.total_continue}},
 									{% endfor %}],
 						backgroundColor: "#CD5C5C",
-			      borderColor: "#EC7063",
-            borderWidth: 1
-        }, , {
+						borderColor: "#EC7063",
+						borderWidth: 1
+        }, {
 					data: [{% for item in safeClinic %} {{item.total_new}},
 								{% endfor %}],
 					label: "# of new clients",
-					backgroundColor : "#FFFFE0" ,
-	        borderColor: "#FFFF33",
+					borderColor: "#721EC1",
 					fill: false
 				}, {
 					data: [{% for item in safeClinic %} {{item.total_sess}},
 								{% endfor %}],
 	        label: "# of Sessions (Total)",
-					backgroundColor : "#D2B4DE" ,
 	        borderColor: "#8e5ea2",
 	        fill: false
 				}

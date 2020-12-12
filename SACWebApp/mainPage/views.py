@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 
 
-
 '''
     Creating the view for the login / register page
 '''
@@ -58,16 +57,18 @@ class currentTeamView(TemplateView) :
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
         clinical = Clinical.objects.all()
+        clinicalVoca = Clinical_VOCA.objects.all();
+        clinicalTotal = list(chain(clinical, clinicalVoca))
         advocacy = Advocacy.objects.all()
         map_ = MAP.objects.all()
         ov  = OV.objects.all()
         safeClinic = SAFE_Clinic.objects.all()
         everything = list(
-            chain(clinical, advocacy, map_, ov, safeClinic)
+            chain(clinical, advocacy, map_, ov, safeClinic, clinicalVoca)
         )
         context["qs"] = everything
         context["safeClinic"] = safeClinic
-        context["clinical"] = clinical
+        context["clinical"] = clinicalTotal
         context["advocacy"] = advocacy
         context["map_"] = map_
         context["ov"] = ov
@@ -114,7 +115,7 @@ class ovTeamView(currentTeamView, TemplateView) :
 class crisisLineTeamView(TemplateView) :
     template_name = 'mainPage/crisis_line.html'
 
-    def get_context_data(self, **kwargs) :
+    def get_context_data(self,   **kwargs) :
         context = super().get_context_data(**kwargs)
         crisisline = Crisis_Line.objects.all()
         context['qs'] = crisisline
@@ -125,6 +126,8 @@ class preventionTeamView(TemplateView) :
 
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
+        prevention = Prevention.objects.all()
+        context['prevention'] = prevention;
         return context
 
 
@@ -133,6 +136,8 @@ class trainingTeamView(TemplateView) :
 
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
+        training = training.objects.all()
+        context['training'] = training;
         return context
 
 class developmentTeamView(TemplateView) :
@@ -140,6 +145,8 @@ class developmentTeamView(TemplateView) :
 
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
+        development = Development.objects.all()
+        context['development'] = development;
         return context
 
 

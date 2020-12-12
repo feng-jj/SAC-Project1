@@ -26,30 +26,29 @@ var myChart = new Chart(ctx, {
     data: {
         labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
         datasets: [{
-            label: '# of continuing clients',
-            data: [{% for item in qs %} {{item.total_continue}},
-									{% endfor %}],
-            backgroundColor: "#CD5C5C",
-            borderColor: "#EC7063",
-            borderWidth: 1
-        }, {
+        label: '# of continuing clients',
+        data: [{% for item in qs %} {{item.total_continue}},
+							{% endfor %}],
+        backgroundColor: "#CD5C5C",
+        borderColor: "#EC7063",
+        borderWidth: 1
+		    }, {
 					data: [{% for item in qs %} {{item.total_new}},
 								{% endfor %}],
-	        label: "# of new clients",
+		      label: "# of new clients",
 					backgroundColor : "#FFFFE0" ,
-	        borderColor: "#FFFF33",
-			borderWidth: 1,
-	        fill: false
+		      borderColor: "#FFFF33",
+					borderWidth: 1,
+		      fill: false
 				}, {
 					data: [{% for item in qs %} {{item.total_sess}},
 								{% endfor %}],
-	        label: "# of Sessions (Total)",
+		      label: "# of Sessions (Total)",
 					backgroundColor : "#D2B4DE" ,
-	        borderColor: "#8e5ea2",
-			borderWidth: 1,
-	        fill: false
+		      borderColor: "#8e5ea2",
+					borderWidth: 1,
+		      fill: false
 				}]
-
     },
     options: {
 		layout: {

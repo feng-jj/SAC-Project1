@@ -9,8 +9,35 @@
 					<h2>Welcome to the Development Dashboard</h2>
 				</header>
 
-				<p>Add graphs here</p>
-
+				<p>Here are the statistics for this team: </p>
+				<p># of new donors:
+					{% for item in development %} {{item.new_donors}}
+					{% endfor %}
+				</p>
+				<p># of new foundations/grants:
+					{% for item in development %} {{item.new_foundations}}
+					{% endfor %}
+				</p>
+				<p># of new gifts >$1000:
+					{% for item in development %} {{item.over_1000}}
+					{% endfor %}
+				</p>
+				<p># of recurring donors:
+					{% for item in development %} {{item.recurring_donors}}
+					{% endfor %}
+				</p>
+				<p>Recurring Gift Average:
+					{% for item in development %} {{item.recurring_gift_avg}}
+					{% endfor %}
+				</p>
+				<p>Total amount raised:
+					{% for item in development %} {{item.total_raised}}
+					{% endfor %}
+				</p>
+				<p>% monthly goal met:
+					{% for item in development %} {{item.percent_goal_met}}
+					{% endfor %}
+				</p>
 			</div>
 		</section>
 {% endblock content %}

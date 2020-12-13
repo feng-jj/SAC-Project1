@@ -23,24 +23,12 @@ var myChart = new Chart(ctx, {
     data: {
         labels: [{% for item in ov %} '{{item.entry_date}}', {% endfor %}],
 				datasets: [{
-            label: '# of continuing clients',
-            data: [{% for item in ov %} {{item.total_continue}},
+            label: 'Total OVs',
+            data: [{% for item in ov %} {{item.total_OV}},
 									{% endfor %}],
 						backgroundColor: "#CD5C5C",
 						borderColor: "#EC7063",
 						borderWidth: 1
-        }, {
-					data: [{% for item in ov %} {{item.total_new}},
-								{% endfor %}],
-					label: "# of new clients",
-					borderColor: "#721EC1",
-					fill: false
-				}, {
-					data: [{% for item in ov %} {{item.total_sess}},
-								{% endfor %}],
-	        label: "# of Sessions (Total)",
-	        borderColor: "#8e5ea2",
-	        fill: false
         }]
     },
     options: {

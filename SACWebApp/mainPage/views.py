@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 
 from .resources import ClinicalResource
-from .models import Clinical
 from datetime import date
 
 
@@ -153,6 +152,7 @@ class developmentTeamView(TemplateView) :
         context['development'] = development;
         return context
 
+##################################################################################
 
 def advocacy_form_view(request):
     context = {}

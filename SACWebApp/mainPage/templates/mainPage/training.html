@@ -6,11 +6,45 @@
 			<div class="container">
 
 				<header>
-					<h2>Welcome to the Training Dashboard</h2>
+					<h2>Training Team Dashboard</h2>
 				</header>
-
-				<p>Add graphs here</p>
-
+				<p>Overall number of trainings: {{ overallNumTrainings|safe }}</p>
+				<canvas id="numAttendees" width="50" height="20"></canvas>
 			</div>
 		</section>
 {% endblock content %}
+
+{% block graphs %}
+<script>
+	var ctx = document.getElementById('numAttendees').getContext('2d');
+	var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+					labels: [{% for item in training %} '{{item.entry_date}}', {% endfor %}],
+					datasets: [{
+							label: '# of Attendees',
+							data: [{% for item in training %} {{item.num_attendees}},
+										{% endfor %}],
+							backgroundColor: "#3e95cd",
+							borderColor: "#8e5ea2",
+							borderWidth: 1
+					}]
+			},
+			options: {
+					scales: {
+							yAxes: [{
+									ticks: {
+											beginAtZero: true
+									}
+							}]
+					},
+					title: {
+						display: true,
+						text: 'Monthly Number of Attendees'
+					}
+			}
+	});
+
+</script>
+
+{% endblock graphs %}

@@ -19,38 +19,17 @@
 <script>
 var ctx = document.getElementById('numberOfPeople').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: [{% for item in map_ %} '{{item.entry_date}}', {% endfor %}],
-        datasets: [{
-            label: '# of Individuals (Total)',
-            data: [{% for item in map_ %} {{item.total_ind}},
+				datasets: [{
+						label: 'Total Accompaniments',
+						data: [{% for item in map_ %} {{item.total_accompaniments}},
 									{% endfor %}],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }, {
-					data: [{% for item in map_ %} {{item.total_sess}},
-								{% endfor %}],
-	        label: "# of Sessions (Total)",
-	        borderColor: "#8e5ea2",
-	        fill: false
+						backgroundColor: "#CD5C5C",
+						borderColor: "#EC7063",
+						borderWidth: 1
 				}]
-
     },
     options: {
         scales: {
@@ -59,29 +38,30 @@ var myChart = new Chart(ctx, {
                     beginAtZero: true
                 }
             }]
-        }
+        },
+				title: {
+	        display: true,
+	        text: 'Monthly Count of Total Accompaniments (MAP)'
+	      }
     }
 });
 
 new Chart(document.getElementById("ageOfPeople"), {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
       datasets: [{
         label: "Age Groups",
         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [{% for item in map_ %} {{item.age_0_12}},{{item.age_13_17}},
-				{{item.age_18_24}}, {{item.age_25_59}}, {{item.age_60_plus}},
-				{% endfor %}]
+        data: {{ mapAges|safe }}
       }]
     },
     options: {
       title: {
         display: true,
-        text: 'Percentage of People in Different Age Groups'
+        text: 'Age Group Breakdown (MAP)'
       }
     }
 });
 </script>
 {% endblock graphs %}
-

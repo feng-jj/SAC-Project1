@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 
 from .resources import ClinicalResource
+from .helper import *
 from datetime import date
 
 
@@ -60,28 +61,41 @@ class currentTeamView(TemplateView) :
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
         clinical = Clinical.objects.all()
-        clinicalVoca = Clinical_VOCA.objects.all();
+        clinicalVoca = Clinical_VOCA.objects.all()
         clinicalTotal = list(chain(clinical, clinicalVoca))
         advocacy = Advocacy.objects.all()
         map_ = MAP.objects.all()
-        ov  = OV.objects.all()
+        ov = OV.objects.all()
         safeClinic = SAFE_Clinic.objects.all()
-        everything = list(
-            chain(clinical, advocacy, map_, ov, safeClinic, clinicalVoca)
-        )
-        context["qs"] = everything
+        # everything = list(
+        #     chain(clinical, advocacy, map_, ov, safeClinic, clinicalVoca)
+        # )
+        # context["qs"] = everything
         context["safeClinic"] = safeClinic
-        context["clinical"] = clinicalTotal
+        # since we need to combine the VOCA data, we have to ensure that we properly
+        # combine the data from both entries
+        context["clinical"] = clinical
+        context["clinicalVoca"] = clinicalVoca
         context["advocacy"] = advocacy
         context["map_"] = map_
         context["ov"] = ov
-        user = None
-        # todo: figure out how to display user name
-        if self.request.user.is_authenticated:
-            user = self.request.user
-        context['user'] = user
-        return context
 
+        #because we have that there will be two pie/doughnut charts, we have to ensure that they are properly
+        #inputted as ages
+        # clinicalAges = appendFieldAge(clinicalTotal)
+        clinicalVocaAges = appendFieldAge(clinicalVoca)
+        clinicalAges = appendFieldAge(clinical)
+        advocacyAges = appendFieldAge(advocacy)
+        safeClinicAges = appendFieldAge(safeClinic)
+        mapAges = appendFieldAge(map_)
+        ovAges = appendFieldAge(ov)
+        context['clinicalAges'] = clinicalAges
+        context['clinicalVocaAges'] = clinicalVocaAges
+        context['advocacyAges'] = advocacyAges
+        context['safeClinicAges'] = safeClinicAges
+        context['mapAges'] = mapAges
+        context['ovAges'] = ovAges
+        return context
 '''
     Safe Clinic Data
 '''
@@ -121,7 +135,9 @@ class crisisLineTeamView(TemplateView) :
     def get_context_data(self,   **kwargs) :
         context = super().get_context_data(**kwargs)
         crisisline = Crisis_Line.objects.all()
+        how = appendHowSAC(crisisline)
         context['qs'] = crisisline
+        context['how'] = how
         return context
 
 class preventionTeamView(TemplateView) :
@@ -130,9 +146,10 @@ class preventionTeamView(TemplateView) :
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
         prevention = Prevention.objects.all()
+        overallNumTrainings = numTrainings(prevention)
         context['prevention'] = prevention;
+        context['overallNumTrainings'] = overallNumTrainings
         return context
-
 
 class trainingTeamView(TemplateView) :
     template_name = 'mainPage/training.html'
@@ -140,7 +157,9 @@ class trainingTeamView(TemplateView) :
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
         training = Training.objects.all()
+        overallNumTrainings = numTrainings(training)
         context['training'] = training;
+        context['overallNumTrainings'] = overallNumTrainings
         return context
 
 class developmentTeamView(TemplateView) :
@@ -149,7 +168,11 @@ class developmentTeamView(TemplateView) :
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
         development = Development.objects.all()
+        dd = develop(development)
         context['development'] = development;
+        context['recurringGiftAvg'] = dd[0]
+        context['totalRaised'] = dd[1]
+        context['percentGoal'] = dd[2]
         return context
 
 ##################################################################################

@@ -20,31 +20,29 @@
 var ctx = document.getElementById('numberOfPeople').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
-    data: {
-        labels: [{% for item in advocacy %} '{{item.entry_date}}', {% endfor %}],
-        datasets: [{
-            label: '# of continuing clients',
-            data: [{% for item in advocacy %} {{item.total_continue}},
+		data: {
+	    datasets: [{
+	            label: '# of continuing clients',
+	            data: [{% for item in advocacy %} {{item.total_continue}},
+										{% endfor %}],
+							backgroundColor: "#CD5C5C",
+				      borderColor: "#EC7063",
+	            borderWidth: 1
+	        }, {
+						data: [{% for item in advocacy %} {{item.total_new}},
 									{% endfor %}],
-						backgroundColor: "#CD5C5C",
-			      borderColor: "#EC7063",
-            borderWidth: 1
-        }, {
-					data: [{% for item in advocacy %} {{item.total_new}},
-								{% endfor %}],
-	        label: "# of new clients",
-					backgroundColor : "#FFFFE0" ,
-	        borderColor: "#FFFF33",
-	        fill: false
-				}, {
-					data: [{% for item in advocacy %} {{item.total_sess}},
-								{% endfor %}],
-	        label: "# of Sessions (Total)",
-					backgroundColor : "#D2B4DE" ,
-	        borderColor: "#8e5ea2",
-	        fill: false
-				}]
-
+		        label: "# of new clients",
+						backgroundColor : "#FFFFE0" ,
+		        borderColor: "#FFFF33",
+		        fill: false
+					}, {
+						data: [{% for item in advocacy %} {{item.total_sess}},
+									{% endfor %}],
+		        label: "# of Sessions (Total)",
+						backgroundColor : "#D2B4DE" ,
+		        borderColor: "#8e5ea2",
+		        fill: false
+					}]
     },
     options: {
         scales: {
@@ -53,7 +51,11 @@ var myChart = new Chart(ctx, {
                     beginAtZero: true
                 }
             }]
-        }
+        },
+				title: {
+	        display: true,
+	        text: 'Monthly Count of Individuals and Sessions (Advocacy)'
+	      }
     }
 });
 
@@ -64,15 +66,13 @@ new Chart(document.getElementById("ageOfPeople"), {
       datasets: [{
         label: "Age Groups",
         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [{% for item in advocacy %} {{item.age_0_12}},{{item.age_13_17}},
-				{{item.age_18_24}}, {{item.age_25_59}}, {{item.age_60_plus}},
-				{% endfor %}]
+        data: {{ advocacyAges|safe }}
       }]
     },
     options: {
       title: {
         display: true,
-        text: 'Percentage of People in Different Age Groups'
+        text: 'Age Group Breakdown (Advocacy)'
       }
     }
 });

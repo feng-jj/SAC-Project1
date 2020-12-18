@@ -38,28 +38,31 @@ var myChart = new Chart(ctx, {
                     beginAtZero: true
                 }
             }]
-        }
+        },
+				title: {
+	        display: true,
+	        text: 'Monthly Count of OVs'
+	      }
     }
 });
 
 new Chart(document.getElementById("ageOfPeople"), {
-    type: 'pie',
-    data: {
-      labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
-      datasets: [{
-        label: "Age Groups",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [{% for item in ov %} {{item.age_0_12}},{{item.age_13_17}},
-				{{item.age_18_24}}, {{item.age_25_59}}, {{item.age_60_plus}},
-				{% endfor %}]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Percentage of People in Different Age Groups'
-      }
-    }
+	type: 'doughnut',
+	data: {
+		labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
+		datasets: [{
+			label: "Age Groups",
+			backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+			data: {{ ovAges|safe }}
+		}]
+	},
+	options: {
+		title: {
+			display: true,
+			text: 'Age Group Breakdown (OV)'
+		}
+	}
 });
 </script>
+
 {% endblock graphs %}

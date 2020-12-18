@@ -16,6 +16,7 @@
 			<canvas id="numberOfPeopleClinical" width="50" height="25"></canvas>
 			<canvas id="numberOfPeopleClinicalVOCA" width="50" height="25"></canvas>
 			<canvas id="ageOfPeopleClinical" width="50" height="25"></canvas>
+			<canvas id="ageOfPeopleClinicalVOCA" width="50" height="25"></canvas>
 			<canvas id="numberOfPeopleAdvocacy" width="50" height="25"></canvas>
 			<canvas id="ageOfPeopleAdvocacy" width="50" height="25"></canvas>
 		</div>
@@ -147,6 +148,32 @@ new Chart(document.getElementById("ageOfPeopleClinical"), {
 		title: {
 			display: true,
 			text: 'Age Group Breakdown (Clinical)'
+		}
+	}
+});
+
+new Chart(document.getElementById("ageOfPeopleClinicalVOCA"), {
+	type: 'doughnut',
+	data: {
+		labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
+		datasets: [{
+			label: "Age Groups",
+			backgroundColor: ["#b654de", "#702f8a","#007377","#13bcbf","#ffd100"],
+			data: {{ clinicalVocaAges|safe }},
+		}]
+	},
+	options: {
+		layout: {
+			padding: {
+				left: 20,
+				right: 20,
+				top:0,
+				bottom: 50
+			}
+		},
+		title: {
+			display: true,
+			text: 'Age Group Breakdown (Clinical VOCA)'
 		}
 	}
 });

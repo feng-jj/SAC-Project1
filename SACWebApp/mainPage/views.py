@@ -67,10 +67,6 @@ class currentTeamView(TemplateView) :
         map_ = MAP.objects.all()
         ov = OV.objects.all()
         safeClinic = SAFE_Clinic.objects.all()
-        # everything = list(
-        #     chain(clinical, advocacy, map_, ov, safeClinic, clinicalVoca)
-        # )
-        # context["qs"] = everything
         context["safeClinic"] = safeClinic
         # since we need to combine the VOCA data, we have to ensure that we properly
         # combine the data from both entries
@@ -82,7 +78,6 @@ class currentTeamView(TemplateView) :
 
         #because we have that there will be two pie/doughnut charts, we have to ensure that they are properly
         #inputted as ages
-        # clinicalAges = appendFieldAge(clinicalTotal)
         clinicalVocaAges = appendFieldAge(clinicalVoca)
         clinicalAges = appendFieldAge(clinical)
         advocacyAges = appendFieldAge(advocacy)

@@ -32,6 +32,19 @@ var myChart = new Chart(ctx, {
         }]
     },
     options: {
+      layout: {
+        padding: {
+          left: 20,
+          right: 20,
+          top: 20,
+          bottom: 50
+        }
+      },
+      title: {
+        display: true,
+        fontSize: 18,
+        text: 'Monthly Count of Individuals and Sessions'
+      },
         scales: {
             yAxes: [{
                 ticks: {
@@ -57,9 +70,18 @@ new Chart(document.getElementById("ageOfPeople"), {
       }]
     },
     options: {
+      layout: {
+        padding: {
+          left: 20,
+          right: 20,
+          top:0,
+          bottom: 50
+        }
+      },
       title: {
         display: true,
-        text: 'Age Group Breakdown (SAFE)'
+        fontSize: 18,
+        text: 'Percentage of People in Different Age Groups'
       }
     }
 });

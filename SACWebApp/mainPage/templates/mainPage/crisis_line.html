@@ -1,5 +1,9 @@
 {% extends "mainPage/base.html" %}
 
+{% block title %}
+	<title>Crisis Line Dashboard | SAC</title>		
+{% endblock title %}
+
 {% block content %}
 	<!-- Dashboard Title -->
 		<section id="crisis_line-link" class="two">
@@ -8,13 +12,14 @@
 				<header>
 					<h2>Crisis Line Dashboard Data</h2>
 				</header>
+			</div>
+		</section>
 
 				<canvas id="totalCalls" width="50" height="20"></canvas>
 				<canvas id="highestCalls" width="50" height="20"></canvas>
 				<canvas id="howSAC" width="50" height="20"></canvas>
 				<canvas id="numberMinors" width="50" height="20"></canvas>
-			</div>
-		</section>
+		
 {% endblock content %}
 
 
@@ -35,6 +40,14 @@
 	        }]
 	    },
 	    options: {
+			layout: {
+				padding: {
+					left: 100,
+					right: 100,
+					top: 60,
+					bottom: 50
+				}
+			},
 	        scales: {
 	            yAxes: [{
 	                ticks: {
@@ -43,7 +56,8 @@
 	            }]
 	        },
 					title: {
-		        display: true,
+				display: true,
+				fontSize: 18,
 		        text: 'Monthly Count of Calls (Total)'
 		      }
 	    }
@@ -64,17 +78,26 @@
 					}]
 			},
 			options: {
-					scales: {
-							yAxes: [{
-									ticks: {
-											beginAtZero: true
-									}
-							}]
-					},
-					title: {
-						display: true,
-						text: 'Monthly Count of Calls (Highest)'
+				layout: {
+					padding: {
+						left: 100,
+						right: 100,
+						top: 20,
+						bottom: 50
 					}
+				},
+				scales: {
+						yAxes: [{
+								ticks: {
+										beginAtZero: true
+								}
+						}]
+				},
+				title: {
+					display: true,
+					fontSize: 18,
+					text: 'Monthly Count of Calls (Highest)'
+				}
 			}
 	});
 
@@ -85,13 +108,22 @@
 								"Friend/Family Member", "Medical Professional","Other"],
 	      datasets: [{
 	        label: "How They Heard",
-	        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+	        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#ffd000"],
 	        data: {{ how|safe }}
 	      }]
 	    },
 	    options: {
+			layout: {
+				padding: {
+					left: 100,
+					right: 100,
+					top: 20,
+					bottom: 50
+				}
+			},
 	      title: {
-	        display: true,
+			display: true,
+			fontSize: 18,
 	        text: 'How they heard about SAC'
 	      }
 	    }
@@ -112,6 +144,14 @@
 					}]
 			},
 			options: {
+				layout: {
+					padding: {
+						left: 100,
+						right: 100,
+						top: 20,
+						bottom: 50
+					}
+				},
 					scales: {
 							yAxes: [{
 									ticks: {
@@ -121,6 +161,7 @@
 					},
 					title: {
 						display: true,
+						fontSize: 18,
 						text: 'Monthly highest # of minors'
 					}
 			}

@@ -1,5 +1,9 @@
 {% extends "mainPage/base.html" %}
 
+{% block title %}
+	<title>MAP Dashboard | SAC</title>		
+{% endblock title %}
+
 {% block content %}
 	<!-- Dashboard Title -->
 		<section id="index-link" class="two">
@@ -32,17 +36,26 @@ var myChart = new Chart(ctx, {
 				}]
     },
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-				title: {
-	        display: true,
-	        text: 'Monthly Count of Total Accompaniments (MAP)'
-	      }
+      layout: {
+        padding: {
+          left: 100,
+          right: 100,
+          top: 60,
+          bottom: 50
+        }
+      },
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+      },
+      title: {
+        display: true,
+        fontSize: 18,
+        text: 'Monthly Count of Total Accompaniments (MAP)'
+      }
     }
 });
 
@@ -57,8 +70,17 @@ new Chart(document.getElementById("ageOfPeople"), {
       }]
     },
     options: {
+      layout: {
+        padding: {
+          left: 100,
+          right: 100,
+          top: 20,
+          bottom: 50
+        }
+      },
       title: {
         display: true,
+        fontSize: 18,
         text: 'Age Group Breakdown (MAP)'
       }
     }

@@ -1,5 +1,9 @@
 {% extends "mainPage/base.html" %}
 
+{% block title %}
+	<title>Main Dashboard | SAC</title>		
+{% endblock title %}
+
 {% block content %}
 	<!-- Dashboard Title -->
 		<section id="index-link" class="two">
@@ -145,8 +149,17 @@ new Chart(document.getElementById("ageOfPeopleClinical"), {
 		}]
 	},
 	options: {
+		layout: {
+			padding: {
+				left: 20,
+				right: 20,
+				top:20,
+				bottom: 50
+			}
+		},
 		title: {
 			display: true,
+			fontSize: 18,
 			text: 'Age Group Breakdown (Clinical)'
 		}
 	}
@@ -167,12 +180,13 @@ new Chart(document.getElementById("ageOfPeopleClinicalVOCA"), {
 			padding: {
 				left: 20,
 				right: 20,
-				top:0,
+				top:20,
 				bottom: 50
 			}
 		},
 		title: {
 			display: true,
+			fontSize: 18,
 			text: 'Age Group Breakdown (Clinical VOCA)'
 		}
 	}
@@ -219,6 +233,7 @@ var myChart = new Chart(ctx, {
 			},
 			title: {
 				display: true,
+				fontSize: 18,
 				text: 'Monthly Count of Individuals and Sessions (Advocacy)'
 			},
 	        scales: {
@@ -246,12 +261,13 @@ new Chart(document.getElementById("ageOfPeopleAdvocacy"), {
 			padding: {
 				left: 20,
 				right: 20,
-				top:0,
+				top:20,
 				bottom: 50
 			}
 		},
 		title: {
 			display: true,
+			fontSize: 18,
 			text: 'Age Group Breakdown (Advocacy)'
 		}
     }

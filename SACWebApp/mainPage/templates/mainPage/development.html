@@ -1,5 +1,9 @@
 {% extends "mainPage/base.html" %}
 
+{% block title %}
+	<title>Development Dashboard | SAC</title>		
+{% endblock title %}
+
 {% block content %}
 	<!-- Dashboard Title -->
 		<section id="development-link" class="two">
@@ -12,9 +16,10 @@
 				<p>Total Amount Raised: {{ totalRaised }}</p>
 				<p>% Monthly Goal Met: {{ percentGoal }}</p>
 
-				<canvas id="development" width="50" height="20"></canvas>
 			</div>
 		</section>
+				<canvas id="development" width="50" height="20"></canvas>
+
 {% endblock content %}
 
 {% block graphs %}
@@ -55,6 +60,14 @@
 				}]
 		},
 		options: {
+			layout: {
+				padding: {
+					left: 100,
+					right: 100,
+					top: 60,
+					bottom: 50
+				}
+			},
 				scales: {
 						yAxes: [{
 								ticks: {
@@ -64,6 +77,7 @@
 				},
 				title: {
 					display: true,
+					fontSize: 18,
 					text: 'Monthly Development Data'
 				}
 		}

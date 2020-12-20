@@ -149,7 +149,7 @@ class developmentTeamView(TemplateView) :
 
 def advocacy_form_view(request):
     context = {}
-    form = AdvocacyForm(request.POST)
+    form = AdvocacyForm(initial={'total_new': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a',  'special_other_text_sub': 'n/a'})
     if form.is_valid():
         form.save()
     context['form'] = form
@@ -157,7 +157,7 @@ def advocacy_form_view(request):
 
 def clinical_form_view(request):
     context = {}
-    form = ClinicalForm(request.POST)
+    form = ClinicalForm(initial={'total_new': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a',  'special_other_text_sub': 'n/a'})
     if form.is_valid():
         form.save()
     context['form'] = form
@@ -165,7 +165,7 @@ def clinical_form_view(request):
 
 def clinical_voca_form_view(request):
     context = {}
-    form = ClinicalVOCAForm(request.POST)
+    form = ClinicalVOCAForm(initial={'total_new': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a',  'special_other_text_sub': 'n/a'})
     if form.is_valid():
         form.save()
     context['form'] = form
@@ -173,7 +173,7 @@ def clinical_voca_form_view(request):
 
 def map_form_view(request):
     context = {}
-    form = MAPForm(request.POST)
+    form = MAPForm(initial={'total_accompaniments': 0, 'gender_other_text': 'n/a',  'special_other_text': 'n/a', 'special_other_text_sub': 'n/a'})
     if form.is_valid():
         form.save()
     context['form'] = form
@@ -181,7 +181,7 @@ def map_form_view(request):
 
 def ov_form_view(request):
     context = {}
-    form = OVForm(request.POST)
+    form = OVForm(initial={'total_OV': 0, 'gender_other_text': 'n/a',  'special_other_text': 'n/a', 'special_other_text_sub': 'n/a'})
     if form.is_valid():
         form.save()
     context['form'] = form
@@ -189,11 +189,11 @@ def ov_form_view(request):
 
 def safe_clinic_form_view(request):
     context = {}
-    form = AdvocacyForm(request.POST)
+    form = SafeClinicForm(initial={'total_exams': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a', 'special_other_text_sub': 'n/a'})
     if form.is_valid():
         form.save()
     context['form'] = form
-    return render(request, "advocacy_form.html", context)
+    return render(request, "safe_clinic_form.html", context)
 
 def crisis_line_form_view(request):
     context = {}

@@ -2,6 +2,7 @@ from django.db import models
 from django.forms import ModelForm
 from datetime import date
 from multiselectfield import MultiSelectField
+from datetime import date
 
 # abstract base class for clinical, advocacy, MAP, OV, and SAFE Clinic Teams
 class CommonEntries(models.Model):
@@ -223,6 +224,10 @@ class OVForm(ModelForm):
         model = OV
         fields = '__all__'
 
+class SafeClinicForm(ModelForm):
+    class Meta:
+        model = SAFE_Clinic
+        fields = '__all__'
 
 
 ##################################################################################################
@@ -349,6 +354,13 @@ class PreventionForm(ModelForm):
         model = Prevention
         fields = '__all__'
 
+def increment_number_monthly():
+        last_training = Training.objects.all().order_by('entry_date').last()
+
+        if last_training.entry_date.month == datetime.date.today().month:
+            return last_training.training_id + 1
+        else: 
+            return 1
 
 class Training(models.Model):
     OCCUPATION = [
@@ -445,10 +457,13 @@ class Training(models.Model):
     training_type = models.CharField(max_length = 50, verbose_name = "Type of Training", blank = True, choices = TYPE)
     training_type_other = models.TextField(verbose_name = "Type of Training - Other Text", default = "")
     training_topic = MultiSelectField(choices = TOPIC, default = "")
+    training_id = models.PositiveIntegerField(default = increment_number_monthly)
 
     class Meta:
         verbose_name = "Training Team Entry"
         verbose_name_plural = "Training Team Entries"
+
+
 
 class TrainingForm(ModelForm):
     class Meta:
@@ -469,7 +484,14 @@ class Development(models.Model):
         verbose_name = "Development Team Entry"
         verbose_name_plural = "Development Team Entries"
 
+    
+
 class DevelopmentForm(ModelForm):
     class Meta:
         model = Development
         fields = '__all__'
+
+
+
+
+

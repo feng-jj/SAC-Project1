@@ -53,6 +53,14 @@ def register_form_view(request):
     return render(request, "register-form.html", context)
 
 '''
+    Creating the view for logout
+'''
+def logout_request(request):
+    logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect('/login')
+
+'''
     Creating the view for the 5 teams w/ similar data
 '''
 class currentTeamView(TemplateView) :

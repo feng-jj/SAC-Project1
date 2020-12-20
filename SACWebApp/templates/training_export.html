@@ -1,7 +1,19 @@
 {% extends "form_base.html" %}
 
+{% block title %}
+		<title>Training Data Export | SAC</title>
+{% endblock %}
+
 {% block content %}
-<h3>Export Training Team Data</h3>
+<section id="index-link" class="two">
+  <div class="container">
+
+    <header> 
+      <h2>Export Training Team Data</h2>
+    </header>
+  </div>
+</section>
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>Please select format of file.</p>

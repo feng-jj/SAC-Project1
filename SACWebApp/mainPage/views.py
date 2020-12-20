@@ -11,9 +11,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 
 from .resources import ClinicalResource
-from .models import Clinical
+from .helper import *
 from datetime import date
-
 
 
 '''
@@ -62,26 +61,36 @@ class currentTeamView(TemplateView) :
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
         clinical = Clinical.objects.all()
+        clinicalVoca = Clinical_VOCA.objects.all()
+        clinicalTotal = list(chain(clinical, clinicalVoca))
         advocacy = Advocacy.objects.all()
         map_ = MAP.objects.all()
-        ov  = OV.objects.all()
+        ov = OV.objects.all()
         safeClinic = SAFE_Clinic.objects.all()
-        everything = list(
-            chain(clinical, advocacy, map_, ov, safeClinic)
-        )
-        context["qs"] = everything
         context["safeClinic"] = safeClinic
+        # since we need to combine the VOCA data, we have to ensure that we properly
+        # combine the data from both entries
         context["clinical"] = clinical
+        context["clinicalVoca"] = clinicalVoca
         context["advocacy"] = advocacy
         context["map_"] = map_
         context["ov"] = ov
-        user = None
-        # todo: figure out how to display user name
-        if self.request.user.is_authenticated:
-            user = self.request.user
-        context['user'] = user
-        return context
 
+        #because we have that there will be two pie/doughnut charts, we have to ensure that they are properly
+        #inputted as ages
+        clinicalVocaAges = appendFieldAge(clinicalVoca)
+        clinicalAges = appendFieldAge(clinical)
+        advocacyAges = appendFieldAge(advocacy)
+        safeClinicAges = appendFieldAge(safeClinic)
+        mapAges = appendFieldAge(map_)
+        ovAges = appendFieldAge(ov)
+        context['clinicalAges'] = clinicalAges
+        context['clinicalVocaAges'] = clinicalVocaAges
+        context['advocacyAges'] = advocacyAges
+        context['safeClinicAges'] = safeClinicAges
+        context['mapAges'] = mapAges
+        context['ovAges'] = ovAges
+        return context
 '''
     Safe Clinic Data
 '''
@@ -118,10 +127,12 @@ class ovTeamView(currentTeamView, TemplateView) :
 class crisisLineTeamView(TemplateView) :
     template_name = 'mainPage/crisis_line.html'
 
-    def get_context_data(self, **kwargs) :
+    def get_context_data(self,   **kwargs) :
         context = super().get_context_data(**kwargs)
         crisisline = Crisis_Line.objects.all()
+        how = appendHowSAC(crisisline)
         context['qs'] = crisisline
+        context['how'] = how
         return context
 
 class preventionTeamView(TemplateView) :
@@ -129,14 +140,21 @@ class preventionTeamView(TemplateView) :
 
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
+        prevention = Prevention.objects.all()
+        overallNumTrainings = numTrainings(prevention)
+        context['prevention'] = prevention;
+        context['overallNumTrainings'] = overallNumTrainings
         return context
-
 
 class trainingTeamView(TemplateView) :
     template_name = 'mainPage/training.html'
 
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
+        training = Training.objects.all()
+        overallNumTrainings = numTrainings(training)
+        context['training'] = training;
+        context['overallNumTrainings'] = overallNumTrainings
         return context
 
 class developmentTeamView(TemplateView) :
@@ -144,8 +162,15 @@ class developmentTeamView(TemplateView) :
 
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
+        development = Development.objects.all()
+        dd = develop(development)
+        context['development'] = development;
+        context['recurringGiftAvg'] = dd[0]
+        context['totalRaised'] = dd[1]
+        context['percentGoal'] = dd[2]
         return context
 
+##################################################################################
 
 def advocacy_form_view(request):
     context = {}
@@ -236,7 +261,7 @@ def clinical_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="clinical_data.csv"'
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="clincial_data.json"'
@@ -244,7 +269,7 @@ def clinical_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="clinical_data.xls"'
-            return response   
+            return response
 
     return render(request, 'clinical_export.html')
 
@@ -257,7 +282,7 @@ def advocacy_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="advocacy_data_{}.csv"'.format(date.today())
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="advocacy_data_{}.json"'.format(date.today())
@@ -265,7 +290,7 @@ def advocacy_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="advocacy_data_{}.xls"'.format(date.today())
-            return response   
+            return response
 
     return render(request, 'advocacy_export.html')
 
@@ -278,7 +303,7 @@ def clinical_voca_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="clinical_voca_data_{}.csv"'.format(date.today())
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="clinical_voca_data_{}.json"'.format(date.today())
@@ -286,7 +311,7 @@ def clinical_voca_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="clinical_voca_data_{}.xls"'.format(date.today())
-            return response   
+            return response
 
     return render(request, 'clinical_voca_export.html')
 
@@ -299,7 +324,7 @@ def map_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="map_data_{}.csv"'.format(date.today())
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="map_data_{}.json"'.format(date.today())
@@ -307,7 +332,7 @@ def map_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="map_data_{}.xls"'.format(date.today())
-            return response   
+            return response
 
     return render(request, 'map_export.html')
 
@@ -320,7 +345,7 @@ def ov_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="ov_data_{}.csv"'.format(date.today())
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="ov_data_{}.json"'.format(date.today())
@@ -328,9 +353,9 @@ def ov_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="ov_data_{}.xls"'.format(date.today())
-            return response   
+            return response
 
-    return render(request, 'ov_export.html')    
+    return render(request, 'ov_export.html')
 
 def safe_clinic_export(request):
     if request.method == 'POST':
@@ -341,7 +366,7 @@ def safe_clinic_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="safe_clinic_data_{}.csv"'.format(date.today())
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="safe_clinic_data_{}.json"'.format(date.today())
@@ -349,9 +374,9 @@ def safe_clinic_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="safe_clinic_data_{}.xls"'.format(date.today())
-            return response   
+            return response
 
-    return render(request, 'safe_clinic_export.html')  
+    return render(request, 'safe_clinic_export.html')
 
 def crisis_line_export(request):
     if request.method == 'POST':
@@ -362,7 +387,7 @@ def crisis_line_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="crisis_line_data_{}.csv"'.format(date.today())
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="crisis_line_data_{}.json"'.format(date.today())
@@ -370,9 +395,9 @@ def crisis_line_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="crisis_line_data_{}.xls"'.format(date.today())
-            return response   
+            return response
 
-    return render(request, 'crisis_line_export.html')  
+    return render(request, 'crisis_line_export.html')
 
 def prevention_export(request):
     if request.method == 'POST':
@@ -383,7 +408,7 @@ def prevention_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="prevention_data_{}.csv"'.format(date.today())
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="prevention_data_{}.json"'.format(date.today())
@@ -391,7 +416,7 @@ def prevention_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="prevention_data_{}.xls"'.format(date.today())
-            return response   
+            return response
 
     return render(request, 'prevention_export.html')
 
@@ -404,7 +429,7 @@ def training_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="training_data_{}.csv"'.format(date.today())
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="training_data_{}.json"'.format(date.today())
@@ -412,7 +437,7 @@ def training_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="training_data_{}.xls"'.format(date.today())
-            return response   
+            return response
 
     return render(request, 'training_export.html')
 
@@ -425,7 +450,7 @@ def development_export(request):
         if file_format == 'CSV':
             response = HttpResponse(dataset.csv, content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="development_data_{}.csv"'.format(date.today())
-            return response        
+            return response
         elif file_format == 'JSON':
             response = HttpResponse(dataset.json, content_type='application/json')
             response['Content-Disposition'] = 'attachment; filename="development_data_{}.json"'.format(date.today())
@@ -433,6 +458,6 @@ def development_export(request):
         elif file_format == 'XLS (Excel)':
             response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
             response['Content-Disposition'] = 'attachment; filename="development_data_{}.xls"'.format(date.today())
-            return response   
+            return response
 
     return render(request, 'development_export.html')

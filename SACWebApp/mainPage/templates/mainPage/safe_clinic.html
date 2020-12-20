@@ -1,5 +1,9 @@
 {% extends "mainPage/base.html" %}
 
+{% block title %}
+	<title>SAFE Clinic Dashboard | SAC</title>		
+{% endblock title %}
+
 {% block content %}
 	<!-- Dashboard Title -->
 		<section id="index-link" class="two">
@@ -23,54 +27,65 @@ var myChart = new Chart(ctx, {
     data: {
         labels: [{% for item in safeClinic %} '{{item.entry_date}}', {% endfor %}],
         datasets: [{
-            label: '# of continuing clients',
-            data: [{% for item in safeClinic %} {{item.total_continue}},
+            label: 'Total # of Rape Exams',
+            data: [{% for item in safeClinic %} {{item.total_exams}},
 									{% endfor %}],
 						backgroundColor: "#CD5C5C",
-			      borderColor: "#EC7063",
-            borderWidth: 1
-        },  {
-					data: [{% for item in safeClinic %} {{item.total_new}},
-								{% endfor %}],
-					label: "# of new clients",
-					backgroundColor : "#FFFFE0" ,
-	        borderColor: "#FFFF33",
-					fill: false
-				}, {
-					data: [{% for item in safeClinic %} {{item.total_sess}},
-								{% endfor %}],
-	        label: "# of Sessions (Total)",
-					backgroundColor : "#D2B4DE" ,
-	        borderColor: "#8e5ea2",
-	        fill: false
-				}]
+						borderColor: "#EC7063",
+						borderWidth: 1
+        }]
     },
     options: {
+      layout: {
+        padding: {
+          left: 100,
+          right: 100,
+          top: 60,
+          bottom: 50
+        }
+      },
+      title: {
+        display: true,
+        fontSize: 18,
+        text: 'Monthly Count of Individuals and Sessions'
+      },
         scales: {
             yAxes: [{
                 ticks: {
                     beginAtZero: true
                 }
             }]
-        }
+        },
+				title: {
+          display: true,
+          fontSize: 18,
+	        text: 'Monthly Count of Rape Exams (SAFE)'
+	      }
     }
 });
 
 new Chart(document.getElementById("ageOfPeople"), {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
       datasets: [{
         label: "Age Groups",
         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [{% for item in safeClinic %} {{item.age_0_12}},{{item.age_13_17}},
-				{{item.age_18_24}}, {{item.age_25_59}}, {{item.age_60_plus}},
-				{% endfor %}]
+        data: {{ safeClinicAges|safe }}
       }]
     },
     options: {
+      layout: {
+        padding: {
+          left: 100,
+          right: 100,
+          top:20,
+          bottom: 50
+        }
+      },
       title: {
         display: true,
+        fontSize: 18,
         text: 'Percentage of People in Different Age Groups'
       }
     }

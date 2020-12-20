@@ -61,11 +61,9 @@ urlpatterns = [
     path('training-export/', training_export, name = 'training_export'),
     path('development-export/', development_export, name = 'development_export'),
 
-<<<<<<< HEAD
     path('form-confirmation/', form_confirmation, name = 'form_confirmation'),
-=======
+
     path('logout/', logout_request, name="logout"),
->>>>>>> f5f2dbf17e5623b9eafabe956ec7b35934670624
 ]
 
 

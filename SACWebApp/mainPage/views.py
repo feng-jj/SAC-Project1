@@ -182,10 +182,15 @@ class developmentTeamView(TemplateView) :
 
 def advocacy_form_view(request):
     context = {}
-    form = AdvocacyForm(initial={'total_new': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a',  'special_other_text_sub': 'n/a'})
-    if form.is_valid():
-        form.save()
+    if request.method == 'POST':
+        form = AdvocacyForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = AdvocacyForm(initial={'total_new': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a',  'special_other_text_sub': 'n/a'})
+        
     context['form'] = form
+
     return render(request, "advocacy_form.html", context)
 
 def clinical_form_view(request):

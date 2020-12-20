@@ -354,14 +354,6 @@ class PreventionForm(ModelForm):
         model = Prevention
         fields = '__all__'
 
-def increment_number_monthly():
-        last_training = Training.objects.all().order_by('entry_date').last()
-
-        if last_training.entry_date.month == datetime.date.today().month:
-            return last_training.training_id + 1
-        else: 
-            return 1
-
 class Training(models.Model):
     OCCUPATION = [
         ('advocacy org staff', 'advocacy org staff'),
@@ -457,7 +449,6 @@ class Training(models.Model):
     training_type = models.CharField(max_length = 50, verbose_name = "Type of Training", blank = True, choices = TYPE)
     training_type_other = models.TextField(verbose_name = "Type of Training - Other Text", default = "")
     training_topic = MultiSelectField(choices = TOPIC, default = "")
-    training_id = models.PositiveIntegerField(default = increment_number_monthly)
 
     class Meta:
         verbose_name = "Training Team Entry"

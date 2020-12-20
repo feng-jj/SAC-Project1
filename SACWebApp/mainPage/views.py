@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 
-from .resources import ClinicalResource
+from .resources import *
 from .helper import *
 from datetime import date
 
@@ -461,3 +461,6 @@ def development_export(request):
             return response
 
     return render(request, 'development_export.html')
+
+def form_confirmation(request):
+    return render(request, 'form_confirmation.html')

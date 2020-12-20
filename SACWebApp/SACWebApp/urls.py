@@ -60,6 +60,8 @@ urlpatterns = [
     path('prevention-export/', prevention_export, name = 'prevention_export'),
     path('training-export/', training_export, name = 'training_export'),
     path('development-export/', development_export, name = 'development_export'),
+
+    path('form-confirmation/', form_confirmation, name = 'form_confirmation'),
 ]
 
 

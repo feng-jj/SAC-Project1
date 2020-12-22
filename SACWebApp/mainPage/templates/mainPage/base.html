@@ -3,124 +3,145 @@
 <!-- BLOCKED CONTENT IS IN MAIN -->
 <!DOCTYPE HTML>
 <html>
+	
 	<head>
-		{% block title %}
+		<!-- Title changes based on authentication status -->
+		{% if user.is_authenticated %}
+			{% block title %}
+				
+			{% endblock %}
+		{% else %}	
+			<title>SAC Dashboard</title>
+		{% endif %}
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+			<link rel="stylesheet" href="../WebAssets/assets/css/main.css" />
+		</head>
+
+		<body class="is-preload">
+			<!-- Nav -->
+			<nav id="menu">
+
+				<div id="logo">
+					<span class="image avatar48"><img src="../WebAssets/images/sac-logo.png" alt="" /></span>
+				</div>
+
+				<!-- Nav changes based on authentication status -->
+
+				<ul class="parent-menu">
+					{% if user.is_authenticated %}
+						<li>
+							<a href="{% url 'home-page' %}" id="index-link">Main Dashboard</a>
+						</li>
+
+						<li>
+							<a href="#">Team Dashboards </a>
+							<ul><b><span style="color:white">Dashboards</span></b>
+								<li><a href="{% url 'safe_clinic' %}" id="safe_clinic-link">SAFE  Clinic</a></li>
+								<li><a href="{% url 'clinical' %}" id="clinical-link">Clinical</a></li>
+								<li><a href="{% url 'advocacy' %}" id="advocacy-link">Advocacy</a></li>
+								<li><a href="{% url 'map' %}" id="map-link">MAP</a></li>
+								<li><a href="{% url 'ov' %}" id="ov-link">OV</a></li>
+								<li><a href="{% url 'crisis_line' %}" id="crisis_line-link">Crisis  Line</a></li>
+								<li><a href="{% url 'prevention' %}" id="prevention-link">Prevention</a></li>
+								<li><a href="{% url 'training' %}" id="training-link">Training</a></li>
+								<li><a href="{% url 'development' %}" id="development-link">Development</a></li>
+							</ul>
+						</li>
+
+						<li>
+							<a href="#" id="data-upload-link">Data Upload</a>
+							<ul><b><span style="color:white">Data Upload</span></b>
+								<li><a href="{% url 'safe_form' %}" id="safe_clinic-upload">SAFE  Clinic</a></li>
+								<li><a href="{% url 'clinical_form' %}" id="clinical-link">Clinical</a></li>
+								<li><a href="{% url 'clinical_voca_form' %}" id="clinical-voca-link">Clinical VOCA</a></li>
+								<li><a href="{% url 'advocacy_form' %}" id="advocacy-upload">Advocacy</a></li>
+								<li><a href="{% url 'map_form' %}" id="map-upload">MAP</a></li>
+								<li><a href="{% url 'ov_form' %}" id="ov-upload">OV</a></li>
+								<li><a href="{% url 'crisis_line_form' %}" id="crisis_line-upload">Crisis  Line</a></li>
+								<li><a href="{% url 'prevention_form' %}" id="prevention-upload">Prevention</a></li>
+								<li><a href="{% url 'training_form' %}" id="training-upload">Training</a></li>
+								<li><a href="{% url 'development_form' %}" id="development-upload">Development</a></li>
+							</ul>
+						</li>
+
+						<li>
+							<a href="#" id="data-download-link">Data Download</a>
+							<ul><b><span style="color:white">Data Download</span></b>
+								<li><a href="{% url 'safe_clinic_export' %}" id="safe_clinic-export-link">SAFE  Clinic</a></li> 
+								<li><a href="{% url 'clinical_export' %}" id="clinical-export-link">Clinical</a></li>
+								<li><a href="{% url 'clinical_voca_export' %}" id="clinical-export-link">Clinical VOCA</a></li>
+								<li><a href="{% url 'advocacy_export' %}" id="advocacy-export-link">Advocacy</a></li>
+								<li><a href="{% url 'map_export' %}" id="map-export-link">MAP</a></li>
+								<li><a href="{% url 'ov_export' %}" id="ov-export-link">OV</a></li>
+								<li><a href="{% url 'crisis_line_export' %}" id="crisis_line-export-link">Crisis  Line</a></li>
+								<li><a href="{% url 'prevention_export' %}" id="prevention-export-link">Prevention</a></li>
+								<li><a href="{% url 'training_export' %}" id="training-export-link">Training</a></li>
+								<li><a href="{% url 'development_export' %}" id="development-export-link">Development</a></li>
+							</ul>
+						</li>
+					
+						<li><a href="{% url 'logout' %}" id="logout-link">Logout</a></li>
+					{% else %}
+						<li><a href="https://sacenter.org/" id="sac-home">SAC Home</a></li>
+						<li><a href="{% url 'login_form' %}" id="login-link">Login</a></li>
+					{% endif %}
+				</ul>
+			</nav>
 			
-		{% endblock %}
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../WebAssets/assets/css/main.css" />
-    </head>
+			<!-- Main changes based on authentication status -->
+			{% if user.is_authenticated %}	
+				<div id="main">
+					<!-- Blocked Content -->
+					{% block content %}
 
-	<body class="is-preload">
+					{% endblock %}
 
-		<!-- Header -->
-			<!--<div id="header">-->
-
-
-
-					<!-- Nav -->
-					<nav id="menu">
-
-						<div id="logo">
-							<span class="image avatar48"><img src="../WebAssets/images/sac-logo.png" alt="" /></span>
+				</div>
+			{% else %}
+				<div id="main">
+					<section id="index-link" class="two">
+						<div class="container">
+				
+							<header>
+								<h2>Welcome to the Sexual Assault Center Dashboard</h2>
+							</header>
+				
+							<p>
+								Please login to access dashboards and data
+							</p>
+				
 						</div>
+					</section>
+				</div>
+			{% endif %}
 
-						<ul class="parent-menu">
-							<li>
-								<a href="{% url 'home-page' %}" id="index-link">Main Dashboard</a>
-							</li>
+			<!-- Footer -->
+				<div id="footer">
 
-							<li>
-								<a href="#">Team Dashboards </a>
-								<ul><b><span style="color:white">Dashboards</span></b>
-									<li><a href="{% url 'safe_clinic' %}" id="safe_clinic-link">SAFE  Clinic</a></li>
-									<li><a href="{% url 'clinical' %}" id="clinical-link">Clinical</a></li>
-									<li><a href="{% url 'advocacy' %}" id="advocacy-link">Advocacy</a></li>
-									<li><a href="{% url 'map' %}" id="map-link">MAP</a></li>
-									<li><a href="{% url 'ov' %}" id="ov-link">OV</a></li>
-									<li><a href="{% url 'crisis_line' %}" id="crisis_line-link">Crisis  Line</a></li>
-									<li><a href="{% url 'prevention' %}" id="prevention-link">Prevention</a></li>
-									<li><a href="{% url 'training' %}" id="training-link">Training</a></li>
-									<li><a href="{% url 'development' %}" id="development-link">Development</a></li>
-								</ul>
-							</li>
-
-							<li>
-								<a href="#" id="data-upload-link">Data Upload</a>
-								<ul><b><span style="color:white">Data Upload</span></b>
-									<li><a href="{% url 'safe_form' %}" id="safe_clinic-upload">SAFE  Clinic</a></li>
-									<li><a href="{% url 'clinical_form' %}" id="clinical-link">Clinical</a></li>
-									<li><a href="{% url 'clinical_voca_form' %}" id="clinical-voca-link">Clinical VOCA</a></li>
-									<li><a href="{% url 'advocacy_form' %}" id="advocacy-upload">Advocacy</a></li>
-									<li><a href="{% url 'map_form' %}" id="map-upload">MAP</a></li>
-									<li><a href="{% url 'ov_form' %}" id="ov-upload">OV</a></li>
-									<li><a href="{% url 'crisis_line_form' %}" id="crisis_line-upload">Crisis  Line</a></li>
-									<li><a href="{% url 'prevention_form' %}" id="prevention-upload">Prevention</a></li>
-									<li><a href="{% url 'training_form' %}" id="training-upload">Training</a></li>
-									<li><a href="{% url 'development_form' %}" id="development-upload">Development</a></li>
-								</ul>
-							</li>
-
-							<li>
-								<a href="#" id="data-download-link">Data Download</a>
-								<ul><b><span style="color:white">Data Download</span></b>
-									<li><a href="{% url 'safe_clinic_export' %}" id="safe_clinic-export-link">SAFE  Clinic</a></li> 
-									<li><a href="{% url 'clinical_export' %}" id="clinical-export-link">Clinical</a></li>
-									<li><a href="{% url 'clinical_voca_export' %}" id="clinical-export-link">Clinical VOCA</a></li>
-									<li><a href="{% url 'advocacy_export' %}" id="advocacy-export-link">Advocacy</a></li>
-									<li><a href="{% url 'map_export' %}" id="map-export-link">MAP</a></li>
-									<li><a href="{% url 'ov_export' %}" id="ov-export-link">OV</a></li>
-									<li><a href="{% url 'crisis_line_export' %}" id="crisis_line-export-link">Crisis  Line</a></li>
-									<li><a href="{% url 'prevention_export' %}" id="prevention-export-link">Prevention</a></li>
-									<li><a href="{% url 'training_export' %}" id="training-export-link">Training</a></li>
-									<li><a href="{% url 'development_export' %}" id="development-export-link">Development</a></li>
-								</ul>
-							</li>
-							<li><a href="{% url 'logout' %}" id="logout-link">Logout</a></li>
+					<!-- Copyright -->
+						<ul class="copyright">
+							<li>&copy; Sexual Assault Center. All rights reserved.</li>
 						</ul>
 
+				</div>
 
-					</nav>
+			<!-- Scripts -->
 
+				<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+				<script src="../WebAssets/assets/js/jquery.min.js"></script>
+				<script src="../WebAssets/assets/js/jquery.scrolly.min.js"></script>
+				<script src="../WebAssets/assets/js/jquery.scrollex.min.js"></script>
+				<script src="../WebAssets/assets/js/browser.min.js"></script>
+				<script src="../WebAssets/assets/js/breakpoints.min.js"></script>
+				<script src="../WebAssets/assets/js/util.js"></script>
+				<script src="../WebAssets/assets/js/main.js"></script>
 
+		</body>
+		<!-- Graphs not displayed if logged out -->
+		{% if user.is_authenticated %}
+			{% block graphs %}
 
-
-			<!--</div>-->
-			
-
-		<!-- Main -->
-			<div id="main">
-                <!-- Blocked Content -->
-                {% block content %}
-
-                {% endblock %}
-
-			</div>
-
-		<!-- Footer -->
-			<div id="footer">
-
-				<!-- Copyright -->
-					<ul class="copyright">
-						<li>&copy; Sexual Assault Center. All rights reserved.</li>
-					</ul>
-
-			</div>
-
-		<!-- Scripts -->
-
-			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-			<script src="../WebAssets/assets/js/jquery.min.js"></script>
-			<script src="../WebAssets/assets/js/jquery.scrolly.min.js"></script>
-			<script src="../WebAssets/assets/js/jquery.scrollex.min.js"></script>
-			<script src="../WebAssets/assets/js/browser.min.js"></script>
-			<script src="../WebAssets/assets/js/breakpoints.min.js"></script>
-			<script src="../WebAssets/assets/js/util.js"></script>
-			<script src="../WebAssets/assets/js/main.js"></script>
-
-	</body>
-{% block graphs %}
-
-{% endblock %}
+			{% endblock %}
+		{% endif %}
 </html>

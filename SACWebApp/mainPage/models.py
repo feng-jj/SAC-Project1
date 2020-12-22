@@ -6,7 +6,22 @@ from datetime import date
 
 # abstract base class for clinical, advocacy, MAP, OV, and SAFE Clinic Teams
 class CommonEntries(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     race_amerind = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - American Indian/Alaska Native", default = 0)
     race_asian = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Asian", default = 0)
     race_black = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Black/African American", default = 0)
@@ -233,7 +248,22 @@ class SafeClinicForm(ModelForm):
 ##################################################################################################
 
 class Crisis_Line(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     total_calls = models.PositiveIntegerField(verbose_name = "Total Calls", default = 0)
     total_chats = models.PositiveIntegerField(verbose_name = "Total Chats", default = 0)
     highest_calls = models.PositiveIntegerField(verbose_name = "Highest # Calls in 1 Day", default = 0)
@@ -320,6 +350,21 @@ class CrisisLineForm(ModelForm):
 #####################################################################################################
 
 class Prevention(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
+
     TYPE_ORG = [
         ('church', 'church'),
         ('college/university', 'college/university'),
@@ -339,6 +384,7 @@ class Prevention(models.Model):
     ]
 
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     type_org = models.CharField(max_length = 30, verbose_name = "Type of Organization", blank = True, choices = TYPE_ORG)
     num_attendees = models.PositiveIntegerField(verbose_name = "Number of Attendees", default = 0)
     duration = models.PositiveIntegerField(verbose_name = "Training Duration", default = 0)
@@ -355,6 +401,21 @@ class PreventionForm(ModelForm):
         fields = '__all__'
 
 class Training(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
+
     OCCUPATION = [
         ('advocacy org staff', 'advocacy org staff'),
         ('attorneys/law students (not prosecutor)', 'attorneys/law students'),
@@ -443,6 +504,7 @@ class Training(models.Model):
     ]
 
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     occupation = models.CharField(max_length = 50, verbose_name = "Occupation of Trainees", blank = True, choices = OCCUPATION)
     num_attendees = models.PositiveIntegerField(verbose_name = "Number of Attendees", default = 0)
     duration = models.PositiveIntegerField(verbose_name = "Training Duration (min)", default = 0)
@@ -463,7 +525,23 @@ class TrainingForm(ModelForm):
        
 
 class Development(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
+
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     new_donors = models.PositiveIntegerField(verbose_name = "New Donors", default = 0)
     new_foundations = models.PositiveIntegerField(verbose_name = "New Foundations/Grants", default = 0 )
     over_1000 = models.PositiveIntegerField(verbose_name = "Gifts over $1000", default = 0)

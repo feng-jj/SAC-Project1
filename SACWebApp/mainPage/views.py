@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView
 from itertools import chain
 from django.contrib.auth.forms import UserCreationForm
@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm
+from .forms import *
 
 from .resources import *
 from .helper import *
@@ -181,88 +181,143 @@ class developmentTeamView(TemplateView) :
 ##################################################################################
 
 def advocacy_form_view(request):
-    context = {}
     if request.method == 'POST':
         form = AdvocacyForm(request.POST)
         if form.is_valid():
             form.save()
+            return HttpResponseRedirect('/form-confirmation/')
     else:
-        form = AdvocacyForm(initial={'total_new': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a',  'special_other_text_sub': 'n/a'})
-        
-    context['form'] = form
+        form = AdvocacyForm()
 
+    context = {
+        'form': form
+    }
     return render(request, "advocacy_form.html", context)
 
 def clinical_form_view(request):
-    context = {}
-    form = ClinicalForm(initial={'total_new': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a',  'special_other_text_sub': 'n/a'})
-    if form.is_valid():
-        form.save()
-    context['form'] = form
+    if request.method == 'POST':
+        form = ClinicalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/form-confirmation/')
+    else:
+        form = ClinicalForm()
+
+    context = {
+        'form': form
+    }
     return render(request, "clinical_form.html", context)
 
 def clinical_voca_form_view(request):
-    context = {}
-    form = ClinicalVOCAForm(initial={'total_new': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a',  'special_other_text_sub': 'n/a'})
-    if form.is_valid():
-        form.save()
-    context['form'] = form
+    if request.method == 'POST':
+        form = ClinicalVOCAForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/form-confirmation/')
+    else:
+        form = ClinicalVOCAForm()
+
+    context = {
+        'form': form
+    }
     return render(request, "clinical_voca_form.html", context)
 
 def map_form_view(request):
-    context = {}
-    form = MAPForm(initial={'total_accompaniments': 0, 'gender_other_text': 'n/a',  'special_other_text': 'n/a', 'special_other_text_sub': 'n/a'})
-    if form.is_valid():
-        form.save()
-    context['form'] = form
+    if request.method == 'POST':
+        form = MAPForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/form-confirmation/')
+    else:
+        form = MAPForm()
+
+    context = {
+        'form': form
+    }
     return render(request, "map_form.html", context)
 
 def ov_form_view(request):
-    context = {}
-    form = OVForm(initial={'total_OV': 0, 'gender_other_text': 'n/a',  'special_other_text': 'n/a', 'special_other_text_sub': 'n/a'})
-    if form.is_valid():
-        form.save()
-    context['form'] = form
+    if request.method == 'POST':
+        form = OVForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/form-confirmation/')
+    else:
+        form = OVForm()
+
+    context = {
+        'form': form
+    }
     return render(request, "ov_form.html", context)
 
 def safe_clinic_form_view(request):
-    context = {}
-    form = SafeClinicForm(initial={'total_exams': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a', 'special_other_text_sub': 'n/a'})
-    if form.is_valid():
-        form.save()
-    context['form'] = form
+    if request.method == 'POST':
+        form = SAFEClinicForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/form-confirmation/')
+    else:
+        form = SAFEClinicForm()
+
+    context = {
+        'form': form
+    }
     return render(request, "safe_clinic_form.html", context)
 
 def crisis_line_form_view(request):
-    context = {}
-    form = CrisisLineForm(request.POST)
-    if form.is_valid():
-        form.save()
-    context['form'] = form
+    if request.method == 'POST':
+        form = CrisisLineForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/form-confirmation/')
+    else:
+        form = CrisisLineForm()
+
+    context = {
+        'form': form
+    }
     return render(request, "crisis_line_form.html", context)
 
 def prevention_form_view(request):
-    context = {}
-    form = PreventionForm(request.POST)
-    if form.is_valid():
-        form.save()
-    context['form'] = form
+    if request.method == 'POST':
+        form = PreventionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/form-confirmation/')
+    else:
+        form = PreventionForm()
+
+    context = {
+        'form': form
+    }
     return render(request, "prevention_form.html", context)
 
 def training_form_view(request):
-    context = {}
-    form = TrainingForm(request.POST)
-    if form.is_valid():
-        form.save()
-    context['form'] = form
+    if request.method == 'POST':
+        form = TrainingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/form-confirmation/')
+    else:
+        form = TrainingForm()
+
+    context = {
+        'form': form
+    }
     return render(request, "training_form.html", context)
 
 def development_form_view(request):
-    context = {}
-    form = DevelopmentForm(request.POST)
-    if form.is_valid():
-        form.save()
-    context['form'] = form
+    if request.method == 'POST':
+        form = DevelopmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/form-confirmation/')
+    else:
+        form = DevelopmentForm()
+
+    context = {
+        'form': form
+    }
     return render(request, "development_form.html", context)
 
 def clinical_export(request):

@@ -6,7 +6,22 @@ from datetime import date
 
 # abstract base class for clinical, advocacy, MAP, OV, and SAFE Clinic Teams
 class CommonEntries(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     race_amerind = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - American Indian/Alaska Native", default = 0)
     race_asian = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Asian", default = 0)
     race_black = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Black/African American", default = 0)
@@ -23,7 +38,7 @@ class CommonEntries(models.Model):
     gender_woman = models.PositiveIntegerField(verbose_name = "Gender Identity - Woman", default = 0)
     gender_not_rep = models.PositiveIntegerField(verbose_name = "Gender Identity - Not Reported", default = 0)
     gender_other = models.PositiveIntegerField(verbose_name = "Gender Identity - Other", default = 0)
-    gender_other_text = models.TextField(verbose_name = "Gender Identity - Other Text", default = "")
+    gender_other_text = models.TextField(verbose_name = "Gender Identity - Other Text", default = "n/a")
     sex_female = models.PositiveIntegerField(verbose_name = "Sex - Female", default = 0)
     sex_male = models.PositiveIntegerField(verbose_name = "Sex - Male", default = 0)
     sex_inter = models.PositiveIntegerField(verbose_name = "Sex - Intersex", default = 0)
@@ -49,7 +64,7 @@ class CommonEntries(models.Model):
     special_disability = models.PositiveIntegerField(verbose_name = "Special Classification - Victims with Disabilities - Cognitive/Physical/Mental", default = 0)
     special_limited_eng = models.PositiveIntegerField(verbose_name = "Special Classification - Victims with Limited English Proficiency", default = 0)
     special_other = models.PositiveIntegerField(verbose_name = "Special Classification - Other", default = 0)
-    special_other_text = models.TextField(verbose_name = "Special Classification - Other Text", default = "")
+    special_other_text = models.TextField(verbose_name = "Special Classification - Other Text", default = "n/a")
     special_deaf_sub = models.PositiveIntegerField(verbose_name = "Special Classification SUBSEQUENT VISIT - Deaf/Hard of Hearing", default = 0)
     special_homeless_sub = models.PositiveIntegerField(verbose_name = "Special Classification SUBSEQUENT VISIT - Homeless", default = 0)
     special_immigrant_sub = models.PositiveIntegerField(verbose_name = "Special Classification SUBSEQUENT VISIT - Immigrants/Refugees/Asylum Seekers", default = 0)
@@ -61,7 +76,7 @@ class CommonEntries(models.Model):
     special_disability_sub= models.PositiveIntegerField(verbose_name = "Special Classification SUBSEQUENT VISIT - Victims with Disabilities - Cognitive/Physical/Mental", default = 0)
     special_limited_eng_sub = models.PositiveIntegerField(verbose_name = "Special Classification SUBSEQUENT VISIT - Victims with Limited English Proficiency", default = 0)
     special_other_sub = models.PositiveIntegerField(verbose_name = "Special Classification SUBSEQUENT VISIT - Other", default = 0)
-    special_other_text_sub = models.TextField(verbose_name = "Special Classification SUBSEQUENT VISIT - Other Text", default = "")
+    special_other_text_sub = models.TextField(verbose_name = "Special Classification SUBSEQUENT VISIT - Other Text", default = "n/a")
     advocacy_med_forens = models.PositiveIntegerField(verbose_name = "Personal Advocacy/Achievement - Victim Advocacy/Accompaniment to Medical Forensic Exam", default = 0)
     advocacy_law_enforce = models.PositiveIntegerField(verbose_name = "Personal Advocacy/Achievement - Law Enforcement Interview Advocacy/Accompaniment", default = 0)
     advocacy_individ = models.PositiveIntegerField(verbose_name = "Personal Advocacy/Achievement - Individual Advocacy", default = 0)
@@ -233,7 +248,22 @@ class SafeClinicForm(ModelForm):
 ##################################################################################################
 
 class Crisis_Line(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     total_calls = models.PositiveIntegerField(verbose_name = "Total Calls", default = 0)
     total_chats = models.PositiveIntegerField(verbose_name = "Total Chats", default = 0)
     highest_calls = models.PositiveIntegerField(verbose_name = "Highest # Calls in 1 Day", default = 0)
@@ -244,7 +274,7 @@ class Crisis_Line(models.Model):
     reason_support_other = models.PositiveIntegerField(verbose_name = "Reason - Support for Someone Else", default = 0)
     reason_concern_child = models.PositiveIntegerField(verbose_name = "Reason - Concerned for a Child", default = 0)
     reason_other = models.PositiveIntegerField(verbose_name = "Reason - Other", default = 0)
-    reason_other_text = models.TextField(verbose_name = "Reason - Other Text", default = "")
+    reason_other_text = models.TextField(verbose_name = "Reason - Other Text", default = "n/a")
     resource_advocacy = models.PositiveIntegerField(verbose_name = "Resource Referral - Advocacy Services", default = 0)
     resource_mental_health = models.PositiveIntegerField(verbose_name = "Resource Referral - Mental Health/Therapy", default = 0)
     resource_shelter = models.PositiveIntegerField(verbose_name = "Resource Referral - Shelter Services", default = 0)
@@ -283,7 +313,7 @@ class Crisis_Line(models.Model):
     gender_woman = models.PositiveIntegerField(verbose_name = "Gender Identity - Woman", default = 0)
     gender_not_rep = models.PositiveIntegerField(verbose_name = "Gender Identity - Not Reported", default = 0)
     gender_other = models.PositiveIntegerField(verbose_name = "Gender Identity - Other", default = 0)
-    gender_other_text = models.TextField(verbose_name = "Gender Identity - Other Text", default = "")
+    gender_other_text = models.TextField(verbose_name = "Gender Identity - Other Text", default = "n/a")
     race_amerind = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - American Indian/Alaska Native", default = 0)
     race_asian = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Asian", default = 0)
     race_black = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Black/African American", default = 0)
@@ -297,7 +327,7 @@ class Crisis_Line(models.Model):
     lang_english = models.PositiveIntegerField(verbose_name = "Preferred Language - English", default = 0)
     lang_spanish = models.PositiveIntegerField(verbose_name = "Preferred Language - Spanish", default = 0)
     lang_other = models.PositiveIntegerField(verbose_name = "Preferred Language - Other", default = 0)
-    lang_other_text = models.TextField(verbose_name = "Preferred Language - Other Text", default = "")
+    lang_other_text = models.TextField(verbose_name = "Preferred Language - Other Text", default = "n/a")
     heard_TV = models.PositiveIntegerField(verbose_name = "Heard Through TV", default = 0)
     heard_radio = models.PositiveIntegerField(verbose_name = "Heard Through Radio", default = 0)
     heard_website = models.PositiveIntegerField(verbose_name = "Heard Through Website", default = 0)
@@ -305,7 +335,7 @@ class Crisis_Line(models.Model):
     heard_friend_fam = models.PositiveIntegerField(verbose_name = "Heard Through Friend or Family", default = 0)
     heard_medical = models.PositiveIntegerField(verbose_name = "Heard Through Medical Professional", default = 0)
     heard_other = models.PositiveIntegerField(verbose_name = "Heard Through Other Source", default = 0)
-    heard_other_text = models.TextField(verbose_name = "Heard Through Other Source - Text", default = "")
+    heard_other_text = models.TextField(verbose_name = "Heard Through Other Source - Text", default = "n/a")
 
     class Meta:
         verbose_name = "Crisis Line Team Entry"
@@ -320,6 +350,21 @@ class CrisisLineForm(ModelForm):
 #####################################################################################################
 
 class Prevention(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
+
     TYPE_ORG = [
         ('church', 'church'),
         ('college/university', 'college/university'),
@@ -339,11 +384,12 @@ class Prevention(models.Model):
     ]
 
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     type_org = models.CharField(max_length = 30, verbose_name = "Type of Organization", blank = True, choices = TYPE_ORG)
     num_attendees = models.PositiveIntegerField(verbose_name = "Number of Attendees", default = 0)
     duration = models.PositiveIntegerField(verbose_name = "Training Duration", default = 0)
     topic = models.CharField(max_length = 30, verbose_name = "Topic of Training", blank = True, choices = TOPIC)
-    topic_other = models.TextField(verbose_name = "Other Topic", default = "")
+    topic_other = models.TextField(verbose_name = "Other Topic", default = "n/a")
 
     class Meta:
         verbose_name = "Prevention Team Entry"
@@ -354,15 +400,22 @@ class PreventionForm(ModelForm):
         model = Prevention
         fields = '__all__'
 
-def increment_number_monthly():
-        last_training = Training.objects.all().order_by('entry_date').last()
-
-        if last_training.entry_date.month == datetime.date.today().month:
-            return last_training.training_id + 1
-        else: 
-            return 1
-
 class Training(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
+
     OCCUPATION = [
         ('advocacy org staff', 'advocacy org staff'),
         ('attorneys/law students (not prosecutor)', 'attorneys/law students'),
@@ -441,7 +494,7 @@ class Training(models.Model):
         ('Community response to sexual assault','Community response to sexual assault'),
         ('Coordinated community response','Coordinated community response'),
         ('Response teams (DART, DVRT, SART)','Response teams (DART, DVRT, SART)'),
-        ('Technology','Technology')
+        ('Technology','Technology'),
     ]
     TYPE = [
         ('training', 'training'),
@@ -451,13 +504,13 @@ class Training(models.Model):
     ]
 
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     occupation = models.CharField(max_length = 50, verbose_name = "Occupation of Trainees", blank = True, choices = OCCUPATION)
     num_attendees = models.PositiveIntegerField(verbose_name = "Number of Attendees", default = 0)
     duration = models.PositiveIntegerField(verbose_name = "Training Duration (min)", default = 0)
     training_type = models.CharField(max_length = 50, verbose_name = "Type of Training", blank = True, choices = TYPE)
-    training_type_other = models.TextField(verbose_name = "Type of Training - Other Text", default = "")
-    training_topic = MultiSelectField(choices = TOPIC, default = "")
-    training_id = models.PositiveIntegerField(default = increment_number_monthly)
+    training_type_other = models.TextField(verbose_name = "Type of Training - Other Text", default = "n/a")
+    training_topic = MultiSelectField(choices = TOPIC, default = "n/a")
 
     class Meta:
         verbose_name = "Training Team Entry"
@@ -469,9 +522,26 @@ class TrainingForm(ModelForm):
     class Meta:
         model = Training
         fields = '__all__'
+       
 
 class Development(models.Model):
+    MONTH_TYPE = [
+        ('January', 'January'),
+        ('February', 'February'),
+        ('March', 'March'),
+        ('April', 'April'),
+        ('May', 'May'),
+        ('June', 'June'),
+        ('July', 'July'),
+        ('August', 'August'),
+        ('September', 'September'),
+        ('October', 'October'),
+        ('November', 'November'),
+        ('December', 'December'),
+    ]
+
     entry_date = models.DateField(default = date.today)
+    month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     new_donors = models.PositiveIntegerField(verbose_name = "New Donors", default = 0)
     new_foundations = models.PositiveIntegerField(verbose_name = "New Foundations/Grants", default = 0 )
     over_1000 = models.PositiveIntegerField(verbose_name = "Gifts over $1000", default = 0)

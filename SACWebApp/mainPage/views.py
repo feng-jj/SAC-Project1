@@ -252,12 +252,12 @@ def ov_form_view(request):
 
 def safe_clinic_form_view(request):
     if request.method == 'POST':
-        form = SAFEClinicForm(request.POST)
+        form = SafeClinicForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/form-confirmation/')
     else:
-        form = SAFEClinicForm()
+        form = SafeClinicForm()
 
     context = {
         'form': form

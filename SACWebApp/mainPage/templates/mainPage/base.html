@@ -5,7 +5,7 @@
 <html>
 	<head>
 		{% block title %}
-			
+
 		{% endblock %}
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -65,7 +65,7 @@
 							<li>
 								<a href="#" id="data-download-link">Data Download</a>
 								<ul><b><span style="color:white">Data Download</span></b>
-									<li><a href="{% url 'safe_clinic_export' %}" id="safe_clinic-export-link">SAFE  Clinic</a></li> 
+									<li><a href="{% url 'safe_clinic_export' %}" id="safe_clinic-export-link">SAFE  Clinic</a></li>
 									<li><a href="{% url 'clinical_export' %}" id="clinical-export-link">Clinical</a></li>
 									<li><a href="{% url 'clinical_voca_export' %}" id="clinical-export-link">Clinical VOCA</a></li>
 									<li><a href="{% url 'advocacy_export' %}" id="advocacy-export-link">Advocacy</a></li>
@@ -87,7 +87,7 @@
 
 
 			<!--</div>-->
-			
+
 
 		<!-- Main -->
 			<div id="main">
@@ -120,6 +120,19 @@
 			<script src="../WebAssets/assets/js/main.js"></script>
 
 	</body>
+	<script type="text/javascript">
+		function clean(chart){
+			if (chart.data.labels.length > 12) {
+				while (chart.data.labels.length > 12) {
+					chart.data.labels.shift();
+					chart.data.datasets.forEach((dataset) => {
+						dataset.data.shift();
+					});
+				}
+			}
+			chart.update();
+		}
+	</script>
 {% block graphs %}
 
 {% endblock %}

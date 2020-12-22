@@ -1,7 +1,7 @@
 {% extends "mainPage/base.html" %}
 
 {% block title %}
-	<title>MAP Dashboard | SAC</title>		
+	<title>MAP Dashboard | SAC</title>
 {% endblock title %}
 
 {% block content %}
@@ -15,13 +15,13 @@
 
 			</div>
 		</section>
-		<canvas id="numberOfPeople" width="50" height="20"></canvas>
+		<canvas id="numberOfAcc" width="50" height="20"></canvas>
 		<canvas id="ageOfPeople" width="50" height="20"></canvas>
 {% endblock content %}
 
 {% block graphs %}
 <script>
-var ctx = document.getElementById('numberOfPeople').getContext('2d');
+var ctx = document.getElementById('numberOfAcc').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -85,5 +85,6 @@ new Chart(document.getElementById("ageOfPeople"), {
       }
     }
 });
+clean(myChart);
 </script>
 {% endblock graphs %}

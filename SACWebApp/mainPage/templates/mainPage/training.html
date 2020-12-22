@@ -1,7 +1,7 @@
 {% extends "mainPage/base.html" %}
 
 {% block title %}
-	<title>Training Dashboard | SAC</title>		
+	<title>Training Dashboard | SAC</title>
 {% endblock title %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 				<header>
 					<h2>Training Team Dashboard</h2>
 				</header>
-	
+
 				<p>Overall number of trainings: {{ overallNumTrainings|safe }}</p>
 
 			</div>
@@ -60,7 +60,7 @@
 					}
 			}
 	});
-
+clean(myChart);
 </script>
 
 {% endblock graphs %}

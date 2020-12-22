@@ -13,12 +13,17 @@ def appendFieldAge(queryObject) :
     age_18_24 = 0
     age_25_59 = 0
     age_60_plus = 0
-    for item in queryObject:
-        age_0_12 += item.age_0_12
-        age_13_17 += item.age_13_17
-        age_18_24 += item.age_18_24
-        age_25_59 += item.age_25_59
-        age_60_plus += item.age_60_plus
+    counter = 12;
+    for item in reversed(queryObject):
+        if counter > 0:
+            age_0_12 += item.age_0_12
+            age_13_17 += item.age_13_17
+            age_18_24 += item.age_18_24
+            age_25_59 += item.age_25_59
+            age_60_plus += item.age_60_plus
+            counter -= 1
+        else:
+            break
     Ages.append(age_0_12)
     Ages.append(age_13_17)
     Ages.append(age_18_24)

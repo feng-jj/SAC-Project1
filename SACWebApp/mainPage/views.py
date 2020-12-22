@@ -188,7 +188,7 @@ def advocacy_form_view(request):
             form.save()
     else:
         form = AdvocacyForm(initial={'total_new': 0, 'gender_other_text': 'n/a', 'special_other_text': 'n/a',  'special_other_text_sub': 'n/a'})
-        
+
     context['form'] = form
 
     return render(request, "advocacy_form.html", context)
@@ -250,12 +250,17 @@ def prevention_form_view(request):
     return render(request, "prevention_form.html", context)
 
 def training_form_view(request):
-    context = {}
-    form = TrainingForm(request.POST)
-    if form.is_valid():
+    if request.method == 'POST':
+        form = TrainingForm(request.POST)
+        #if form.is_valid():
         form.save()
-    context['form'] = form
+    else:
+        form = TrainingForm()
+    context = {
+        'form': form
+    }
     return render(request, "training_form.html", context)
+
 
 def development_form_view(request):
     context = {}

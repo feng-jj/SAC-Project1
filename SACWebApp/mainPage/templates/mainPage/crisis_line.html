@@ -1,7 +1,7 @@
 {% extends "mainPage/base.html" %}
 
 {% block title %}
-	<title>Crisis Line Dashboard | SAC</title>		
+	<title>Crisis Line Dashboard | SAC</title>
 {% endblock title %}
 
 {% block content %}
@@ -19,14 +19,14 @@
 				<canvas id="highestCalls" width="50" height="20"></canvas>
 				<canvas id="howSAC" width="50" height="20"></canvas>
 				<canvas id="numberMinors" width="50" height="20"></canvas>
-		
+
 {% endblock content %}
 
 
 {% block graphs %}
 <script>
 	var ctx = document.getElementById('totalCalls').getContext('2d');
-	var myChart = new Chart(ctx, {
+	var totalCalls = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
 	        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
@@ -64,7 +64,7 @@
 	});
 
 	var ctx = document.getElementById('highestCalls').getContext('2d');
-	var myChart = new Chart(ctx, {
+	var highestCalls = new Chart(ctx, {
 			type: 'bar',
 			data: {
 					labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
@@ -130,7 +130,7 @@
 	});
 
 	var ctx = document.getElementById('numberMinors').getContext('2d');
-	var myChart = new Chart(ctx, {
+	var numMinors = new Chart(ctx, {
 			type: 'bar',
 			data: {
 					labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
@@ -166,7 +166,9 @@
 					}
 			}
 	});
-
+clean(totalCalls);
+clean(highestCalls);
+clean(numMinors);
 </script>
 
 {% endblock graphs %}

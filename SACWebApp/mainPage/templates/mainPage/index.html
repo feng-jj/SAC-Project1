@@ -1,7 +1,7 @@
 {% extends "mainPage/base.html" %}
 
 {% block title %}
-	<title>Main Dashboard | SAC</title>		
+	<title>Main Dashboard | SAC</title>
 {% endblock title %}
 
 {% block content %}
@@ -30,7 +30,7 @@
 {% block graphs %}
 <script>
 var ctx = document.getElementById('numberOfPeopleClinical').getContext('2d');
-var myChart = new Chart(ctx, {
+var numPeopleClinical = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: [{% for item in clinical %} '{{item.entry_date}}', {% endfor %}],
@@ -84,7 +84,7 @@ var myChart = new Chart(ctx, {
 });
 
 var ctx = document.getElementById('numberOfPeopleClinicalVOCA').getContext('2d');
-var myChart = new Chart(ctx, {
+var numPeopleClinicalVoca = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: [{% for item in clinicalVoca %} '{{item.entry_date}}', {% endfor %}],
@@ -193,7 +193,7 @@ new Chart(document.getElementById("ageOfPeopleClinicalVOCA"), {
 });
 
 var ctx = document.getElementById('numberOfPeopleAdvocacy').getContext('2d');
-var myChart = new Chart(ctx, {
+var numPeopleAdvocacy = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
@@ -272,6 +272,9 @@ new Chart(document.getElementById("ageOfPeopleAdvocacy"), {
 		}
     }
 });
+clean(numPeopleClinical);
+clean(numPeopleClinicalVoca);
+clean(numPeopleAdvocacy);
 
 </script>
 

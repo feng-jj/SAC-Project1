@@ -32,9 +32,107 @@ def appendFieldAge(queryObject) :
     return Ages
 
 '''
-    Helper method to append the ways which the client heard about SAC into doughnut chart.
-    Used for the Crisis Line dashboard
+    MAP team specific data processing
 '''
+def getAcc(queryObject):
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.Month
+        currYear = item.Year
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.total_accompaniments + currNum
+        else :
+            new_dict.update({currDate : item.total_accompaniments})
+    return new_dict
+
+
+'''
+    OV team specific data processing
+'''
+def getOV(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.Month
+        currYear = item.Year
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.total_OV + currNum
+        else :
+            new_dict.update({currDate : item.total_OV})
+    return new_dict
+
+'''
+    Helper methods for the Prevention and Training teams
+'''
+
+# Helper method to get the number of trainings for both the Prevention and Training teams
+def numTrainings(queryObject):
+    numTrainings = 0;
+    for item in queryObject:
+        numTrainings += 1
+    return numTrainings
+
+# Get the total number of attendees from both teams
+def totalAtt(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.Month
+        currYear = item.Year
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.num_attendees + currNum
+        else :
+            new_dict.update({currDate : item.num_attendees})
+    return new_dict
+
+'''
+    Helper methods for the Crisis Line team
+'''
+def totalCall(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.Month
+        currYear = item.Year
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.total_calls + currNum
+        else :
+            new_dict.update({currDate : item.total_calls})
+    return new_dict
+
+def newCall(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.Month
+        currYear = item.Year
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.highest_calls + currNum
+        else :
+            new_dict.update({currDate : item.highest_calls})
+    return new_dict
+
+def numMinors(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.Month
+        currYear = item.Year
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict :
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.demographic_minors + currNum
+        else :
+            new_dict.update({currDate : item.demographic_minors})
+    return new_dict
+
+
+# Helper method to append the ways which the client heard about SAC into doughnut chart.
 def appendHowSAC(queryObject) :
     how = []
     heard_TV = 0;
@@ -62,14 +160,48 @@ def appendHowSAC(queryObject) :
     return how
 
 '''
-    Helper method to get the number of trainings for both the Prevention and Training
-    teams
+    Helper method to parse the # of sessions/new individuals/old individuals into
+    a dictionary. Second parameter is either sessions, new, or continue to indicate
+    which data field is currently being processed. Mainly used for the advocacy, and
+    clinical team data. Usage: read from dictionary so anyone can contribute to a month's data
 '''
-def numTrainings(queryObject):
-    numTrainings = 0;
-    for item in queryObject:
-        numTrainings += 1
-    return numTrainings
+def numSP(queryObject, string):
+    new_dict = dict()
+    if string ==  "sessions" :
+        for item in queryObject:
+            currMonth = item.Month
+            currYear = item.Year
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.total_sess + currNum
+            else :
+                new_dict.update({currDate : item.total_sess})
+        return new_dict
+    elif string == "new" :
+        for item in queryObject:
+            currMonth = item.Month
+            currYear = item.Year
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.total_new + currNum
+            else :
+                new_dict.update({currDate : item.total_new})
+        return new_dict
+    elif string == "continue" :
+        for item in queryObject:
+            currMonth = item.Month
+            currYear = item.Year
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.total_continue + currNum
+            else :
+                new_dict.update({currDate : item.total_continue})
+        return new_dict
+    else :
+        print("Not a valid query")
 
 '''
     Helper method for development

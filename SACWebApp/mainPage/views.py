@@ -68,6 +68,7 @@ class currentTeamView(TemplateView) :
 
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
+        # database objects
         clinical = Clinical.objects.all()
         clinicalVoca = Clinical_VOCA.objects.all()
         clinicalTotal = list(chain(clinical, clinicalVoca))
@@ -75,6 +76,20 @@ class currentTeamView(TemplateView) :
         map_ = MAP.objects.all()
         ov = OV.objects.all()
         safeClinic = SAFE_Clinic.objects.all()
+        # num  sessions
+        clinicalS = numSP(clinical, "sessions")
+        clinicalVocaS = numSP(clinicalVoca, "sessions")
+        advocacyS = numSP(advocacy, "sessions")
+        # num people new
+        clinicalS = numSP(clinical, "new")
+        clinicalVocaS = numSP(clinicalVoca, "new")
+        advocacyS = numSP(advocacy, "new")
+        # num people continue
+        clinicalS = numSP(clinical, "continue")
+        clinicalVocaS = numSP(clinicalVoca, "continue")
+        advocacyS = numSP(advocacy, "continue")
+        # now getting to team specfic data that we must manipulate
+
         context["safeClinic"] = safeClinic
         # since we need to combine the VOCA data, we have to ensure that we properly
         # combine the data from both entries
@@ -98,6 +113,10 @@ class currentTeamView(TemplateView) :
         context['safeClinicAges'] = safeClinicAges
         context['mapAges'] = mapAges
         context['ovAges'] = ovAges
+
+        # What to do for the ability for everyone to update
+        # Read in each specific field into an array that contains all the entries
+        # from each specific month and year.
         return context
 '''
     Safe Clinic Data

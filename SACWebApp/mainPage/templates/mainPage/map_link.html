@@ -25,10 +25,10 @@ var ctx = document.getElementById('numberOfAcc').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [{% for item in map_ %} '{{item.entry_date}}', {% endfor %}],
+        labels: [{% for key, value in map_.items %} '{{ key }}', {% endfor %}],
 				datasets: [{
 						label: 'Total Accompaniments',
-						data: [{% for item in map_ %} {{item.total_accompaniments}},
+						data: [{% for key, value in map_.items %} {{ value }},
 									{% endfor %}],
 						backgroundColor: "#CD5C5C",
 						borderColor: "#EC7063",

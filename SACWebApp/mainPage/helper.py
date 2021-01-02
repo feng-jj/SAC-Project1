@@ -32,13 +32,29 @@ def appendFieldAge(queryObject) :
     return Ages
 
 '''
+    SAFE team specific data processing
+'''
+def getExam(queryObject):
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.month
+        currYear = str(item.year)
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.total_exams + currNum
+        else :
+            new_dict.update({currDate : item.total_exams})
+    return new_dict
+
+'''
     MAP team specific data processing
 '''
 def getAcc(queryObject):
     new_dict = dict()
     for item in queryObject:
-        currMonth = item.Month
-        currYear = item.Year
+        currMonth = item.month
+        currYear = str(item.year)
         currDate = currMonth + " " + currYear
         if currDate in new_dict:
             currNum = new_dict[currDate]
@@ -54,8 +70,8 @@ def getAcc(queryObject):
 def getOV(queryObject) :
     new_dict = dict()
     for item in queryObject:
-        currMonth = item.Month
-        currYear = item.Year
+        currMonth = item.month
+        currYear = str(item.year)
         currDate = currMonth + " " + currYear
         if currDate in new_dict:
             currNum = new_dict[currDate]
@@ -79,8 +95,8 @@ def numTrainings(queryObject):
 def totalAtt(queryObject) :
     new_dict = dict()
     for item in queryObject:
-        currMonth = item.Month
-        currYear = item.Year
+        currMonth = item.month
+        currYear = str(item.year)
         currDate = currMonth + " " + currYear
         if currDate in new_dict:
             currNum = new_dict[currDate]
@@ -95,8 +111,8 @@ def totalAtt(queryObject) :
 def totalCall(queryObject) :
     new_dict = dict()
     for item in queryObject:
-        currMonth = item.Month
-        currYear = item.Year
+        currMonth = item.month
+        currYear = str(item.year)
         currDate = currMonth + " " + currYear
         if currDate in new_dict:
             currNum = new_dict[currDate]
@@ -105,11 +121,11 @@ def totalCall(queryObject) :
             new_dict.update({currDate : item.total_calls})
     return new_dict
 
-def newCall(queryObject) :
+def highCall(queryObject) :
     new_dict = dict()
     for item in queryObject:
-        currMonth = item.Month
-        currYear = item.Year
+        currMonth = item.month
+        currYear = str(item.year)
         currDate = currMonth + " " + currYear
         if currDate in new_dict:
             currNum = new_dict[currDate]
@@ -121,8 +137,8 @@ def newCall(queryObject) :
 def numMinors(queryObject) :
     new_dict = dict()
     for item in queryObject:
-        currMonth = item.Month
-        currYear = item.Year
+        currMonth = item.month
+        currYear = str(item.year)
         currDate = currMonth + " " + currYear
         if currDate in new_dict :
             currNum = new_dict[currDate]
@@ -169,8 +185,8 @@ def numSP(queryObject, string):
     new_dict = dict()
     if string ==  "sessions" :
         for item in queryObject:
-            currMonth = item.Month
-            currYear = item.Year
+            currMonth = item.month
+            currYear = str(item.year)
             currDate = currMonth + " " + currYear
             if currDate in new_dict :
                 currNum = new_dict[currDate]
@@ -180,8 +196,8 @@ def numSP(queryObject, string):
         return new_dict
     elif string == "new" :
         for item in queryObject:
-            currMonth = item.Month
-            currYear = item.Year
+            currMonth = item.month
+            currYear = str(item.year)
             currDate = currMonth + " " + currYear
             if currDate in new_dict :
                 currNum = new_dict[currDate]
@@ -191,8 +207,8 @@ def numSP(queryObject, string):
         return new_dict
     elif string == "continue" :
         for item in queryObject:
-            currMonth = item.Month
-            currYear = item.Year
+            currMonth = item.month
+            currYear = str(item.year)
             currDate = currMonth + " " + currYear
             if currDate in new_dict :
                 currNum = new_dict[currDate]

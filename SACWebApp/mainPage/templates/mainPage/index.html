@@ -33,16 +33,16 @@ var ctx = document.getElementById('numberOfPeopleClinical').getContext('2d');
 var numPeopleClinical = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [{% for item in clinical %} '{{item.entry_date}}', {% endfor %}],
+        labels: [{% for key, value in clinicalS.items %} '{{ key }}', {% endfor %}],
         datasets: [{
         label: '# of continuing clients',
-        data: [{% for item in clinical %} {{item.total_continue}},
+        data: [{% for key, value in clinicalC.items %} {{ value }},
 							{% endfor %}],
         backgroundColor: "#CD5C5C",
         borderColor: "#EC7063",
         borderWidth: 1
 		    }, {
-					data: [{% for item in clinical %} {{item.total_new}},
+					data: [{% for key, value in clinicalN.items %} {{ value }},
 								{% endfor %}],
 		      label: "# of new clients",
 					backgroundColor : "#FFFFE0" ,
@@ -50,7 +50,7 @@ var numPeopleClinical = new Chart(ctx, {
 					borderWidth: 1,
 		      fill: false
 				}, {
-					data: [{% for item in clinical %} {{item.total_sess}},
+					data: [{% for key, value in clinicalS.items %} {{ value }},
 								{% endfor %}],
 		      label: "# of Sessions (Total)",
 					backgroundColor : "#D2B4DE" ,
@@ -87,16 +87,16 @@ var ctx = document.getElementById('numberOfPeopleClinicalVOCA').getContext('2d')
 var numPeopleClinicalVoca = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [{% for item in clinicalVoca %} '{{item.entry_date}}', {% endfor %}],
+        labels: [{% for key, value in clinicalVocaS.items %} '{{ key }}', {% endfor %}],
         datasets: [{
         label: '# of continuing clients',
-        data: [{% for item in clinicalVoca %} {{item.total_continue}},
+        data: [{% for key, value in clinicalVocaC %} {{ value }},
 							{% endfor %}],
         backgroundColor: "#CD5C5C",
         borderColor: "#EC7063",
         borderWidth: 1
 		    }, {
-					data: [{% for item in clinicalVoca %} {{item.total_new}},
+					data: [{% for key, value in clinicalVocaN.items %} {{ value }},
 								{% endfor %}],
 		      label: "# of new clients",
 					backgroundColor : "#FFFFE0" ,
@@ -104,7 +104,7 @@ var numPeopleClinicalVoca = new Chart(ctx, {
 					borderWidth: 1,
 		      fill: false
 				}, {
-					data: [{% for item in clinicalVoca %} {{item.total_sess}},
+					data: [{% for key, value in clinicalVocaS.items %} {{ value }},
 								{% endfor %}],
 		      label: "# of Sessions (Total)",
 					backgroundColor : "#D2B4DE" ,
@@ -196,16 +196,16 @@ var ctx = document.getElementById('numberOfPeopleAdvocacy').getContext('2d');
 var numPeopleAdvocacy = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
+        labels: [{% for key, value in advocacyC.items %} '{{ key }}', {% endfor %}],
         datasets: [{
         label: '# of continuing clients',
-        data: [{% for item in advocacy %} {{item.total_continue}},
+        data: [{% for key, value in advocacyC.items %} {{ value }},
 							{% endfor %}],
         backgroundColor: "#CD5C5C",
         borderColor: "#EC7063",
         borderWidth: 1
 		    }, {
-					data: [{% for item in advocacy %} {{item.total_new}},
+					data: [{% for key, value in advocacyN.items %} {{ value }},
 								{% endfor %}],
 		      label: "# of new clients",
 					backgroundColor : "#FFFFE0" ,
@@ -213,7 +213,7 @@ var numPeopleAdvocacy = new Chart(ctx, {
 					borderWidth: 1,
 		      fill: false
 				}, {
-					data: [{% for item in advocacy %} {{item.total_sess}},
+					data: [{% for key, value in advocacyS.items %} {{ value }},
 								{% endfor %}],
 		      label: "# of Sessions (Total)",
 					backgroundColor : "#D2B4DE" ,

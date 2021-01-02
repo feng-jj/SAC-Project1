@@ -76,29 +76,34 @@ class currentTeamView(TemplateView) :
         map_ = MAP.objects.all()
         ov = OV.objects.all()
         safeClinic = SAFE_Clinic.objects.all()
+        # inputting Advocacy and Clinical team data
         # num  sessions
         clinicalS = numSP(clinical, "sessions")
         clinicalVocaS = numSP(clinicalVoca, "sessions")
         advocacyS = numSP(advocacy, "sessions")
         # num people new
-        clinicalS = numSP(clinical, "new")
-        clinicalVocaS = numSP(clinicalVoca, "new")
-        advocacyS = numSP(advocacy, "new")
+        clinicalN = numSP(clinical, "new")
+        clinicalVocaN = numSP(clinicalVoca, "new")
+        advocacyN = numSP(advocacy, "new")
         # num people continue
-        clinicalS = numSP(clinical, "continue")
-        clinicalVocaS = numSP(clinicalVoca, "continue")
-        advocacyS = numSP(advocacy, "continue")
-        # now getting to team specfic data that we must manipulate
-
-        context["safeClinic"] = safeClinic
-        # since we need to combine the VOCA data, we have to ensure that we properly
-        # combine the data from both entries
-        context["clinical"] = clinical
-        context["clinicalVoca"] = clinicalVoca
-        context["advocacy"] = advocacy
-        context["map_"] = map_
-        context["ov"] = ov
-
+        clinicalC = numSP(clinical, "continue")
+        clinicalVocaC = numSP(clinicalVoca, "continue")
+        advocacyC = numSP(advocacy, "continue")
+        # inputting into the context
+        context["clinicalS"] = clinicalS
+        context["clinicalVocaS"] = clinicalVocaS
+        context["advocacyS"] = advocacyS
+        context["clinicalN"] = clinicalN
+        context["clinicalVocaN"] = clinicalVocaN
+        context["advocacyN"] = advocacyN
+        context["clinicalC"] = clinicalC
+        context["clinicalVocaC"] = clinicalVocaC
+        context["advocacyC"] = advocacyC
+        # SAFE clinic specific data
+        context['safeClinic'] = getExam(safeClinic)
+        # MAP and OV team data
+        context['map_'] = getAcc(map_)
+        context['ov'] = getOV(ov)
         #because we have that there will be two pie/doughnut charts, we have to ensure that they are properly
         #inputted as ages
         clinicalVocaAges = appendFieldAge(clinicalVoca)
@@ -113,10 +118,6 @@ class currentTeamView(TemplateView) :
         context['safeClinicAges'] = safeClinicAges
         context['mapAges'] = mapAges
         context['ovAges'] = ovAges
-
-        # What to do for the ability for everyone to update
-        # Read in each specific field into an array that contains all the entries
-        # from each specific month and year.
         return context
 '''
     Safe Clinic Data
@@ -158,7 +159,9 @@ class crisisLineTeamView(TemplateView) :
         context = super().get_context_data(**kwargs)
         crisisline = Crisis_Line.objects.all()
         how = appendHowSAC(crisisline)
-        context['qs'] = crisisline
+        context['totalCalls'] = totalCall(crisisline)
+        context['highCalls'] = highCall(crisisline)
+        context['numMinors'] = numMinors(crisisline)
         context['how'] = how
         return context
 
@@ -169,7 +172,7 @@ class preventionTeamView(TemplateView) :
         context = super().get_context_data(**kwargs)
         prevention = Prevention.objects.all()
         overallNumTrainings = numTrainings(prevention)
-        context['prevention'] = prevention;
+        context['prevention'] = totalAtt(prevention);
         context['overallNumTrainings'] = overallNumTrainings
         return context
 
@@ -180,7 +183,7 @@ class trainingTeamView(TemplateView) :
         context = super().get_context_data(**kwargs)
         training = Training.objects.all()
         overallNumTrainings = numTrainings(training)
-        context['training'] = training;
+        context['training'] = totalAtt(training);
         context['overallNumTrainings'] = overallNumTrainings
         return context
 

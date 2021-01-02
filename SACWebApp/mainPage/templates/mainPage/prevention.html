@@ -26,10 +26,10 @@
 	var myChart = new Chart(ctx, {
 			type: 'bar',
 			data: {
-					labels: [{% for item in prevention %} '{{item.entry_date}}', {% endfor %}],
+					labels: [{% for key, value in prevention.items %} '{{ key }}', {% endfor %}],
 					datasets: [{
 							label: '# of Attendees',
-							data: [{% for item in prevention %} {{item.num_attendees}},
+							data: [{% for key, value in prevention.items %} {{ value }},
 										{% endfor %}],
 							backgroundColor: "#3e95cd",
 							borderColor: "#8e5ea2",

@@ -25,10 +25,10 @@ var ctx = document.getElementById('numberOfPeople').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [{% for item in safeClinic %} '{{item.entry_date}}', {% endfor %}],
+        labels: [{% for key, value in safeClinic.items %} '{{ key }}', {% endfor %}],
         datasets: [{
             label: 'Total # of Rape Exams',
-            data: [{% for item in safeClinic %} {{item.total_exams}},
+            data: [{% for key, value in safeClinic.items %} {{ value }},
 									{% endfor %}],
 						backgroundColor: "#CD5C5C",
 						borderColor: "#EC7063",

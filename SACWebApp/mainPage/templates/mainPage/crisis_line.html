@@ -29,10 +29,10 @@
 	var totalCalls = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
+	        labels: [{% for key, value in totalCalls.items %} '{{ key }}', {% endfor %}],
 	        datasets: [{
 	            label: 'Total Number of Calls',
-	            data: [{% for item in qs %} {{item.total_calls}},
+	            data: [{% for key, value in totalCalls.items %} {{ value }},
 										{% endfor %}],
 							backgroundColor: "#CD5C5C",
 							borderColor: "#EC7063",
@@ -67,16 +67,16 @@
 	var highestCalls = new Chart(ctx, {
 			type: 'bar',
 			data: {
-					labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
-					datasets: [{
-							label: 'Highest Number of Calls',
-							data: [{% for item in qs %} {{item.highest_calls}},
+	        labels: [{% for key, value in highCalls.items %} '{{ key }}', {% endfor %}],
+	        datasets: [{
+	            label: 'Total Number of Calls',
+	            data: [{% for key, value in highCalls.items %} {{ value }},
 										{% endfor %}],
-							backgroundColor: "#3e95cd",
-							borderColor: "#8e5ea2",
-							borderWidth: 1
-					}]
-			},
+							backgroundColor: "#CD5C5C",
+							borderColor: "#EC7063",
+	            borderWidth: 1
+	        }]
+	    },
 			options: {
 				layout: {
 					padding: {
@@ -133,16 +133,16 @@
 	var numMinors = new Chart(ctx, {
 			type: 'bar',
 			data: {
-					labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
-					datasets: [{
-							label: 'Total Number of Minors',
-							data: [{% for item in qs %} {{item.demographic_minors}},
+	        labels: [{% for key, value in numMinors.items %} '{{ key }}', {% endfor %}],
+	        datasets: [{
+	            label: 'Total Number of Calls',
+	            data: [{% for key, value in numMinors.items %} {{ value }},
 										{% endfor %}],
 							backgroundColor: "#CD5C5C",
 							borderColor: "#EC7063",
-							borderWidth: 1
-					}]
-			},
+	            borderWidth: 1
+	        }]
+	    },
 			options: {
 				layout: {
 					padding: {

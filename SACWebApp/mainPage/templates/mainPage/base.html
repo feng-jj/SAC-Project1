@@ -3,14 +3,14 @@
 <!-- BLOCKED CONTENT IS IN MAIN -->
 <!DOCTYPE HTML>
 <html>
-	
+
 	<head>
 		<!-- Title changes based on authentication status -->
 		{% if user.is_authenticated %}
 			{% block title %}
-				
+
 			{% endblock %}
-		{% else %}	
+		{% else %}
 			<title>SAC Dashboard</title>
 		{% endif %}
 			<meta charset="utf-8" />
@@ -68,7 +68,7 @@
 						<li>
 							<a href="#" id="data-download-link">Data Download</a>
 							<ul><b><span style="color:white">Data Download</span></b>
-								<li><a href="{% url 'safe_clinic_export' %}" id="safe_clinic-export-link">SAFE  Clinic</a></li> 
+								<li><a href="{% url 'safe_clinic_export' %}" id="safe_clinic-export-link">SAFE  Clinic</a></li>
 								<li><a href="{% url 'clinical_export' %}" id="clinical-export-link">Clinical</a></li>
 								<li><a href="{% url 'clinical_voca_export' %}" id="clinical-export-link">Clinical VOCA</a></li>
 								<li><a href="{% url 'advocacy_export' %}" id="advocacy-export-link">Advocacy</a></li>
@@ -80,7 +80,7 @@
 								<li><a href="{% url 'development_export' %}" id="development-export-link">Development</a></li>
 							</ul>
 						</li>
-					
+
 						<li><a href="{% url 'logout' %}" id="logout-link">Logout</a></li>
 					{% else %}
 						<li><a href="https://sacenter.org/" id="sac-home">SAC Home</a></li>
@@ -88,9 +88,9 @@
 					{% endif %}
 				</ul>
 			</nav>
-			
+
 			<!-- Main changes based on authentication status -->
-			{% if user.is_authenticated %}	
+			{% if user.is_authenticated %}
 				<div id="main">
 					<!-- Blocked Content -->
 					{% block content %}
@@ -102,15 +102,15 @@
 				<div id="main">
 					<section id="index-link" class="two">
 						<div class="container">
-				
+
 							<header>
 								<h2>Welcome to the Sexual Assault Center Dashboard</h2>
 							</header>
-				
+
 							<p>
 								Please login to access dashboards and data
 							</p>
-				
+
 						</div>
 					</section>
 				</div>
@@ -140,6 +140,19 @@
 		</body>
 		<!-- Graphs not displayed if logged out -->
 		{% if user.is_authenticated %}
+		<script type="text/javascript">
+			function clean(chart){
+				if (chart.data.labels.length > 12) {
+					while (chart.data.labels.length > 12) {
+						chart.data.labels.shift();
+						chart.data.datasets.forEach((dataset) => {
+							dataset.data.shift();
+						});
+					}
+				}
+				chart.update();
+			}
+		</script>
 			{% block graphs %}
 
 			{% endblock %}

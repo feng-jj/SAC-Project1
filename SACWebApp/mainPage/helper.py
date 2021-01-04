@@ -13,12 +13,17 @@ def appendFieldAge(queryObject) :
     age_18_24 = 0
     age_25_59 = 0
     age_60_plus = 0
-    for item in queryObject:
-        age_0_12 += item.age_0_12
-        age_13_17 += item.age_13_17
-        age_18_24 += item.age_18_24
-        age_25_59 += item.age_25_59
-        age_60_plus += item.age_60_plus
+    counter = 12;
+    for item in reversed(queryObject):
+        if counter > 0:
+            age_0_12 += item.age_0_12
+            age_13_17 += item.age_13_17
+            age_18_24 += item.age_18_24
+            age_25_59 += item.age_25_59
+            age_60_plus += item.age_60_plus
+            counter -= 1
+        else:
+            break
     Ages.append(age_0_12)
     Ages.append(age_13_17)
     Ages.append(age_18_24)
@@ -27,9 +32,123 @@ def appendFieldAge(queryObject) :
     return Ages
 
 '''
-    Helper method to append the ways which the client heard about SAC into doughnut chart.
-    Used for the Crisis Line dashboard
+    SAFE team specific data processing
 '''
+def getExam(queryObject):
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.month
+        currYear = str(item.year)
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.total_exams + currNum
+        else :
+            new_dict.update({currDate : item.total_exams})
+    return new_dict
+
+'''
+    MAP team specific data processing
+'''
+def getAcc(queryObject):
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.month
+        currYear = str(item.year)
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.total_accompaniments + currNum
+        else :
+            new_dict.update({currDate : item.total_accompaniments})
+    return new_dict
+
+
+'''
+    OV team specific data processing
+'''
+def getOV(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.month
+        currYear = str(item.year)
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.total_OV + currNum
+        else :
+            new_dict.update({currDate : item.total_OV})
+    return new_dict
+
+'''
+    Helper methods for the Prevention and Training teams
+'''
+
+# Helper method to get the number of trainings for both the Prevention and Training teams
+def numTrainings(queryObject):
+    numTrainings = 0;
+    for item in queryObject:
+        numTrainings += 1
+    return numTrainings
+
+# Get the total number of attendees from both teams
+def totalAtt(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.month
+        currYear = str(item.year)
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.num_attendees + currNum
+        else :
+            new_dict.update({currDate : item.num_attendees})
+    return new_dict
+
+'''
+    Helper methods for the Crisis Line team
+'''
+def totalCall(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.month
+        currYear = str(item.year)
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.total_calls + currNum
+        else :
+            new_dict.update({currDate : item.total_calls})
+    return new_dict
+
+def highCall(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.month
+        currYear = str(item.year)
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict:
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.highest_calls + currNum
+        else :
+            new_dict.update({currDate : item.highest_calls})
+    return new_dict
+
+def numMinors(queryObject) :
+    new_dict = dict()
+    for item in queryObject:
+        currMonth = item.month
+        currYear = str(item.year)
+        currDate = currMonth + " " + currYear
+        if currDate in new_dict :
+            currNum = new_dict[currDate]
+            new_dict[currDate] = item.demographic_minors + currNum
+        else :
+            new_dict.update({currDate : item.demographic_minors})
+    return new_dict
+
+
+# Helper method to append the ways which the client heard about SAC into doughnut chart.
 def appendHowSAC(queryObject) :
     how = []
     heard_TV = 0;
@@ -57,17 +176,51 @@ def appendHowSAC(queryObject) :
     return how
 
 '''
-    Helper method to get the number of trainings for both the Prevention and Training
-    teams
+    Helper method to parse the # of sessions/new individuals/old individuals into
+    a dictionary. Second parameter is either sessions, new, or continue to indicate
+    which data field is currently being processed. Mainly used for the advocacy, and
+    clinical team data. Usage: read from dictionary so anyone can contribute to a month's data
 '''
-def numTrainings(queryObject):
-    numTrainings = 0;
-    for item in queryObject:
-        numTrainings += 1
-    return numTrainings
+def numSP(queryObject, string):
+    new_dict = dict()
+    if string ==  "sessions" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.total_sess + currNum
+            else :
+                new_dict.update({currDate : item.total_sess})
+        return new_dict
+    elif string == "new" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.total_new + currNum
+            else :
+                new_dict.update({currDate : item.total_new})
+        return new_dict
+    elif string == "continue" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.total_continue + currNum
+            else :
+                new_dict.update({currDate : item.total_continue})
+        return new_dict
+    else :
+        print("Not a valid query")
 
 '''
-    Helper method for development
+    Helper methods for development
 '''
 def develop(queryObject) :
     recurring_gift_avg = 0
@@ -78,3 +231,52 @@ def develop(queryObject) :
         total_raised += item.total_raised
         percent_goal_met += item.percent_goal_met
     return [recurring_gift_avg, total_raised, percent_goal_met]
+
+def numDevelop(queryObject, string):
+    new_dict = dict()
+    if string ==  "donors" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.new_donors + currNum
+            else :
+                new_dict.update({currDate : item.new_donors})
+        return new_dict
+    elif string == "foundations" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.new_foundations+ currNum
+            else :
+                new_dict.update({currDate : item.new_foundations})
+        return new_dict
+    elif string == "gifts" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.over_1000 + currNum
+            else :
+                new_dict.update({currDate : item.over_1000})
+        return new_dict
+    elif string == "recurring" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.recurring_donors+ currNum
+            else :
+                new_dict.update({currDate : item.recurring_donors})
+        return new_dict
+    else :
+        print("Not a valid query")

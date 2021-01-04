@@ -68,6 +68,7 @@ class currentTeamView(TemplateView) :
 
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
+        # database objects
         clinical = Clinical.objects.all()
         clinicalVoca = Clinical_VOCA.objects.all()
         clinicalTotal = list(chain(clinical, clinicalVoca))
@@ -75,15 +76,34 @@ class currentTeamView(TemplateView) :
         map_ = MAP.objects.all()
         ov = OV.objects.all()
         safeClinic = SAFE_Clinic.objects.all()
-        context["safeClinic"] = safeClinic
-        # since we need to combine the VOCA data, we have to ensure that we properly
-        # combine the data from both entries
-        context["clinical"] = clinical
-        context["clinicalVoca"] = clinicalVoca
-        context["advocacy"] = advocacy
-        context["map_"] = map_
-        context["ov"] = ov
-
+        # inputting Advocacy and Clinical team data
+        # num  sessions
+        clinicalS = numSP(clinical, "sessions")
+        clinicalVocaS = numSP(clinicalVoca, "sessions")
+        advocacyS = numSP(advocacy, "sessions")
+        # num people new
+        clinicalN = numSP(clinical, "new")
+        clinicalVocaN = numSP(clinicalVoca, "new")
+        advocacyN = numSP(advocacy, "new")
+        # num people continue
+        clinicalC = numSP(clinical, "continue")
+        clinicalVocaC = numSP(clinicalVoca, "continue")
+        advocacyC = numSP(advocacy, "continue")
+        # inputting into the context
+        context["clinicalS"] = clinicalS
+        context["clinicalVocaS"] = clinicalVocaS
+        context["advocacyS"] = advocacyS
+        context["clinicalN"] = clinicalN
+        context["clinicalVocaN"] = clinicalVocaN
+        context["advocacyN"] = advocacyN
+        context["clinicalC"] = clinicalC
+        context["clinicalVocaC"] = clinicalVocaC
+        context["advocacyC"] = advocacyC
+        # SAFE clinic specific data
+        context['safeClinic'] = getExam(safeClinic)
+        # MAP and OV team data
+        context['map_'] = getAcc(map_)
+        context['ov'] = getOV(ov)
         #because we have that there will be two pie/doughnut charts, we have to ensure that they are properly
         #inputted as ages
         clinicalVocaAges = appendFieldAge(clinicalVoca)
@@ -139,7 +159,9 @@ class crisisLineTeamView(TemplateView) :
         context = super().get_context_data(**kwargs)
         crisisline = Crisis_Line.objects.all()
         how = appendHowSAC(crisisline)
-        context['qs'] = crisisline
+        context['totalCalls'] = totalCall(crisisline)
+        context['highCalls'] = highCall(crisisline)
+        context['numMinors'] = numMinors(crisisline)
         context['how'] = how
         return context
 
@@ -150,7 +172,7 @@ class preventionTeamView(TemplateView) :
         context = super().get_context_data(**kwargs)
         prevention = Prevention.objects.all()
         overallNumTrainings = numTrainings(prevention)
-        context['prevention'] = prevention;
+        context['prevention'] = totalAtt(prevention);
         context['overallNumTrainings'] = overallNumTrainings
         return context
 
@@ -161,7 +183,7 @@ class trainingTeamView(TemplateView) :
         context = super().get_context_data(**kwargs)
         training = Training.objects.all()
         overallNumTrainings = numTrainings(training)
-        context['training'] = training;
+        context['training'] = totalAtt(training);
         context['overallNumTrainings'] = overallNumTrainings
         return context
 
@@ -176,6 +198,11 @@ class developmentTeamView(TemplateView) :
         context['recurringGiftAvg'] = dd[0]
         context['totalRaised'] = dd[1]
         context['percentGoal'] = dd[2]
+        # line graph data
+        context['donors'] = numDevelop(development, "donors")
+        context['foundations'] = numDevelop(development, "foundations")
+        context['gifts'] = numDevelop(development, "gifts")
+        context['recurring'] = numDevelop(development, "recurring")
         return context
 
 ##################################################################################
@@ -305,6 +332,7 @@ def training_form_view(request):
         'form': form
     }
     return render(request, "training_form.html", context)
+
 
 def development_form_view(request):
     if request.method == 'POST':

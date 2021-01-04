@@ -1,8 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
-from datetime import date
 from multiselectfield import MultiSelectField
-from datetime import date
+from datetime import date, datetime
 
 # abstract base class for clinical, advocacy, MAP, OV, and SAFE Clinic Teams
 class CommonEntries(models.Model):
@@ -22,6 +21,7 @@ class CommonEntries(models.Model):
     ]
     entry_date = models.DateField(default = date.today)
     month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
+    year = models.PositiveIntegerField(verbose_name = "Year", default = datetime.now().year)
     race_amerind = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - American Indian/Alaska Native", default = 0)
     race_asian = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Asian", default = 0)
     race_black = models.PositiveIntegerField(verbose_name = "Race/Ethnicity - Black/African American", default = 0)
@@ -264,6 +264,7 @@ class Crisis_Line(models.Model):
     ]
     entry_date = models.DateField(default = date.today)
     month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
+    year = models.PositiveIntegerField(verbose_name = "Year", default = datetime.now().year)
     total_calls = models.PositiveIntegerField(verbose_name = "Total Calls", default = 0)
     total_chats = models.PositiveIntegerField(verbose_name = "Total Chats", default = 0)
     highest_calls = models.PositiveIntegerField(verbose_name = "Highest # Calls in 1 Day", default = 0)
@@ -385,6 +386,7 @@ class Prevention(models.Model):
 
     entry_date = models.DateField(default = date.today)
     month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
+    year = models.PositiveIntegerField(verbose_name = "Year", default = datetime.now().year)
     type_org = models.CharField(max_length = 30, verbose_name = "Type of Organization", blank = True, choices = TYPE_ORG)
     num_attendees = models.PositiveIntegerField(verbose_name = "Number of Attendees", default = 0)
     duration = models.PositiveIntegerField(verbose_name = "Training Duration", default = 0)
@@ -505,6 +507,7 @@ class Training(models.Model):
 
     entry_date = models.DateField(default = date.today)
     month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
+    year = models.PositiveIntegerField(verbose_name = "Year", default = datetime.now().year)
     occupation = models.CharField(max_length = 50, verbose_name = "Occupation of Trainees", blank = True, choices = OCCUPATION)
     num_attendees = models.PositiveIntegerField(verbose_name = "Number of Attendees", default = 0)
     duration = models.PositiveIntegerField(verbose_name = "Training Duration (min)", default = 0)
@@ -542,6 +545,7 @@ class Development(models.Model):
 
     entry_date = models.DateField(default = date.today)
     month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
+    year = models.PositiveIntegerField(verbose_name = "Year", default = datetime.now().year)
     new_donors = models.PositiveIntegerField(verbose_name = "New Donors", default = 0)
     new_foundations = models.PositiveIntegerField(verbose_name = "New Foundations/Grants", default = 0 )
     over_1000 = models.PositiveIntegerField(verbose_name = "Gifts over $1000", default = 0)

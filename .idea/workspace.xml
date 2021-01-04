@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd2aaeb8-830f-4f0f-a71e-1fff69b35682" name="Default Changelist" comment="" />
+    <list default="true" id="fd2aaeb8-830f-4f0f-a71e-1fff69b35682" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SACWebApp/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,7 +32,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/SACWebApp/manage.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -76,6 +82,7 @@
       <workItem from="1608076743598" duration="274000" />
       <workItem from="1608077141150" duration="3168000" />
       <workItem from="1608326274902" duration="5000" />
+      <workItem from="1609542666128" duration="1155000" />
     </task>
     <servers />
   </component>
@@ -102,10 +109,15 @@
           <line>62</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SACWebApp/mainPage/views.py</url>
+          <line>79</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SAC_Project1$meme.coverage" NAME="meme Coverage Results" MODIFIED="1608078191675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SACWebApp" />
+    <SUITE FILE_PATH="coverage/SAC_Project1$meme.coverage" NAME="meme Coverage Results" MODIFIED="1609542966568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SACWebApp" />
   </component>
 </project>

@@ -125,4 +125,15 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'WebAssets'),
 )
 
+#forgot password SMTP Configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'dannysactest@gmail.com'
+EMAIL_HOST_PASSWORD = 'SACtest123'
+
+
+
 IMPORT_EXPORT_USE_TRANSACTIONS = True

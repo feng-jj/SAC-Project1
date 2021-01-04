@@ -52,6 +52,14 @@ var numPeople = new Chart(ctx, {
 				}]
     },
     options: {
+		layout: {
+			padding: {
+				left: 100,
+				right: 100,
+				top: 60,
+				bottom: 50
+			}
+		},
         scales: {
             yAxes: [{
                 ticks: {
@@ -66,6 +74,7 @@ var numPeople = new Chart(ctx, {
         },
 				title: {
 					display: true,
+					fontSize: 18,
 					text: 'Monthly Count of Individuals and Sessions (Clinical)'
 				}
     }
@@ -82,11 +91,20 @@ var agePeople = new Chart(document.getElementById("ageOfPeople"), {
       }]
     },
     options: {
-      title: {
-        display: true,
-        text: 'Age Group Breakdown (Clinical)'
-      }
-    }
+		layout: {
+			padding: {
+				left: 100,
+				right: 100,
+				top: 20,
+				bottom: 50
+			}
+		},	
+		title: {
+			display: true,
+			fontSize: 18,
+			text: 'Age Group Breakdown (Clinical)'
+		}
+		}
 });
 
 var ctx1 = document.getElementById('numberOfPeopleVOCA').getContext('2d');
@@ -120,6 +138,14 @@ var numPeopleVOCA = new Chart(ctx1, {
 				}]
     },
     options: {
+		layout: {
+			padding: {
+				left: 100,
+				right: 100,
+				top: 20,
+				bottom: 50
+			}
+		},
         scales: {
             yAxes: [{
                 ticks: {
@@ -129,6 +155,7 @@ var numPeopleVOCA = new Chart(ctx1, {
         },
 				title: {
 					display: true,
+					fontSize: 18,
 					text: 'Monthly Count of Individuals and Sessions (Clinical VOCA)'
 				}
     }
@@ -147,14 +174,15 @@ var agePeopleVOCA = new Chart(document.getElementById("ageOfPeopleVOCA"), {
 	options: {
 		layout: {
 			padding: {
-				left: 20,
-				right: 20,
-				top:0,
+				left: 100,
+				right: 100,
+				top:20,
 				bottom: 50
 			}
 		},
 		title: {
 			display: true,
+			fontSize: 18,
 			text: 'Age Group Breakdown (Clinical VOCA)'
 		}
 	}

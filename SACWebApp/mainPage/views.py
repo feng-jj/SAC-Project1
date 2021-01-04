@@ -198,6 +198,11 @@ class developmentTeamView(TemplateView) :
         context['recurringGiftAvg'] = dd[0]
         context['totalRaised'] = dd[1]
         context['percentGoal'] = dd[2]
+        # line graph data
+        context['donors'] = numDevelop(development, "donors")
+        context['foundations'] = numDevelop(development, "foundations")
+        context['gifts'] = numDevelop(development, "gifts")
+        context['recurring'] = numDevelop(development, "recurring")
         return context
 
 ##################################################################################

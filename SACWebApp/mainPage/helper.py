@@ -220,7 +220,7 @@ def numSP(queryObject, string):
         print("Not a valid query")
 
 '''
-    Helper method for development
+    Helper methods for development
 '''
 def develop(queryObject) :
     recurring_gift_avg = 0
@@ -231,3 +231,52 @@ def develop(queryObject) :
         total_raised += item.total_raised
         percent_goal_met += item.percent_goal_met
     return [recurring_gift_avg, total_raised, percent_goal_met]
+
+def numDevelop(queryObject, string):
+    new_dict = dict()
+    if string ==  "donors" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.new_donors + currNum
+            else :
+                new_dict.update({currDate : item.new_donors})
+        return new_dict
+    elif string == "foundations" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.new_foundations+ currNum
+            else :
+                new_dict.update({currDate : item.new_foundations})
+        return new_dict
+    elif string == "gifts" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.over_1000 + currNum
+            else :
+                new_dict.update({currDate : item.over_1000})
+        return new_dict
+    elif string == "recurring" :
+        for item in queryObject:
+            currMonth = item.month
+            currYear = str(item.year)
+            currDate = currMonth + " " + currYear
+            if currDate in new_dict :
+                currNum = new_dict[currDate]
+                new_dict[currDate] = item.recurring_donors+ currNum
+            else :
+                new_dict.update({currDate : item.recurring_donors})
+        return new_dict
+    else :
+        print("Not a valid query")

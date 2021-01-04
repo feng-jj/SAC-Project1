@@ -1,9 +1,5 @@
 {% extends "mainPage/base.html" %}
 
-{% block title %}
-	<title>Clinical Dashboard | SAC</title>		
-{% endblock title %}
-
 {% block content %}
 	<!-- Dashboard Title -->
 		<section id="index-link" class="two">
@@ -19,67 +15,63 @@
 		<canvas id="ageOfPeople" width="50" height="20"></canvas>
 		<canvas id="numberOfPeopleVOCA" width="50" height="20"></canvas>
 		<canvas id="ageOfPeopleVOCA" width="50" height="20"></canvas>
+
+
 {% endblock content %}
 
 {% block graphs %}
 <script>
 var ctx = document.getElementById('numberOfPeople').getContext('2d');
-var myChart = new Chart(ctx, {
+var numPeople = new Chart(ctx, {
     type: 'bar',
-    data: {
-        labels: [{% for item in clinical %} '{{item.entry_date}}', {% endfor %}],
+		data: {
+        labels: [{% for key, value in clinicalS.items %} '{{ key }}', {% endfor %}],
         datasets: [{
-						label: '# of continuing clients',
-						data: [{% for item in clinical %} {{item.total_continue}},
-									{% endfor %}],
-						backgroundColor: "#CD5C5C",
-						borderColor: "#EC7063",
-						borderWidth: 1
-					}, {
-						data: [{% for item in clinical %} {{item.total_new}},
-									{% endfor %}],
-						label: "# of new clients",
-						backgroundColor : "#FFFFE0" ,
-						borderColor: "#FFFF33",
-						borderWidth: 1,
-						fill: false
-					}, {
-						data: [{% for item in clinical %} {{item.total_sess}},
-									{% endfor %}],
-						label: "# of Sessions (Total)",
-						backgroundColor : "#D2B4DE" ,
-						borderColor: "#8e5ea2",
-						borderWidth: 1,
-						fill: false
-					}]
-
+        label: '# of continuing clients',
+        data: [{% for key, value in clinicalC.items %} {{ value }},
+							{% endfor %}],
+        backgroundColor: "#CD5C5C",
+        borderColor: "#EC7063",
+        borderWidth: 1
+		    }, {
+					data: [{% for key, value in clinicalN.items %} {{ value }},
+								{% endfor %}],
+		      label: "# of new clients",
+					backgroundColor : "#FFFFE0" ,
+		      borderColor: "#FFFF33",
+					borderWidth: 1,
+		      fill: false
+				}, {
+					data: [{% for key, value in clinicalS.items %} {{ value }},
+								{% endfor %}],
+		      label: "# of Sessions (Total)",
+					backgroundColor : "#D2B4DE" ,
+		      borderColor: "#8e5ea2",
+					borderWidth: 1,
+		      fill: false
+				}]
     },
     options: {
-		layout: {
-			padding: {
-				left: 100,
-				right: 100,
-				top: 60,
-				bottom: 50
-			}
-		},
-		scales: {
+        scales: {
             yAxes: [{
                 ticks: {
                     beginAtZero: true
                 }
-            }]
-		},
-		
-		title: {
-			display: true,
-			fontSize: 18,
-			text: 'Monthly Count of Individuals and Sessions (Clinical)'
-		}
+            }],
+						// xAxes: [{
+						// 		ticks: {
+						// 			maxTicksLimit: 12
+						// 		}
+						// }]
+        },
+				title: {
+					display: true,
+					text: 'Monthly Count of Individuals and Sessions (Clinical)'
+				}
     }
 });
 
-new Chart(document.getElementById("ageOfPeople"), {
+var agePeople = new Chart(document.getElementById("ageOfPeople"), {
     type: 'doughnut',
     data: {
       labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
@@ -90,62 +82,44 @@ new Chart(document.getElementById("ageOfPeople"), {
       }]
     },
     options: {
-		layout: {
-			padding: {
-				left: 100,
-				right: 100,
-				top: 20,
-				bottom: 50
-			}
-		},
-		title: {
-			display: true,
-			fontSize: 18,
-			text: 'Age Group Breakdown (Clinical)'
-		}
+      title: {
+        display: true,
+        text: 'Age Group Breakdown (Clinical)'
+      }
     }
 });
 
-var ctx = document.getElementById('numberOfPeopleVOCA').getContext('2d');
-var myChart = new Chart(ctx, {
+var ctx1 = document.getElementById('numberOfPeopleVOCA').getContext('2d');
+var numPeopleVOCA = new Chart(ctx1, {
     type: 'bar',
-    data: {
-        labels: [{% for item in clinicalVoca %} '{{item.entry_date}}', {% endfor %}],
+		data: {
+        labels: [{% for key, value in clinicalVocaS.items %} '{{ key }}', {% endfor %}],
         datasets: [{
-						label: '# of continuing clients',
-						data: [{% for item in clinical %} {{item.total_continue}},
-									{% endfor %}],
-						backgroundColor: "#CD5C5C",
-						borderColor: "#EC7063",
-						borderWidth: 1
-					}, {
-						data: [{% for item in clinicalVoca %} {{item.total_new}},
-									{% endfor %}],
-						label: "# of new clients",
-						backgroundColor : "#FFFFE0" ,
-						borderColor: "#FFFF33",
-						borderWidth: 1,
-						fill: false
-					}, {
-						data: [{% for item in clinicalVoca %} {{item.total_sess}},
-									{% endfor %}],
-						label: "# of Sessions (Total)",
-						backgroundColor : "#D2B4DE" ,
-						borderColor: "#8e5ea2",
-						borderWidth: 1,
-						fill: false
-					}]
-
+        label: '# of continuing clients',
+        data: [{% for key, value in clinicalVocaC %} {{ value }},
+							{% endfor %}],
+        backgroundColor: "#CD5C5C",
+        borderColor: "#EC7063",
+        borderWidth: 1
+		    }, {
+					data: [{% for key, value in clinicalVocaN.items %} {{ value }},
+								{% endfor %}],
+		      label: "# of new clients",
+					backgroundColor : "#FFFFE0" ,
+		      borderColor: "#FFFF33",
+					borderWidth: 1,
+		      fill: false
+				}, {
+					data: [{% for key, value in clinicalVocaS.items %} {{ value }},
+								{% endfor %}],
+		      label: "# of Sessions (Total)",
+					backgroundColor : "#D2B4DE" ,
+		      borderColor: "#8e5ea2",
+					borderWidth: 1,
+		      fill: false
+				}]
     },
     options: {
-		layout: {
-			padding: {
-				left: 100,
-				right: 100,
-				top: 20,
-				bottom: 50
-			}
-		},
         scales: {
             yAxes: [{
                 ticks: {
@@ -153,15 +127,14 @@ var myChart = new Chart(ctx, {
                 }
             }]
         },
-		title: {
-			display: true,
-			fontSize: 18,
-			text: 'Monthly Count of Individuals and Sessions (Clinical VOCA)'
-		}
+				title: {
+					display: true,
+					text: 'Monthly Count of Individuals and Sessions (Clinical VOCA)'
+				}
     }
 });
 
-new Chart(document.getElementById("ageOfPeopleVOCA"), {
+var agePeopleVOCA = new Chart(document.getElementById("ageOfPeopleVOCA"), {
 	type: 'doughnut',
 	data: {
 		labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
@@ -174,20 +147,21 @@ new Chart(document.getElementById("ageOfPeopleVOCA"), {
 	options: {
 		layout: {
 			padding: {
-				left: 100,
-				right: 100,
-				top:20,
+				left: 20,
+				right: 20,
+				top:0,
 				bottom: 50
 			}
 		},
 		title: {
 			display: true,
-			fontSize: 18,
 			text: 'Age Group Breakdown (Clinical VOCA)'
 		}
 	}
 });
 
+clean(numPeople);
+clean(numPeopleVOCA);
 
 </script>
 {% endblock graphs %}

@@ -1,7 +1,7 @@
 {% extends "mainPage/base.html" %}
 
 {% block title %}
-	<title>Advocacy Dashboard | SAC</title>		
+	<title>Advocacy Dashboard | SAC</title>
 {% endblock title %}
 
 {% block content %}
@@ -25,28 +25,31 @@ var ctx = document.getElementById('numberOfPeople').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
 		data: {
-	    datasets: [{
-	            label: '# of continuing clients',
-	            data: [{% for item in advocacy %} {{item.total_continue}},
-										{% endfor %}],
-							backgroundColor: "#CD5C5C",
-				      borderColor: "#EC7063",
-	            borderWidth: 1
-	        }, {
-						data: [{% for item in advocacy %} {{item.total_new}},
-									{% endfor %}],
-		        label: "# of new clients",
-						backgroundColor : "#FFFFE0" ,
-		        borderColor: "#FFFF33",
-		        fill: false
-					}, {
-						data: [{% for item in advocacy %} {{item.total_sess}},
-									{% endfor %}],
-		        label: "# of Sessions (Total)",
-						backgroundColor : "#D2B4DE" ,
-		        borderColor: "#8e5ea2",
-		        fill: false
-					}]
+        labels: [{% for key, value in advocacyC.items %} '{{ key }}', {% endfor %}],
+        datasets: [{
+        label: '# of continuing clients',
+        data: [{% for key, value in advocacyC.items %} {{ value }},
+							{% endfor %}],
+        backgroundColor: "#CD5C5C",
+        borderColor: "#EC7063",
+        borderWidth: 1
+		    }, {
+					data: [{% for key, value in advocacyN.items %} {{ value }},
+								{% endfor %}],
+		      label: "# of new clients",
+					backgroundColor : "#FFFFE0" ,
+		      borderColor: "#FFFF33",
+					borderWidth: 1,
+		      fill: false
+				}, {
+					data: [{% for key, value in advocacyS.items %} {{ value }},
+								{% endfor %}],
+		      label: "# of Sessions (Total)",
+					backgroundColor : "#D2B4DE" ,
+		      borderColor: "#8e5ea2",
+					borderWidth: 1,
+		      fill: false
+				}]
     },
     options: {
 		layout: {
@@ -98,5 +101,7 @@ new Chart(document.getElementById("ageOfPeople"), {
       }
     }
 });
+
+clean(myChart);
 </script>
 {% endblock graphs %}

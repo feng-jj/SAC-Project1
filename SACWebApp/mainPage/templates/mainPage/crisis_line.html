@@ -1,7 +1,7 @@
 {% extends "mainPage/base.html" %}
 
 {% block title %}
-	<title>Crisis Line Dashboard | SAC</title>		
+	<title>Crisis Line Dashboard | SAC</title>
 {% endblock title %}
 
 {% block content %}
@@ -19,20 +19,20 @@
 				<canvas id="highestCalls" width="50" height="20"></canvas>
 				<canvas id="howSAC" width="50" height="20"></canvas>
 				<canvas id="numberMinors" width="50" height="20"></canvas>
-		
+
 {% endblock content %}
 
 
 {% block graphs %}
 <script>
 	var ctx = document.getElementById('totalCalls').getContext('2d');
-	var myChart = new Chart(ctx, {
+	var totalCalls = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
+	        labels: [{% for key, value in totalCalls.items %} '{{ key }}', {% endfor %}],
 	        datasets: [{
 	            label: 'Total Number of Calls',
-	            data: [{% for item in qs %} {{item.total_calls}},
+	            data: [{% for key, value in totalCalls.items %} {{ value }},
 										{% endfor %}],
 							backgroundColor: "#CD5C5C",
 							borderColor: "#EC7063",
@@ -64,19 +64,19 @@
 	});
 
 	var ctx = document.getElementById('highestCalls').getContext('2d');
-	var myChart = new Chart(ctx, {
+	var highestCalls = new Chart(ctx, {
 			type: 'bar',
 			data: {
-					labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
-					datasets: [{
-							label: 'Highest Number of Calls',
-							data: [{% for item in qs %} {{item.highest_calls}},
+	        labels: [{% for key, value in highCalls.items %} '{{ key }}', {% endfor %}],
+	        datasets: [{
+	            label: 'Total Number of Calls',
+	            data: [{% for key, value in highCalls.items %} {{ value }},
 										{% endfor %}],
-							backgroundColor: "#3e95cd",
-							borderColor: "#8e5ea2",
-							borderWidth: 1
-					}]
-			},
+							backgroundColor: "#CD5C5C",
+							borderColor: "#EC7063",
+	            borderWidth: 1
+	        }]
+	    },
 			options: {
 				layout: {
 					padding: {
@@ -130,19 +130,19 @@
 	});
 
 	var ctx = document.getElementById('numberMinors').getContext('2d');
-	var myChart = new Chart(ctx, {
+	var numMinors = new Chart(ctx, {
 			type: 'bar',
 			data: {
-					labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
-					datasets: [{
-							label: 'Total Number of Minors',
-							data: [{% for item in qs %} {{item.demographic_minors}},
+	        labels: [{% for key, value in numMinors.items %} '{{ key }}', {% endfor %}],
+	        datasets: [{
+	            label: 'Total Number of Calls',
+	            data: [{% for key, value in numMinors.items %} {{ value }},
 										{% endfor %}],
 							backgroundColor: "#CD5C5C",
 							borderColor: "#EC7063",
-							borderWidth: 1
-					}]
-			},
+	            borderWidth: 1
+	        }]
+	    },
 			options: {
 				layout: {
 					padding: {
@@ -166,7 +166,9 @@
 					}
 			}
 	});
-
+clean(totalCalls);
+clean(highestCalls);
+clean(numMinors);
 </script>
 
 {% endblock graphs %}

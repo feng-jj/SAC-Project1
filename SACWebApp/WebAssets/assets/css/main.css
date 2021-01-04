@@ -2070,14 +2070,14 @@ input, select, textarea {
 
 /* Header and Navigation Bar */
 
-	/* Header no longer in use */
+	/* This Header no longer in use */
 	#header {
 		background: rgb(164, 69, 202);
 		box-shadow: inset -0.25em 0 0.25em 0 rgba(0, 0, 0, 0.1);
 		height: 100vh;
 		left: 0;
 		overflow-y: auto;
-		position: fixed;
+		position: absolute;
 		text-align: left;
 		top: 0;
 		width: 250px;
@@ -2089,7 +2089,7 @@ input, select, textarea {
 		text-align: center;	
 		min-height: 48px;
 		cursor: default;
-		z-index: 4;
+		z-index: 3;
 	}
 
 		#logo .image {
@@ -2114,7 +2114,6 @@ input, select, textarea {
 			width: 250px;
 			height: 100%;
 			background: rgb(164, 69, 202);
-			z-index: 2;
 			box-shadow: inset -0.25em 0 0.25em 0 rgba(0, 0, 0, 0.1);
 		}
 
@@ -2143,7 +2142,6 @@ input, select, textarea {
 
 			#menu ul li:hover > ul {
 				left: 250px;
-				z-index:-1;
 				-webkit-transition: left 0.3s ease-in;
 				-moz-transition: left 0.3s ease-in;
 				transition: left 0.3s ease-in;
@@ -2163,7 +2161,7 @@ input, select, textarea {
 				top: 0;
 				left: -250px;
 				width: 250px;
-				z-index:-1;
+				z-index: -1;
 				height: 100%;
 				-webkit-transition: left 0.3s ease-in;
 				-moz-transition: left 0.3s ease-in;
@@ -2216,10 +2214,9 @@ input, select, textarea {
 		#main > section {
 			margin: 0;
 			overflow: hidden;
-			padding: 4em 0;
+			padding: 2em 0;
 			box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.05), inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.025);
 			text-align: center;
-			background-image: url("images/overlay.png");
 		}
 
 			#main > section.dark {
@@ -2253,7 +2250,6 @@ input, select, textarea {
 
 			#main > section.one {
 				background-color: #81918E;
-				background-image: url("../../images/banner.jpg");
 			}
 
 			#main > section.two {
@@ -2287,13 +2283,13 @@ input, select, textarea {
 		/* Footer */
 
 			#footer {
-				margin-left: 300px;
+				margin-left: 250px;
 			}
 
 		/* Main */
 
 			#main {
-				margin-left: 300px;
+				margin-left: 250px;
 			}
 
 	}

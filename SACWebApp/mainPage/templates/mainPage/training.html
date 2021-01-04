@@ -1,7 +1,7 @@
 {% extends "mainPage/base.html" %}
 
 {% block title %}
-	<title>Training Dashboard | SAC</title>		
+	<title>Training Dashboard | SAC</title>
 {% endblock title %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 				<header>
 					<h2>Training Team Dashboard</h2>
 				</header>
-	
+
 				<p>Overall number of trainings: {{ overallNumTrainings|safe }}</p>
 
 			</div>
@@ -27,10 +27,10 @@
 	var myChart = new Chart(ctx, {
 			type: 'bar',
 			data: {
-					labels: [{% for item in training %} '{{item.entry_date}}', {% endfor %}],
+					labels: [{% for key, value in training.items %} '{{ key }}', {% endfor %}],
 					datasets: [{
 							label: '# of Attendees',
-							data: [{% for item in training %} {{item.num_attendees}},
+							data: [{% for key, value in training.items %} {{ value }},
 										{% endfor %}],
 							backgroundColor: "#3e95cd",
 							borderColor: "#8e5ea2",
@@ -60,7 +60,7 @@
 					}
 			}
 	});
-
+clean(myChart);
 </script>
 
 {% endblock graphs %}

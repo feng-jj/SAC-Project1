@@ -1,7 +1,7 @@
 {% extends "mainPage/base.html" %}
 
 {% block title %}
-	<title>OV Dashboard | SAC</title>		
+	<title>OV Dashboard | SAC</title>
 {% endblock title %}
 
 {% block content %}
@@ -25,10 +25,10 @@ var ctx = document.getElementById('numberOfPeople').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [{% for item in ov %} '{{item.entry_date}}', {% endfor %}],
+        labels: [{% for key, value in ov.items %} '{{ key }}', {% endfor %}],
 				datasets: [{
             label: 'Total OVs',
-            data: [{% for item in ov %} {{item.total_OV}},
+            data: [{% for key, value in ov %} {{ value }},
 									{% endfor %}],
 						backgroundColor: "#CD5C5C",
 						borderColor: "#EC7063",
@@ -85,6 +85,7 @@ new Chart(document.getElementById("ageOfPeople"), {
 		}
 	}
 });
+clean(myChart);
 </script>
 
 {% endblock graphs %}

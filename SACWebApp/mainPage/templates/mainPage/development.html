@@ -1,5 +1,9 @@
 {% extends "mainPage/base.html" %}
 
+{% block title %}
+	<title>Development Dashboard | SAC</title>		
+{% endblock title %}
+
 {% block content %}
 	<!-- Dashboard Title -->
 		<section id="development-link" class="two">
@@ -8,9 +12,76 @@
 				<header>
 					<h2>Welcome to the Development Dashboard</h2>
 				</header>
-
-				<p>Add graphs here</p>
+				<p>Recurring Gift Average: {{ recurringGiftAvg }}</p>
+				<p>Total Amount Raised: {{ totalRaised }}</p>
+				<p>% Monthly Goal Met: {{ percentGoal }}</p>
 
 			</div>
 		</section>
+				<canvas id="development" width="50" height="20"></canvas>
+
 {% endblock content %}
+
+{% block graphs %}
+<script>
+	var ctx = document.getElementById('development').getContext('2d');
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+				labels: [{% for item in development %} '{{item.entry_date}}', {% endfor %}],
+				datasets: [{
+						label: '# of new donors',
+						data: [{% for item in development %} {{item.new_donors}}
+									{% endfor %}],
+						backgroundColor: "#3e95cd",
+						borderColor: "#8e5ea2",
+						borderWidth: 1
+				}, {
+						label: '# of new foundations/grants',
+						data: [{% for item in development %} {{item.new_foundations}}
+									{% endfor %}],
+						backgroundColor: "#9c7f32",
+						borderColor: "#8e5ea2",
+						borderWidth: 1
+				}, {
+						label: '# of new gifts greater than $1000',
+						data: [{% for item in development %} {{item.over_1000}}
+									{% endfor %}],
+						backgroundColor: "#c62fab",
+						borderColor: "#8e5ea2",
+						borderWidth: 1
+				}, {
+						label: '# of recurring donors',
+						data: [{% for item in development %} {{item.recurring_donors}}
+									{% endfor %}],
+						backgroundColor: "#91a4ce",
+						borderColor: "#8e5ea2",
+						borderWidth: 1
+				}]
+		},
+		options: {
+			layout: {
+				padding: {
+					left: 100,
+					right: 100,
+					top: 60,
+					bottom: 50
+				}
+			},
+				scales: {
+						yAxes: [{
+								ticks: {
+										beginAtZero: true
+								}
+						}]
+				},
+				title: {
+					display: true,
+					fontSize: 18,
+					text: 'Monthly Development Data'
+				}
+		}
+	});
+</script>
+
+{% endblock graphs %}

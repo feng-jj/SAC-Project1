@@ -1,0 +1,28 @@
+{% extends "form_base.html" %}
+
+{% block title %}
+		<title>MAP Data Export | SAC</title>
+{% endblock %}
+
+{% block content %}
+<section id="index-link" class="two">
+  <div class="container">
+
+    <header> 
+      <h2>Export MAP Team Data</h2>
+    </header>
+  </div>
+</section>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Please select format of file.</p>
+    <select name="file-format" class="form-control my-3">
+        <option selected>Choose format...</option>
+        <option>CSV</option>
+        <option>JSON</option>
+        <option>XLS (Excel)</option>
+      </select>
+    <button class="btn btn-primary" type="submit">Export</button>
+  </form>
+  {% endblock %} 

@@ -1,6 +1,8 @@
 from django.db import models
 from django.forms import ModelForm
 from datetime import date
+from multiselectfield import MultiSelectField
+from datetime import date
 
 # abstract base class for clinical, advocacy, MAP, OV, and SAFE Clinic Teams
 class CommonEntries(models.Model):
@@ -75,13 +77,13 @@ class CommonEntries(models.Model):
     aces_children_2 = models.PositiveIntegerField(verbose_name = "ACES Scores Children 2", default = 0)
     aces_children_3 = models.PositiveIntegerField(verbose_name = "ACES Scores Children 3", default = 0)
     aces_children_4 = models.PositiveIntegerField(verbose_name = "ACES Scores Children 4 or More", default = 0)
-    
+
 
     class Meta:
         abstract = True
 
 # child classes of CommonEntries
-class Clinical(CommonEntries):  
+class Clinical(CommonEntries):
     total_new = models.PositiveIntegerField(verbose_name = "Total New Clients", default = 0)
     total_continue = models.PositiveIntegerField(verbose_name = "Total Continuing Clients", default = 0)
     total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions", default = 0)
@@ -113,7 +115,7 @@ class Clinical(CommonEntries):
         verbose_name_plural = "Clinical Team Entries"
     pass
 
-class Clinical_VOCA(CommonEntries):  
+class Clinical_VOCA(CommonEntries):
     total_new = models.PositiveIntegerField(verbose_name = "Total New Clients", default = 0)
     total_continue = models.PositiveIntegerField(verbose_name = "Total Continuing Clients", default = 0)
     total_sess = models.PositiveIntegerField(verbose_name = "Total Sessions", default = 0)
@@ -198,12 +200,12 @@ class SAFE_Clinic(CommonEntries):
     pass
 
 class ClinicalForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Clinical
         fields = '__all__'
 
 class ClinicalVOCAForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Clinical_VOCA
         fields = '__all__'
 
@@ -222,6 +224,10 @@ class OVForm(ModelForm):
         model = OV
         fields = '__all__'
 
+class SafeClinicForm(ModelForm):
+    class Meta:
+        model = SAFE_Clinic
+        fields = '__all__'
 
 
 ##################################################################################################
@@ -307,14 +313,14 @@ class Crisis_Line(models.Model):
 
 
 class CrisisLineForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Crisis_Line
         fields = '__all__'
-    
+
 #####################################################################################################
 
 class Prevention(models.Model):
-    TYPE_ORG = [ 
+    TYPE_ORG = [
         ('church', 'church'),
         ('college/university', 'college/university'),
         ('high school', 'high school'),
@@ -344,10 +350,9 @@ class Prevention(models.Model):
         verbose_name_plural = "Prevention Team Entries"
 
 class PreventionForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Prevention
         fields = '__all__'
-
 
 class Training(models.Model):
     OCCUPATION = [
@@ -443,13 +448,16 @@ class Training(models.Model):
     duration = models.PositiveIntegerField(verbose_name = "Training Duration (min)", default = 0)
     training_type = models.CharField(max_length = 50, verbose_name = "Type of Training", blank = True, choices = TYPE)
     training_type_other = models.TextField(verbose_name = "Type of Training - Other Text", default = "")
+    training_topic = MultiSelectField(choices = TOPIC, default = "")
 
     class Meta:
         verbose_name = "Training Team Entry"
         verbose_name_plural = "Training Team Entries"
 
+
+
 class TrainingForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Training
         fields = '__all__'
 
@@ -467,7 +475,14 @@ class Development(models.Model):
         verbose_name = "Development Team Entry"
         verbose_name_plural = "Development Team Entries"
 
+    
+
 class DevelopmentForm(ModelForm):
-    class Meta: 
+    class Meta:
         model = Development
         fields = '__all__'
+
+
+
+
+

@@ -1,5 +1,9 @@
 {% extends "mainPage/base.html" %}
 
+{% block title %}
+	<title>Main Dashboard | SAC</title>		
+{% endblock title %}
+
 {% block content %}
 	<!-- Dashboard Title -->
 		<section id="index-link" class="two">
@@ -7,54 +11,53 @@
 
 				<header>
 					<h2>Welcome to SAC's Main Dashboard</h2>
-					<p>This page contains specific graphs selected from each team. For all team-specific data, use the navigation bar to the left.</p>
+					<p>This page contains specific graphs selected from each team. For all team-specific dashboards and data entry, use the navigation bar to the left.</p>
 				</header>
 
 			</div>
 		</section>
-		<div class = "container"> 
-			<canvas id="numberOfPeople" width="50" height="25"></canvas>
-			<canvas id="ageOfPeople" width="50" height="25"></canvas>
+		<div class = "container">
+			<canvas id="numberOfPeopleClinical" width="50" height="25"></canvas>
+			<canvas id="numberOfPeopleClinicalVOCA" width="50" height="25"></canvas>
+			<canvas id="ageOfPeopleClinical" width="50" height="25"></canvas>
+			<canvas id="ageOfPeopleClinicalVOCA" width="50" height="25"></canvas>
+			<canvas id="numberOfPeopleAdvocacy" width="50" height="25"></canvas>
+			<canvas id="ageOfPeopleAdvocacy" width="50" height="25"></canvas>
 		</div>
+
 {% endblock content %}
 
 {% block graphs %}
 <script>
-var ctx = document.getElementById('numberOfPeople').getContext('2d');
+var ctx = document.getElementById('numberOfPeopleClinical').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
-        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
+        labels: [{% for item in clinical %} '{{item.entry_date}}', {% endfor %}],
         datasets: [{
-            label: '# of Individuals (Total)',
-            data: [{% for item in qs %} {{item.total_ind}},
-									{% endfor %}],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }, {
-					data: [{% for item in qs %} {{item.total_sess}},
+        label: '# of continuing clients',
+        data: [{% for item in clinical %} {{item.total_continue}},
+							{% endfor %}],
+        backgroundColor: "#CD5C5C",
+        borderColor: "#EC7063",
+        borderWidth: 1
+		    }, {
+					data: [{% for item in clinical %} {{item.total_new}},
 								{% endfor %}],
-	        label: "# of Sessions (Total)",
-	        borderColor: "#8e5ea2",
-			borderWidth: 1,
-	        fill: false
+		      label: "# of new clients",
+					backgroundColor : "#FFFFE0" ,
+		      borderColor: "#FFFF33",
+					borderWidth: 1,
+		      fill: false
+				}, {
+					data: [{% for item in clinical %} {{item.total_sess}},
+								{% endfor %}],
+		      label: "# of Sessions (Total)",
+					backgroundColor : "#D2B4DE" ,
+		      borderColor: "#8e5ea2",
+					borderWidth: 1,
+		      fill: false
 				}]
-
     },
     options: {
 		layout: {
@@ -68,7 +71,7 @@ var myChart = new Chart(ctx, {
 		title: {
 			display: true,
 			fontSize: 18,
-			text: 'Monthly Count of Individuals and Sessions'
+			text: 'Monthly Count of Individuals and Sessions (Clinical)'
 		},
         scales: {
             yAxes: [{
@@ -80,16 +83,177 @@ var myChart = new Chart(ctx, {
     }
 });
 
-new Chart(document.getElementById("ageOfPeople"), {
-    type: 'pie',
+var ctx = document.getElementById('numberOfPeopleClinicalVOCA').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for item in clinicalVoca %} '{{item.entry_date}}', {% endfor %}],
+        datasets: [{
+        label: '# of continuing clients',
+        data: [{% for item in clinicalVoca %} {{item.total_continue}},
+							{% endfor %}],
+        backgroundColor: "#CD5C5C",
+        borderColor: "#EC7063",
+        borderWidth: 1
+		    }, {
+					data: [{% for item in clinicalVoca %} {{item.total_new}},
+								{% endfor %}],
+		      label: "# of new clients",
+					backgroundColor : "#FFFFE0" ,
+		      borderColor: "#FFFF33",
+					borderWidth: 1,
+		      fill: false
+				}, {
+					data: [{% for item in clinicalVoca %} {{item.total_sess}},
+								{% endfor %}],
+		      label: "# of Sessions (Total)",
+					backgroundColor : "#D2B4DE" ,
+		      borderColor: "#8e5ea2",
+					borderWidth: 1,
+		      fill: false
+				}]
+    },
+    options: {
+		layout: {
+			padding: {
+				left: 20,
+				right: 20,
+				top: 20,
+				bottom: 50
+			}
+		},
+		title: {
+			display: true,
+			fontSize: 18,
+			text: 'Monthly Count of Individuals and Sessions (Clinical VOCA)'
+		},
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+new Chart(document.getElementById("ageOfPeopleClinical"), {
+	type: 'doughnut',
+	data: {
+		labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
+		datasets: [{
+			labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
+			data: {{ clinicalAges|safe }},
+			label: "Age Groups",
+			backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+		}]
+	},
+	options: {
+		layout: {
+			padding: {
+				left: 20,
+				right: 20,
+				top:20,
+				bottom: 50
+			}
+		},
+		title: {
+			display: true,
+			fontSize: 18,
+			text: 'Age Group Breakdown (Clinical)'
+		}
+	}
+});
+
+new Chart(document.getElementById("ageOfPeopleClinicalVOCA"), {
+	type: 'doughnut',
+	data: {
+		labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
+		datasets: [{
+			label: "Age Groups",
+			backgroundColor: ["#b654de", "#702f8a","#007377","#13bcbf","#ffd100"],
+			data: {{ clinicalVocaAges|safe }},
+		}]
+	},
+	options: {
+		layout: {
+			padding: {
+				left: 20,
+				right: 20,
+				top:20,
+				bottom: 50
+			}
+		},
+		title: {
+			display: true,
+			fontSize: 18,
+			text: 'Age Group Breakdown (Clinical VOCA)'
+		}
+	}
+});
+
+var ctx = document.getElementById('numberOfPeopleAdvocacy').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for item in qs %} '{{item.entry_date}}', {% endfor %}],
+        datasets: [{
+        label: '# of continuing clients',
+        data: [{% for item in advocacy %} {{item.total_continue}},
+							{% endfor %}],
+        backgroundColor: "#CD5C5C",
+        borderColor: "#EC7063",
+        borderWidth: 1
+		    }, {
+					data: [{% for item in advocacy %} {{item.total_new}},
+								{% endfor %}],
+		      label: "# of new clients",
+					backgroundColor : "#FFFFE0" ,
+		      borderColor: "#FFFF33",
+					borderWidth: 1,
+		      fill: false
+				}, {
+					data: [{% for item in advocacy %} {{item.total_sess}},
+								{% endfor %}],
+		      label: "# of Sessions (Total)",
+					backgroundColor : "#D2B4DE" ,
+		      borderColor: "#8e5ea2",
+					borderWidth: 1,
+		      fill: false
+				}]
+    },
+    options: {
+			layout: {
+				padding: {
+					left: 20,
+					right: 20,
+					top: 20,
+					bottom: 50
+				}
+			},
+			title: {
+				display: true,
+				fontSize: 18,
+				text: 'Monthly Count of Individuals and Sessions (Advocacy)'
+			},
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+    }
+});
+
+new Chart(document.getElementById("ageOfPeopleAdvocacy"), {
+    type: 'doughnut',
     data: {
       labels: ["Age 0-12", "Age 13-17","Age 18-24","Age 25-59","Age 60+"],
       datasets: [{
         label: "Age Groups",
         backgroundColor: ["#b654de", "#702f8a","#007377","#13bcbf","#ffd100"],
-        data: [{% for item in qs %} {{item.age_0_12}},{{item.age_13_17}},
-				{{item.age_18_24}}, {{item.age_25_59}}, {{item.age_60_plus}},
-				{% endfor %}]
+        data: {{ advocacyAges|safe }},
       }]
     },
     options: {
@@ -97,130 +261,19 @@ new Chart(document.getElementById("ageOfPeople"), {
 			padding: {
 				left: 20,
 				right: 20,
-				top:0,
+				top:20,
 				bottom: 50
 			}
 		},
 		title: {
 			display: true,
 			fontSize: 18,
-			text: 'Age Group Breakdown'
+			text: 'Age Group Breakdown (Advocacy)'
 		}
     }
 });
+
 </script>
+
+
 {% endblock graphs %}
-
-
-
-				<!-- EVERYTHING BELOW HERE IS FOR REFERENCE-->
-
-					<!-- SAFE Clinic -->
-					<!-- <section id="portfolio" class="two">
-						<div class="container">
-
-							<header>
-								<h2>Portfolio</h2>
-							</header>
-
-							<p>Vitae natoque dictum etiam semper magnis enim feugiat convallis convallis
-							egestas rhoncus ridiculus in quis risus amet curabitur tempor orci penatibus.
-							Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis
-							fusce hendrerit lacus ridiculus.</p>
-
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="../../../../WebAssets/images/pic02.jpg" alt="" /></a>
-										<header>
-											<h3>Ipsum Feugiat</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="../../../../WebAssets/images/pic03.jpg" alt="" /></a>
-										<header>
-											<h3>Rhoncus Semper</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="../../../../WebAssets/images/pic04.jpg" alt="" /></a>
-										<header>
-											<h3>Magna Nullam</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="../../../../WebAssets/images/pic05.jpg" alt="" /></a>
-										<header>
-											<h3>Natoque Vitae</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="../../../../WebAssets/images/pic06.jpg" alt="" /></a>
-										<header>
-											<h3>Dolor Penatibus</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="../../../../WebAssets/images/pic07.jpg" alt="" /></a>
-										<header>
-											<h3>Orci Convallis</h3>
-										</header>
-									</article>
-								</div>
-							</div>
-
-						</div>
-					</section> -->
-
-					<!-- Advocacy -->
-						<!-- <section id="about" class="three">
-							<div class="container">
-
-								<header>
-									<h2>About Me</h2>
-								</header>
-
-								<a href="#" class="image featured"><img src="../../../../WebAssets/images/pic08.jpg" alt="" /></a>
-
-								<p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus
-								ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae
-								laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem
-								parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper
-								dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec
-								ornare iaculis.</p>
-
-							</div>
-						</section> -->
-
-					<!-- MAP -->
-						<!-- <section id="contact" class="four">
-							<div class="container">
-
-								<header>
-									<h2>Contact</h2>
-								</header>
-
-								<p>Elementum sem parturient nulla quam placerat viverra
-								mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia
-								donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc
-								orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p>
-
-								<form method="post" action="#">
-									<div class="row">
-										<div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="Name" /></div>
-										<div class="col-6 col-12-mobile"><input type="text" name="email" placeholder="Email" /></div>
-										<div class="col-12">
-											<textarea name="message" placeholder="Message"></textarea>
-										</div>
-										<div class="col-12">
-											<input type="submit" value="Send Message" />n
-										</div>
-									</div>
-								</form>
-
-							</div>
-						</section> -->

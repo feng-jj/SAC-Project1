@@ -1,0 +1,30 @@
+{% extends "form_base.html" %}
+
+	<!-- Blocked Content -->
+	{% block content %}
+
+	<section id="index-link" class="two">
+		<div class="container">
+
+			<header>
+				<h2>SAFE Clinic Team Entry Form</h2>
+			</header>
+
+			<p>
+				For all numeric entries, enter a number 0 or greater. For all text entries (detailing other), enter all other options separated by commas. Enter n/a if no "other". 
+			</p>
+
+		</div>
+	</section>
+
+
+	<form action = "/form-confirmation/" method = "post">
+		{% csrf_token %}
+		<table border = "1">
+			{{ form }}
+		</table>
+		<input type = "submit" value = "Submit">
+
+	</form>
+
+	{% endblock %}

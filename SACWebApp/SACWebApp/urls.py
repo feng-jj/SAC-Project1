@@ -49,7 +49,48 @@ urlpatterns = [
     path('prevention/', preventionTeamView.as_view(), name='prevention'),
     path('training/', trainingTeamView.as_view(), name='training'),
     path('development/', developmentTeamView.as_view(), name='development'),
+
+    path('clinical-export/', clinical_export, name = 'clinical_export'),
+    path('advocacy-export/', advocacy_export, name = 'advocacy_export'),
+    path('clinical-voca-export/', clinical_voca_export, name = 'clinical_voca_export'),
+    path('map-export/', map_export, name = 'map_export'),
+    path('ov-export/', ov_export, name = 'ov_export'),
+    path('safe-clinic-export/', safe_clinic_export, name = 'safe_clinic_export'),
+    path('crisis-line-export/', crisis_line_export, name = 'crisis_line_export'),
+    path('prevention-export/', prevention_export, name = 'prevention_export'),
+    path('training-export/', training_export, name = 'training_export'),
+    path('development-export/', development_export, name = 'development_export'),
+
+    path('form-confirmation/', form_confirmation, name = 'form_confirmation'),
+
+    path('logout/', logout_request, name="logout"),
+
+    #reset password urls
+    path('reset_password/',
+         auth_views.PasswordResetView.as_view(template_name="mainPage/password_reset.html"),
+         name="reset_password"),
+
+    path('reset_password_sent/',
+         auth_views.PasswordResetDoneView.as_view(template_name="mainPage/password_reset_sent.html"),
+         name="password_reset_done"),
+
+    path('reset/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name="mainPage/password_reset_form.html"),
+         name="password_reset_confirm"),
+
+    path('reset_password_complete/',
+         auth_views.PasswordResetCompleteView.as_view(template_name="mainPage/password_reset_done.html"),
+         name="password_reset_complete"),
+
+
 ]
 
 
 urlpatterns += staticfiles_urlpatterns()
+
+'''
+1 - Submit email form                         //PasswordResetView.as_view()
+2 - Email sent success message                //PasswordResetDoneView.as_view()
+3 - Link to password Rest form in email       //PasswordResetConfirmView.as_view()
+4 - Password successfully changed message     //PasswordResetCompleteView.as_view()
+'''

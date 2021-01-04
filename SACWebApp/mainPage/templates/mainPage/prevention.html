@@ -1,16 +1,65 @@
 {% extends "mainPage/base.html" %}
 
+{% block title %}
+	<title>Prevention Dashboard | SAC</title>		
+{% endblock title %}
+
 {% block content %}
 	<!-- Dashboard Title -->
 		<section id="prevention-link" class="two">
 			<div class="container">
 
 				<header>
-					<h2>Welcome to the Prevention Dashboard</h2>
+					<h2>Prevention Team Dashboard</h2>
 				</header>
-
-				<p>Add graphs here</p>
-
+				<p>Overall number of trainings: {{ overallNumTrainings|safe }}</p>
 			</div>
 		</section>
+				<canvas id="numAttendees" width="50" height="20"></canvas>
+
 {% endblock content %}
+
+{% block graphs %}
+<script>
+
+	var ctx = document.getElementById('numAttendees').getContext('2d');
+	var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+					labels: [{% for item in prevention %} '{{item.entry_date}}', {% endfor %}],
+					datasets: [{
+							label: '# of Attendees',
+							data: [{% for item in prevention %} {{item.num_attendees}},
+										{% endfor %}],
+							backgroundColor: "#3e95cd",
+							borderColor: "#8e5ea2",
+							borderWidth: 1
+					}]
+			},
+			options: {
+				layout: {
+					padding: {
+						left: 100,
+						right: 100,
+						top: 60,
+						bottom: 50
+					}
+				},
+					scales: {
+							yAxes: [{
+									ticks: {
+											beginAtZero: true
+									}
+							}]
+					},
+					title: {
+						display: true,
+						fontSize: 18,
+						text: 'Monthly Number of Attendees'
+					}
+			}
+	});
+
+</script>
+
+{% endblock graphs %}

@@ -22,7 +22,7 @@ from users import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('mainPage.urls')),
+    path('', login_form_view, name='login_form'),
     path('home/', include('mainPage.urls')),
 
     path('login/', login_form_view, name='login_form'),
@@ -81,8 +81,6 @@ urlpatterns = [
     path('reset_password_complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name="mainPage/password_reset_done.html"),
          name="password_reset_complete"),
-
-
 ]
 
 

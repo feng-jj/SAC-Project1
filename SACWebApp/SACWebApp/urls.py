@@ -22,7 +22,7 @@ from users import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', login_form_view, name='login_form'),
+    path('', include('mainPage.urls')),
     path('home/', include('mainPage.urls')),
 
     path('login/', login_form_view, name='login_form'),

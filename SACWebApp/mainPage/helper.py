@@ -87,8 +87,13 @@ def getOV(queryObject) :
 # Helper method to get the number of trainings for both the Prevention and Training teams
 def numTrainings(queryObject):
     numTrainings = 0;
-    for item in queryObject:
-        numTrainings += 1
+    counter = 12;
+    for item in queryObject.reverse():
+        if counter == 0 :
+            break;
+        else :
+            counter -= 1;
+            numTrainings += 1
     return numTrainings
 
 # Get the total number of attendees from both teams

@@ -1897,6 +1897,13 @@ input, select, textarea {
 		line-height: 1.25em;
 	}
 
+	form select {
+		width: 50%;
+	}
+		#file-format {
+			margin: 1em auto;
+		}
+
 	form textarea {
 		min-height: 14em;
 	}

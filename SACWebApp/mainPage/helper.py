@@ -13,7 +13,27 @@ def appendFieldAge(queryObject) :
     age_18_24 = 0
     age_25_59 = 0
     age_60_plus = 0
-    counter = 12;
+    # this counter here tells us how many entries there are in the past 12 months
+    counter = 0
+    dates = dict()
+    # going through each month and year, and appending them to a dictionary where
+    # we can access how many entries there are for each month over the recent 12 months
+    for item in reversed(queryObject):
+        currDate = item.month + " " + str(item.year)
+        if currDate in dates:
+            dates[currDate] += 1
+        else :
+            dates.update({currDate : 1})
+    counter1 = 12
+    if dates:
+        for item in dates :
+            if counter1 == 0 :
+                break
+            else :
+                counter += dates[item]
+                counter1 -= 1
+    # now we know how many entries there are to go through and add up to for the
+    # data in the recent 12 months
     for item in reversed(queryObject):
         if counter > 0:
             age_0_12 += item.age_0_12
@@ -89,10 +109,10 @@ def numTrainings(queryObject):
     numTrainings = 0;
     counter = 12;
     for item in queryObject.reverse():
-        if counter == 0 :
-            break;
-        else :
-            counter -= 1;
+        # if counter == 0:
+        #     break;
+        # else :
+        #     counter -= 1;
             numTrainings += 1
     return numTrainings
 

@@ -28,7 +28,7 @@
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-				labels: [{% for key, value in donor.items %} '{{ key }}', {% endfor %}],
+				labels: [{% for key, value in donors.items %} '{{ key }}', {% endfor %}],
 				datasets: [{
 						label: '# of new donors',
 						data: [{% for key, value in donors.items %} {{ value }}

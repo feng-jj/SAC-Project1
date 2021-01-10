@@ -18,7 +18,7 @@
 
 			</div>
 		</section>
-				<canvas id="development" width="50" height="20"></canvas>
+		<canvas id="development" width="50" height="20"></canvas>
 
 {% endblock content %}
 
@@ -26,9 +26,9 @@
 <script>
 	var ctx = document.getElementById('development').getContext('2d');
 	var myChart = new Chart(ctx, {
-		type: 'line',
+		type: 'bar',
 		data: {
-				labels: [{% for key, value in donor.items %} '{{ key }}', {% endfor %}],
+				labels: [{% for key, value in donors.items %} '{{ key }}', {% endfor %}],
 				datasets: [{
 						label: '# of new donors',
 						data: [{% for key, value in donors.items %} {{ value }}

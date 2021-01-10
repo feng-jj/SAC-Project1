@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView
 from itertools import chain
 from django.contrib.auth.forms import UserCreationForm
+from tablib import Dataset
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages

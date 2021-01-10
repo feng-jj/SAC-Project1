@@ -28,7 +28,7 @@ var myChart = new Chart(ctx, {
         labels: [{% for key, value in ov.items %} '{{ key }}', {% endfor %}],
 				datasets: [{
             label: 'Total OVs',
-            data: [{% for key, value in ov %} {{ value }},
+            data: [{% for key, value in ov.items %} {{ value }},
 									{% endfor %}],
 						backgroundColor: "#CD5C5C",
 						borderColor: "#EC7063",

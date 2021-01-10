@@ -27,12 +27,12 @@ var numPeople = new Chart(ctx, {
 		data: {
         labels: [{% for key, value in clinicalS.items %} '{{ key }}', {% endfor %}],
         datasets: [{
-        label: '# of continuing clients',
-        data: [{% for key, value in clinicalC.items %} {{ value }},
-							{% endfor %}],
-        backgroundColor: "#CD5C5C",
-        borderColor: "#EC7063",
-        borderWidth: 1
+	        label: '# of continuing clients',
+	        data: [{% for key, value in clinicalC.items %} {{ value }},
+								{% endfor %}],
+	        backgroundColor: "#CD5C5C",
+	        borderColor: "#EC7063",
+	        borderWidth: 1
 		    }, {
 					data: [{% for key, value in clinicalN.items %} {{ value }},
 								{% endfor %}],
@@ -98,7 +98,7 @@ var agePeople = new Chart(document.getElementById("ageOfPeople"), {
 				top: 20,
 				bottom: 50
 			}
-		},	
+		},
 		title: {
 			display: true,
 			fontSize: 18,
@@ -113,12 +113,12 @@ var numPeopleVOCA = new Chart(ctx1, {
 		data: {
         labels: [{% for key, value in clinicalVocaS.items %} '{{ key }}', {% endfor %}],
         datasets: [{
-        label: '# of continuing clients',
-        data: [{% for key, value in clinicalVocaC %} {{ value }},
-							{% endfor %}],
-        backgroundColor: "#CD5C5C",
-        borderColor: "#EC7063",
-        borderWidth: 1
+	        label: '# of continuing clients',
+	        data: [{% for key, value in clinicalVocaC.items %} {{ value }},
+								{% endfor %}],
+	        backgroundColor: "#CD5C5C",
+	        borderColor: "#EC7063",
+	        borderWidth: 1
 		    }, {
 					data: [{% for key, value in clinicalVocaN.items %} {{ value }},
 								{% endfor %}],

@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fd2aaeb8-830f-4f0f-a71e-1fff69b35682" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SACWebApp/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/clinical.html" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/clinical.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +80,7 @@
       <workItem from="1608077141150" duration="3168000" />
       <workItem from="1608326274902" duration="5000" />
       <workItem from="1609542666128" duration="1155000" />
-      <workItem from="1610318449281" duration="1575000" />
+      <workItem from="1610318449281" duration="2782000" />
     </task>
     <servers />
   </component>

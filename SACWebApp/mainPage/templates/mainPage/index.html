@@ -90,7 +90,7 @@ var numPeopleClinicalVoca = new Chart(ctx, {
         labels: [{% for key, value in clinicalVocaS.items %} '{{ key }}', {% endfor %}],
         datasets: [{
         label: '# of continuing clients',
-        data: [{% for key, value in clinicalVocaC %} {{ value }},
+        data: [{% for key, value in clinicalVocaC.items %} {{ value }},
 							{% endfor %}],
         backgroundColor: "#CD5C5C",
         borderColor: "#EC7063",

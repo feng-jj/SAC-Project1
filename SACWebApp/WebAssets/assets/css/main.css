@@ -1959,6 +1959,11 @@ input, select, textarea {
 			text-indent: -0.5em;
 		}
 
+		table tr td ul li {
+			list-style-type: none;
+			margin-left: -1em;
+		}
+
 		table tbody th{
 			font-size: 0.8em;
 			margin: auto;

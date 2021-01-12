@@ -12,13 +12,15 @@
 				<header>
 					<h2>Development Dashboard</h2>
 				</header>
-				<p>Recurring Gift Average: {{ recurringGiftAvg }}</p>
-				<p>Total Amount Raised: {{ totalRaised }}</p>
-				<p>% Monthly Goal Met: {{ percentGoal }}</p>
+				<!-- <p>Recurring Gift Average: {{ recurringGiftAvg }}</p> -->
+				<p>Total Amount Raised: ${{ totalRaised }}</p>
+				<!-- <p>% Monthly Goal Met: {{ percentGoal }}</p> -->
 
 			</div>
 		</section>
+		<!-- <div class = "container"> -->
 		<canvas id="development" width="50" height="20"></canvas>
+		<!-- </div> -->
 
 {% endblock content %}
 
@@ -26,37 +28,41 @@
 <script>
 	var ctx = document.getElementById('development').getContext('2d');
 	var myChart = new Chart(ctx, {
-		type: 'bar',
+		type: 'line',
 		data: {
-				labels: [{% for key, value in donors.items %} '{{ key }}', {% endfor %}],
+				labels: [{% for key, value in gifts.items %} '{{ key }}', {% endfor %}],
 				datasets: [{
 						label: '# of new donors',
-						data: [{% for key, value in donors.items %} {{ value }}
+						data: [{% for item in donors.values %} {{ item }},
 									{% endfor %}],
 						backgroundColor: "#3e95cd",
-						borderColor: "#8e5ea2",
-						borderWidth: 1
+						borderColor: "#3e95cd",
+						borderWidth: 1,
+						fill: false
 				}, {
 						label: '# of new foundations/grants',
-						data: [{% for key, value in foundations.items %} {{ value }}
+						data: [{% for item in foundations.values %} {{ item }},
 									{% endfor %}],
 						backgroundColor: "#9c7f32",
-						borderColor: "#8e5ea2",
-						borderWidth: 1
+						borderColor: "#9c7f32",
+						borderWidth: 1,
+						fill: false
 				}, {
 						label: '# of new gifts greater than $1000',
-						data: [{% for key, value in gifts.items %} {{ value }}
+						data: [{% for item in gifts.values %} {{ item }},
 									{% endfor %}],
 						backgroundColor: "#c62fab",
-						borderColor: "#8e5ea2",
-						borderWidth: 1
+						borderColor: "#c62fab",
+						borderWidth: 1,
+						fill: false
 				}, {
 						label: '# of recurring donors',
-						data: [{% for key, value in recurring.items %} {{ value }}
+						data: [{% for item in recurring.values %} {{ item }},
 									{% endfor %}],
 						backgroundColor: "#91a4ce",
-						borderColor: "#8e5ea2",
-						borderWidth: 1
+						borderColor: "#91a4ce",
+						borderWidth: 1,
+						fill: false
 				}]
 		},
 		options: {

@@ -35,12 +35,12 @@ var numPeopleClinical = new Chart(ctx, {
     data: {
         labels: [{% for key, value in clinicalS.items %} '{{ key }}', {% endfor %}],
         datasets: [{
-        label: '# of continuing clients',
-        data: [{% for key, value in clinicalC.items %} {{ value }},
-							{% endfor %}],
-        backgroundColor: "#CD5C5C",
-        borderColor: "#EC7063",
-        borderWidth: 1
+	        label: '# of continuing clients',
+	        data: [{% for key, value in clinicalC.items %} {{ value }},
+								{% endfor %}],
+	        backgroundColor: "#CD5C5C",
+	        borderColor: "#EC7063",
+	        borderWidth: 1
 		    }, {
 					data: [{% for key, value in clinicalN.items %} {{ value }},
 								{% endfor %}],
@@ -89,12 +89,12 @@ var numPeopleClinicalVoca = new Chart(ctx, {
     data: {
         labels: [{% for key, value in clinicalVocaS.items %} '{{ key }}', {% endfor %}],
         datasets: [{
-        label: '# of continuing clients',
-        data: [{% for key, value in clinicalVocaC.items %} {{ value }},
-							{% endfor %}],
-        backgroundColor: "#CD5C5C",
-        borderColor: "#EC7063",
-        borderWidth: 1
+	        label: '# of continuing clients',
+	        data: [{% for key, value in clinicalVocaC.items %} {{ value }},
+								{% endfor %}],
+	        backgroundColor: "#CD5C5C",
+	        borderColor: "#EC7063",
+	        borderWidth: 1
 		    }, {
 					data: [{% for key, value in clinicalVocaN.items %} {{ value }},
 								{% endfor %}],
@@ -198,12 +198,12 @@ var numPeopleAdvocacy = new Chart(ctx, {
     data: {
         labels: [{% for key, value in advocacyC.items %} '{{ key }}', {% endfor %}],
         datasets: [{
-        label: '# of continuing clients',
-        data: [{% for key, value in advocacyC.items %} {{ value }},
-							{% endfor %}],
-        backgroundColor: "#CD5C5C",
-        borderColor: "#EC7063",
-        borderWidth: 1
+	        label: '# of continuing clients',
+	        data: [{% for key, value in advocacyC.items %} {{ value }},
+								{% endfor %}],
+	        backgroundColor: "#CD5C5C",
+	        borderColor: "#EC7063",
+	        borderWidth: 1
 		    }, {
 					data: [{% for key, value in advocacyN.items %} {{ value }},
 								{% endfor %}],
@@ -236,13 +236,13 @@ var numPeopleAdvocacy = new Chart(ctx, {
 				fontSize: 18,
 				text: 'Monthly Count of Individuals and Sessions (Advocacy)'
 			},
-	        scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero: true
-	                }
-	            }]
-	        }
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+      }
     }
 });
 
@@ -253,7 +253,7 @@ new Chart(document.getElementById("ageOfPeopleAdvocacy"), {
       datasets: [{
         label: "Age Groups",
         backgroundColor: ["#b654de", "#702f8a","#007377","#13bcbf","#ffd100"],
-        data: {{ advocacyAges|safe }},
+        data: {{ advocacyAges }},
       }]
     },
     options: {
@@ -268,7 +268,7 @@ new Chart(document.getElementById("ageOfPeopleAdvocacy"), {
 		title: {
 			display: true,
 			fontSize: 18,
-			text: 'Age Group Breakdown, Recent 12 Months (Advocacy)'
+			text: 'Age Group Breakdown, Recent 12 Months o(Advocacy)'
 		}
     }
 });

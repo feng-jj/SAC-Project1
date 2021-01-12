@@ -145,6 +145,8 @@
 		<!-- Graphs not displayed if logged out -->
 		{% if user.is_authenticated %}
 		<script type="text/javascript">
+			// usage: to clean the chart so that only the recent 12 months
+			// of data appear onto the dashboard
 			function clean(chart){
 				if (chart.data.labels.length > 12) {
 					while (chart.data.labels.length > 12) {
@@ -156,6 +158,10 @@
 				}
 				chart.update();
 			}
+			// usage: sort the chart in order of month and year, ascending
+			// notes: dataset.data is the data of each entry, data.labels are <thead>
+			// strings containing month and year
+			// function
 		</script>
 			{% block graphs %}
 

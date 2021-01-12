@@ -17,7 +17,7 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p style="text-align:center">Please select a file format</p>
-    <select id="file-format" class="form-control my-3">
+    <select id="file-format" name="file-format" class="form-control my-3">
         <option selected>Choose format...</option>
         <option>CSV</option>
         <option>JSON</option>

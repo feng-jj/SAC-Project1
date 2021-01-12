@@ -158,10 +158,23 @@
 				}
 				chart.update();
 			}
+			// WORK IN PROGRESS
 			// usage: sort the chart in order of month and year, ascending
-			// notes: dataset.data is the data of each entry, data.labels are <thead>
+			// notes: dataset.data is the data of each entry, data.labels are
 			// strings containing month and year
-			// function
+			// function chrono(chart) {
+			// 	// first we want to ensure that we sort the data by month and year. that
+			// 	// way we avoid the problem of need to sort the data by a specified parameter
+			// 	chart.data.datasets.forEach((dataset) => {
+			// 		var sorted = dataset.data.sort(function(a,b) {
+			// 		    a = a.labels.split(" ")
+			// 		    b = b.labels.split(" ")
+			// 		    return new Date(a[1], a[0], 1) - new Date(b[1], b[0], 1)
+			// 		});
+			// 	});
+			// 	// then we sort the labels
+			//
+			// }
 		</script>
 			{% block graphs %}
 

@@ -129,6 +129,7 @@ def numTrainings(queryObject):
     for item in queryObject.reverse():
         if counter > 0:
             numTrainings += 1
+            counter -= 1
         else:
             break
     return numTrainings
@@ -229,6 +230,7 @@ def appendHowSAC(queryObject) :
             heard_friend_fam = item.heard_friend_fam
             heard_medical = item.heard_medical
             heard_other = item.heard_other
+            counter -= 1
         else :
             break
     how.append(heard_TV)
@@ -315,6 +317,7 @@ def develop(queryObject) :
             recurring_gift_avg += item.recurring_gift_avg
             total_raised += item.total_raised
             percent_goal_met += item.percent_goal_met
+            counter -= 1
         else :
             break
     return [recurring_gift_avg, total_raised, percent_goal_met]

@@ -19,7 +19,7 @@ Once logged in, SAC employees can input their team's operational data which is v
 ## Prerequisites
 Before proceeding, please make sure you have the following installed:
 * [Django](https://www.djangoproject.com/download/)
-* Anything else?
+* [Python](https://www.python.org/downloads/)
 
 ## Installation 
 1. Follow the instructions outlined on this link:

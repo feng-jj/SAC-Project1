@@ -48,7 +48,7 @@ webscraping and API frameworks. He is excited for the opportunity to utilize his
 of social robotics to create innovative and user-friendly software solutions for non-profit organizations in need.
 
 ### Reena Zhang
-
+Reena is a junior at Vanderbilt University studying Psychology and Computer Science. She is excited to bring her background in computational cognitive science and psychology research to build user-friendly technology for SAC.
 
 ### Daniel Kim
 Daniel is a rising junior at Vanderbilt University majoring in Economics. With experience working at a software startup in the Silicon Valley, Daniel is passionate about leveraging his skills in java, html/css, advanced data visualization with excel, and strategic social media marketing to drive positive and sustainable results for amazing nonprofits.

@@ -22,7 +22,12 @@ Before proceeding, please make sure you have the following installed:
 * Anything else?
 
 ## Installation 
-1. Not sure how this is gonna be installed but I can fill this in once we have more stuff done
+1. Follow the instructions outlined on this link:
+https://docs.djangoproject.com/en/3.1/howto/windows/
+
+2. Install the following packages using the following lines:
+pip3 install import_export
+pip3 install multiselectfield
 
 ## Instructions
 **To be updated once we have more stuff done**

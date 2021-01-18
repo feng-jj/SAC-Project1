@@ -18,7 +18,7 @@
 				<canvas id="totalCalls" width="50" height="20"></canvas>
 				<canvas id="highestCalls" width="50" height="20"></canvas>
 				<canvas id="howSAC" width="50" height="20"></canvas>
-				<canvas id="numberMinors" width="50" height="20"></canvas>
+				<!-- <canvas id="numberMinors" width="50" height="20"></canvas> -->
 
 {% endblock content %}
 
@@ -129,46 +129,46 @@
 	    }
 	});
 
-	var ctx = document.getElementById('numberMinors').getContext('2d');
-	var numMinors = new Chart(ctx, {
-			type: 'bar',
-			data: {
-	        labels: [{% for key, value in numMinors.items %} '{{ key }}', {% endfor %}],
-	        datasets: [{
-	            label: 'Total Number of Calls',
-	            data: [{% for key, value in numMinors.items %} {{ value }},
-										{% endfor %}],
-							backgroundColor: "#CD5C5C",
-							borderColor: "#EC7063",
-	            borderWidth: 1
-	        }]
-	    },
-			options: {
-				layout: {
-					padding: {
-						left: 100,
-						right: 100,
-						top: 20,
-						bottom: 50
-					}
-				},
-					scales: {
-							yAxes: [{
-									ticks: {
-											beginAtZero: true
-									}
-							}]
-					},
-					title: {
-						display: true,
-						fontSize: 18,
-						text: 'Monthly highest # of minors'
-					}
-			}
-	});
+	// var ctx = document.getElementById('numberMinors').getContext('2d');
+	// var numMinors = new Chart(ctx, {
+	// 		type: 'bar',
+	// 		data: {
+	//         labels: [{% for key, value in numMinors.items %} '{{ key }}', {% endfor %}],
+	//         datasets: [{
+	//             label: 'Total Number of Calls',
+	//             data: [{% for key, value in numMinors.items %} {{ value }},
+	// 									{% endfor %}],
+	// 						backgroundColor: "#CD5C5C",
+	// 						borderColor: "#EC7063",
+	//             borderWidth: 1
+	//         }]
+	//     },
+	// 		options: {
+	// 			layout: {
+	// 				padding: {
+	// 					left: 100,
+	// 					right: 100,
+	// 					top: 20,
+	// 					bottom: 50
+	// 				}
+	// 			},
+	// 				scales: {
+	// 						yAxes: [{
+	// 								ticks: {
+	// 										beginAtZero: true
+	// 								}
+	// 						}]
+	// 				},
+	// 				title: {
+	// 					display: true,
+	// 					fontSize: 18,
+	// 					text: 'Monthly highest # of minors'
+	// 				}
+	// 		}
+	// });
 clean(totalCalls);
 clean(highestCalls);
-clean(numMinors);
+// clean(numMinors);
 </script>
 
 {% endblock graphs %}

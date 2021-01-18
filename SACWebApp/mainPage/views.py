@@ -162,7 +162,7 @@ class crisisLineTeamView(TemplateView) :
         how = appendHowSAC(crisisline)
         context['totalCalls'] = totalCall(crisisline)
         context['highCalls'] = highCall(crisisline)
-        context['numMinors'] = numMinors(crisisline)
+        # context['numMinors'] = numMinors(crisisline)
         context['how'] = how
         return context
 

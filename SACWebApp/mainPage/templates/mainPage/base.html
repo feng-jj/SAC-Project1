@@ -43,8 +43,8 @@
 								<li><a href="{% url 'development' %}" id="development-link">Development</a></li>
 								<li><a href="{% url 'map' %}" id="map-link">MAP</a></li>
 								<li><a href="{% url 'ov' %}" id="ov-link">OV</a></li>
-								<li><a href="{% url 'prevention' %}" id="prevention-link">Prevention</a></li>	
-								<li><a href="{% url 'safe_clinic' %}" id="safe_clinic-link">SAFE  Clinic</a></li>		
+								<li><a href="{% url 'prevention' %}" id="prevention-link">Prevention</a></li>
+								<li><a href="{% url 'safe_clinic' %}" id="safe_clinic-link">SAFE  Clinic</a></li>
 								<li><a href="{% url 'training' %}" id="training-link">Training</a></li>
 							</ul>
 						</li>
@@ -76,11 +76,11 @@
 								<li><a href="{% url 'map_export' %}" id="map-export-link">MAP</a></li>
 								<li><a href="{% url 'ov_export' %}" id="ov-export-link">OV</a></li>
 								<li><a href="{% url 'prevention_export' %}" id="prevention-export-link">Prevention</a></li>
-								<li><a href="{% url 'safe_clinic_export' %}" id="safe_clinic-export-link">SAFE  Clinic</a></li> 
+								<li><a href="{% url 'safe_clinic_export' %}" id="safe_clinic-export-link">SAFE  Clinic</a></li>
 								<li><a href="{% url 'training_export' %}" id="training-export-link">Training</a></li>
 							</ul>
 						</li>
-						<li><a href="{% url 'admin:index' %}" id="admin-link">Administration</a></li>	
+						<li><a href="{% url 'admin:index' %}" id="admin-link">Administration</a></li>
 						<li><a href="{% url 'logout' %}" id="logout-link">Logout</a></li>
 					{% else %}
 						<li><a href="https://sacenter.org/" id="sac-home">SAC Home</a></li>
@@ -158,23 +158,7 @@
 				}
 				chart.update();
 			}
-			// WORK IN PROGRESS
-			// usage: sort the chart in order of month and year, ascending
-			// notes: dataset.data is the data of each entry, data.labels are
-			// strings containing month and year
-			// function chrono(chart) {
-			// 	// first we want to ensure that we sort the data by month and year. that
-			// 	// way we avoid the problem of need to sort the data by a specified parameter
-			// 	chart.data.datasets.forEach((dataset) => {
-			// 		var sorted = dataset.data.sort(function(a,b) {
-			// 		    a = a.labels.split(" ")
-			// 		    b = b.labels.split(" ")
-			// 		    return new Date(a[1], a[0], 1) - new Date(b[1], b[0], 1)
-			// 		});
-			// 	});
-			// 	// then we sort the labels
-			//
-			// }
+			
 		</script>
 			{% block graphs %}
 

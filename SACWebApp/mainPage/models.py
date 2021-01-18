@@ -19,6 +19,7 @@ class CommonEntries(models.Model):
         ('November', 'November'),
         ('December', 'December'),
     ]
+    emp_name = models.CharField(verbose_name = "Employee Name", max_length = 50, default = "Enter your name here")
     entry_date = models.DateField(default = date.today)
     month = models.CharField(max_length = 9, verbose_name = "Month", blank = True, choices = MONTH_TYPE)
     year = models.PositiveIntegerField(verbose_name = "Year", default = datetime.now().year)
@@ -155,7 +156,6 @@ class Clinical_VOCA(CommonEntries):
     assist_appeal_compensation = models.PositiveIntegerField(verbose_name = "Assistance Appealing Compensation Award", default = 0)
     followup_outreach_to_all = models.PositiveIntegerField(verbose_name = "Followup Outreach to All Clients", default = 0)
     followup_outreach_to_current = models.PositiveIntegerField(verbose_name = "Followup Outreach to Current Monthly Clients ", default = 0)
-
 
     class Meta:
         verbose_name = "Clinical VOCA Team Entry"

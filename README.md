@@ -19,10 +19,15 @@ Once logged in, SAC employees can input their team's operational data which is v
 ## Prerequisites
 Before proceeding, please make sure you have the following installed:
 * [Django](https://www.djangoproject.com/download/)
-* Anything else?
+* [Python](https://www.python.org/downloads/)
 
 ## Installation 
-1. Not sure how this is gonna be installed but I can fill this in once we have more stuff done
+1. Follow the instructions outlined on this link:
+https://docs.djangoproject.com/en/3.1/howto/windows/
+
+2. Install the following packages using the following lines:
+pip3 install import_export
+pip3 install multiselectfield
 
 ## Instructions
 **To be updated once we have more stuff done**
@@ -43,7 +48,7 @@ webscraping and API frameworks. He is excited for the opportunity to utilize his
 of social robotics to create innovative and user-friendly software solutions for non-profit organizations in need.
 
 ### Reena Zhang
-
+Reena is a junior at Vanderbilt University studying Psychology and Computer Science. She is excited to bring her background in computational cognitive science and psychology research to build user-friendly technology for SAC.
 
 ### Daniel Kim
 Daniel is a rising junior at Vanderbilt University majoring in Economics. With experience working at a software startup in the Silicon Valley, Daniel is passionate about leveraging his skills in java, html/css, advanced data visualization with excel, and strategic social media marketing to drive positive and sustainable results for amazing nonprofits.

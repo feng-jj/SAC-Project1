@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SACWebApp/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/crisis_line.html" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/crisis_line.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/development.html" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/development.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SACWebApp/mainPage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SACWebApp/mainPage/views.py" afterDir="false" />
     </list>
@@ -83,6 +85,8 @@
       <workItem from="1608077141150" duration="3168000" />
       <workItem from="1608326274902" duration="5000" />
       <workItem from="1609542666128" duration="1155000" />
+      <workItem from="1610318449281" duration="4989000" />
+      <workItem from="1610401456466" duration="1846000" />
     </task>
     <servers />
   </component>
@@ -106,18 +110,37 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SACWebApp/mainPage/views.py</url>
-          <line>62</line>
+          <line>63</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SACWebApp/mainPage/views.py</url>
-          <line>79</line>
-          <option name="timeStamp" value="3" />
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/development.html</url>
+          <line>35</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/development.html</url>
+          <line>42</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/development.html</url>
+          <line>49</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/SACWebApp/mainPage/templates/mainPage/development.html</url>
+          <line>54</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SAC_Project1$meme.coverage" NAME="meme Coverage Results" MODIFIED="1609542966568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SACWebApp" />
+    <SUITE FILE_PATH="coverage/SAC_Project1$meme.coverage" NAME="meme Coverage Results" MODIFIED="1610404625536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SACWebApp" />
   </component>
 </project>

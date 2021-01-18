@@ -13,7 +13,27 @@ def appendFieldAge(queryObject) :
     age_18_24 = 0
     age_25_59 = 0
     age_60_plus = 0
-    counter = 12;
+    # this counter here tells us how many entries there are in the past 12 months
+    counter = 0
+    dates = dict()
+    # going through each month and year, and appending them to a dictionary where
+    # we can access how many entries there are for each month over the recent 12 months
+    for item in reversed(queryObject):
+        currDate = item.month + " " + str(item.year)
+        if currDate in dates:
+            dates[currDate] += 1
+        else :
+            dates.update({currDate : 1})
+    counter1 = 12
+    if dates:
+        for item in dates :
+            if counter1 == 0 :
+                break
+            else :
+                counter += dates[item]
+                counter1 -= 1
+    # now we know how many entries there are to go through and add up to for the
+    # data in the recent 12 months
     for item in reversed(queryObject):
         if counter > 0:
             age_0_12 += item.age_0_12
@@ -87,13 +107,31 @@ def getOV(queryObject) :
 # Helper method to get the number of trainings for both the Prevention and Training teams
 def numTrainings(queryObject):
     numTrainings = 0;
-    counter = 12;
-    for item in queryObject.reverse():
-        if counter == 0 :
-            break;
+    # this counter here tells us how many entries there are in the past 12 months
+    counter = 0
+    dates = dict()
+    # going through each month and year, and appending them to a dictionary where
+    # we can access how many entries there are for each month over the recent 12 months
+    for item in reversed(queryObject):
+        currDate = item.month + " " + str(item.year)
+        if currDate in dates:
+            dates[currDate] += 1
         else :
-            counter -= 1;
+            dates.update({currDate : 1})
+    counter1 = 12
+    if dates:
+        for item in dates :
+            if counter1 == 0 :
+                break
+            else :
+                counter += dates[item]
+                counter1 -= 1
+    for item in queryObject.reverse():
+        if counter > 0:
             numTrainings += 1
+            counter -= 1
+        else:
+            break
     return numTrainings
 
 # Get the total number of attendees from both teams
@@ -163,14 +201,38 @@ def appendHowSAC(queryObject) :
     heard_friend_fam = 0;
     heard_medical = 0;
     heard_other = 0;
-    for item in queryObject:
-        heard_TV += item.heard_TV
-        heard_radio += item.heard_radio
-        heard_website += item.heard_website
-        heard_social += item.heard_social
-        heard_friend_fam = item.heard_friend_fam
-        heard_medical = item.heard_medical
-        heard_other = item.heard_other
+    # this counter here tells us how many entries there are in the past 12 months
+    counter = 0
+    dates = dict()
+    # going through each month and year, and appending them to a dictionary where
+    # we can access how many entries there are for each month over the recent 12 months
+    for item in reversed(queryObject):
+        currDate = item.month + " " + str(item.year)
+        if currDate in dates:
+            dates[currDate] += 1
+        else :
+            dates.update({currDate : 1})
+    counter1 = 12
+    # appending now from data from the recent 12 months
+    if dates:
+        for item in dates :
+            if counter1 == 0 :
+                break
+            else :
+                counter += dates[item]
+                counter1 -= 1
+    for item in reversed(queryObject):
+        if counter > 0:
+            heard_TV += item.heard_TV
+            heard_radio += item.heard_radio
+            heard_website += item.heard_website
+            heard_social += item.heard_social
+            heard_friend_fam = item.heard_friend_fam
+            heard_medical = item.heard_medical
+            heard_other = item.heard_other
+            counter -= 1
+        else :
+            break
     how.append(heard_TV)
     how.append(heard_radio)
     how.append(heard_website)
@@ -231,10 +293,33 @@ def develop(queryObject) :
     recurring_gift_avg = 0
     total_raised = 0
     percent_goal_met = 0
+    # this counter here tells us how many entries there are in the past 12 months
+    counter = 0
+    dates = dict()
+    # going through each month and year, and appending them to a dictionary where
+    # we can access how many entries there are for each month over the recent 12 months
+    for item in reversed(queryObject):
+        currDate = item.month + " " + str(item.year)
+        if currDate in dates:
+            dates[currDate] += 1
+        else :
+            dates.update({currDate : 1})
+    counter1 = 12
+    if dates:
+        for item in dates :
+            if counter1 == 0 :
+                break
+            else :
+                counter += dates[item]
+                counter1 -= 1
     for item in queryObject:
-        recurring_gift_avg += item.recurring_gift_avg
-        total_raised += item.total_raised
-        percent_goal_met += item.percent_goal_met
+        if counter > 0:
+            recurring_gift_avg += item.recurring_gift_avg
+            total_raised += item.total_raised
+            percent_goal_met += item.percent_goal_met
+            counter -= 1
+        else :
+            break
     return [recurring_gift_avg, total_raised, percent_goal_met]
 
 def numDevelop(queryObject, string):
@@ -257,7 +342,7 @@ def numDevelop(queryObject, string):
             currDate = currMonth + " " + currYear
             if currDate in new_dict :
                 currNum = new_dict[currDate]
-                new_dict[currDate] = item.new_foundations+ currNum
+                new_dict[currDate] = item.new_foundations + currNum
             else :
                 new_dict.update({currDate : item.new_foundations})
         return new_dict
@@ -279,7 +364,7 @@ def numDevelop(queryObject, string):
             currDate = currMonth + " " + currYear
             if currDate in new_dict :
                 currNum = new_dict[currDate]
-                new_dict[currDate] = item.recurring_donors+ currNum
+                new_dict[currDate] = item.recurring_donors + currNum
             else :
                 new_dict.update({currDate : item.recurring_donors})
         return new_dict

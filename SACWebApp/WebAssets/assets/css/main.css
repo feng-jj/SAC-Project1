@@ -103,7 +103,7 @@ input, select, textarea {
 		}*/
 
 	body::-webkit-scrollbar {
-		width: 7px;
+		width: 8px;
 	}
 
 	body::-webkit-scrollbar-track {
@@ -1959,13 +1959,18 @@ input, select, textarea {
 			text-indent: -0.5em;
 		}
 
+		table tr td ul li {
+			list-style-type: none;
+			margin-left: -1em;
+		}
+
 		table tbody th{
 			font-size: 0.8em;
 			margin: auto;
 			width: 50%;
 			padding: 0.5em 1em 0.5em 1em;
 			color: rgb(255, 255, 255);
-			background: rgb(184, 6, 184);
+			background: rgb(164, 69, 202);
 		}
 
 		table thead {
@@ -2019,6 +2024,12 @@ input, select, textarea {
 		button:active,
 		.button:active {
 			background-color: #7eaeac;
+		}
+
+		input[type="checkbox" i] {
+			appearance: checkbox;
+			width: 13px;
+			height: 13px;
 		}
 
 /* Item */

@@ -30,11 +30,10 @@ pip3 install import_export
 pip3 install multiselectfield
 
 ## Instructions
-**To be updated once we have more stuff done**
-1. Upon launching the WebApp, you will be directed to an authentication page. Enter your username and password to gain access to the dashboard. *(image once complete)*
-2. Once logged in, you will automatically be taken to your team's dashboard. *(image once complete)*
+1. Upon launching the WebApp, you will be directed to an authentication page. Enter your username and password to gain access to the dashboard. 
+2. Once logged in, you will automatically be taken to your team's dashboard. 
 3. The navigation menu on the left allows you to view the main SAC dashboard as well as any team's dashboard. To view a certain dashboard, simply click on the team name in the navigation menu.
-4. In order to input data, click on the "Data Entry" tab in the navigation menu. **(Is the system going to automatically direct users to the appropriate data entry page based on their login credentials?)** 
+4. In order to input data, click on the "Data Entry" tab in the navigation menu. 
 5. Your team's dashboard should automatically update once you submit new data. 
 
 ## Acknowledgements
